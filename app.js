@@ -53,3 +53,98 @@ if(data) {
   const pending = el('div', 'pending');pending.append(el('span', 'pending-symbol', '…'),el('h3', '', 'המשך יבוא'),el('p', '', 'הפרק יתווסף לרשימות בהמשך.'));
   const back = el('a', 'action primary', 'לקריאת פרק 1');back.href = '?chapter=1';pending.append(back);section.append(pending);
 }
+
+
+// ===== LAB EXPERIMENT 1: one question, blurring, and Skip =====
+// Everything below is experimental and can be removed as a single block.
+if (chapter === 1 && data && data.pages.length >= 2) {
+  const figures = Array.from(document.querySelectorAll('.pages > figure.page'));
+
+  // The logic section ends on the page where section 1.4 begins.
+  // Put our checkpoint just after that page, leaving at least one later page.
+  const nextSection = data.sections.find(item => item.number === '1.4');
+  const afterPage = Math.max(1, Math.min(nextSection ? nextSection.page : 5, figures.length - 1));
+
+  const checkpoint = document.createElement('section');
+  checkpoint.id = 'lab-logic-001'; // A permanent identifier for this question.
+  checkpoint.className = 'lab-checkpoint';
+  checkpoint.innerHTML = `
+    <h3>שאלת הבנה · לוגיקה</h3>
+    <p>מהי השלילה של הטענה הבאה?</p>
+    <p class="lab-formula" dir="ltr">∀x ∈ ℝ ∃y ∈ ℝ : y &gt; x</p>
+    <fieldset>
+      <legend>בחרו תשובה אחת:</legend>
+      <label><input type="radio" name="lab-logic-answer" value="a">
+        <span dir="ltr">∃x ∈ ℝ ∀y ∈ ℝ : y ≤ x</span></label>
+      <label><input type="radio" name="lab-logic-answer" value="b">
+        <span dir="ltr">∀x ∈ ℝ ∃y ∈ ℝ : y ≤ x</span></label>
+      <label><input type="radio" name="lab-logic-answer" value="c">
+        <span dir="ltr">∃x ∈ ℝ ∃y ∈ ℝ : y ≤ x</span></label>
+      <label><input type="radio" name="lab-logic-answer" value="d">
+        <span dir="ltr">∀x ∈ ℝ ∀y ∈ ℝ : y ≤ x</span></label>
+    </fieldset>
+    <div class="lab-buttons">
+      <button type="button" class="lab-check-answer">בדיקת תשובה</button>
+      <button type="button" class="lab-skip">דלג (במצב ניסוי)</button>
+    </div>
+    <p class="lab-feedback" role="status" aria-live="polite"></p>
+  `;
+  figures[afterPage - 1].after(checkpoint);
+
+  // Every later page is blurred until the student passes or skips.
+  const lockedPages = figures.slice(afterPage);
+  lockedPages.forEach(page => page.classList.add('lab-locked'));
+
+  const feedback = checkpoint.querySelector('.lab-feedback');
+  function unlock(skipped) {
+    lockedPages.forEach(page => page.classList.remove('lab-locked'));
+    checkpoint.querySelectorAll('button, input').forEach(control => control.disabled = true);
+    feedback.textContent = skipped
+      ? 'דילגתם על השאלה. המשך הפרק פתוח לקריאה.'
+      : 'נכון! קיים x כך שאף y אינו גדול ממנו. המשך הפרק פתוח לקריאה.';
+  }
+
+  checkpoint.querySelector('.lab-check-answer').addEventListener('click', () => {
+    const selected = checkpoint.querySelector('input[name="lab-logic-answer"]:checked');
+    if (!selected) {
+      feedback.textContent = 'בחרו תחילה אחת מהתשובות.';
+    } else if (selected.value === 'a') {
+      unlock(false);
+    } else {
+      feedback.textContent = 'לא בדיוק. בשלילה מחליפים ∀ ב־∃, ואת ∃ ב־∀, וגם > הופך ל־≤. נסו שוב.';
+    }
+  });
+  checkpoint.querySelector('.lab-skip').addEventListener('click', () => unlock(true));
+
+  // Temporary styling for this one experiment. Later we can move it to style.css.
+  const labStyles = document.createElement('style');
+  labStyles.textContent = `
+    .lab-checkpoint { margin: 26px auto; max-width: 900px; padding: 24px;
+      border: 2px solid #165f64; border-radius: 12px; background: #fff; direction: rtl; }
+    .lab-checkpoint h3 { margin: 0 0 14px; color: #165f64; }
+    .lab-checkpoint p { line-height: 1.7; }
+    .lab-formula { font-family: Georgia, 'Times New Roman', serif; font-size: 1.3rem;
+      text-align: center; background: #f3f6f7; padding: 12px; }
+    .lab-checkpoint fieldset { border: 0; padding: 0; margin: 18px 0; }
+    .lab-checkpoint legend { margin-bottom: 10px; font-weight: bold; }
+    .lab-checkpoint label { display: flex; align-items: center; gap: 12px;
+      margin: 8px 0; padding: 10px; border: 1px solid #dbe3e7; border-radius: 6px;
+      cursor: pointer; }
+    .lab-checkpoint label span { unicode-bidi: isolate; text-align: left; }
+    .lab-buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+    .lab-buttons button { padding: 10px 16px; border-radius: 6px; cursor: pointer;
+      border: 1px solid #165f64; background: #165f64; color: white; }
+    .lab-buttons .lab-skip { background: white; color: #165f64; }
+    .lab-buttons button:disabled { opacity: .55; cursor: default; }
+    .lab-feedback { min-height: 1.7em; font-weight: 600; }
+    .page.lab-locked img { filter: blur(12px); pointer-events: none; }
+    .page.lab-locked { position: relative; }
+    .page.lab-locked::after { content: 'כדי לקרוא בהמשך, ענו על השאלה או לחצו על דלג';
+      position: absolute; inset: 45px 0 0; display: grid; place-items: start center;
+      padding: 26px; font-weight: bold; text-align: center; color: #172d3e;
+      background: rgba(255,255,255,.55); pointer-events: none; }
+  `;
+  document.head.appendChild(labStyles);
+}
+// ===== END LAB EXPERIMENT 1 =====
+
