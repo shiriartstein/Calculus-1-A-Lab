@@ -54,18 +54,15 @@ if(data) {
   const back = el('a', 'action primary', 'לקריאת פרק 1');back.href = '?chapter=1';pending.append(back);section.append(pending);
 }
 
-
-
-  // ===== LAB EXPERIMENT 1: one question, blurring, and Skip =====
+// ===== LAB EXPERIMENT 1: one question, blurring, Skip, and hints =====
 // Everything below is experimental and can be removed as a single block.
 if (chapter === 1 && data && data.pages.length >= 2) {
   const figures = Array.from(document.querySelectorAll('.pages > figure.page'));
-  // The logic section ends on the page where section 1.4 begins.
-  // Put our checkpoint just after that page, leaving at least one later page.
   const nextSection = data.sections.find(item => item.number === '1.4');
   const afterPage = Math.max(1, Math.min(nextSection ? nextSection.page : 5, figures.length - 1));
+
   const checkpoint = document.createElement('section');
-  checkpoint.id = 'lab-logic-001'; // A permanent identifier for this question.
+  checkpoint.id = 'lab-logic-001';
   checkpoint.className = 'lab-checkpoint';
   checkpoint.innerHTML = `
     <h3>שאלת הבנה · לוגיקה</h3>
@@ -85,54 +82,106 @@ if (chapter === 1 && data && data.pages.length >= 2) {
     </fieldset>
     <div class="lab-buttons">
       <button type="button" class="lab-check-answer">בדיקת תשובה</button>
+      <button type="button" class="lab-hint-button">רמז</button>
       <button type="button" class="lab-skip">דלג (במצב ניסוי)</button>
     </div>
     <p class="lab-feedback" role="status" aria-live="polite"></p>
+    <div class="lab-hint" role="status" aria-live="polite" hidden></div>
   `;
   figures[afterPage - 1].after(checkpoint);
 
-  // Render the mathematical expressions with a LaTeX-like font (KaTeX).
-  // If the external library cannot load, the original Unicode text remains visible.
+  // The same KaTeX renderer is used for the question, hints, and feedback.
+  // If KaTeX is unavailable, readable math remains as fallback text.
+  function renderMath(container) {
+    if (!window.katex) return;
+    container.querySelectorAll('[data-tex]:not([data-math-ready])').forEach(node => {
+      window.katex.render(node.dataset.tex, node, {
+        throwOnError: false,
+        displayMode: node.classList.contains('lab-formula')
+      });
+      node.dataset.mathReady = 'yes';
+    });
+  }
   const katexCss = document.createElement('link');
   katexCss.rel = 'stylesheet';
   katexCss.href = 'https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css';
   document.head.appendChild(katexCss);
   const katexScript = document.createElement('script');
   katexScript.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js';
-  katexScript.onload = () => {
-    checkpoint.querySelectorAll('[data-tex]').forEach(node => {
-      katex.render(node.dataset.tex, node, {
-        throwOnError: false,
-        displayMode: node.classList.contains('lab-formula')
-      });
-    });
-  };
+  katexScript.onload = () => renderMath(checkpoint);
   document.head.appendChild(katexScript);
+  renderMath(checkpoint);
 
-  // Every later page is blurred until the student passes or skips.
   const lockedPages = figures.slice(afterPage);
   lockedPages.forEach(page => page.classList.add('lab-locked'));
+
   const feedback = checkpoint.querySelector('.lab-feedback');
+  const hint = checkpoint.querySelector('.lab-hint');
+  const checkButton = checkpoint.querySelector('.lab-check-answer');
+  const hintButton = checkpoint.querySelector('.lab-hint-button');
+  let wrongAttempts = 0;
+
+  function firstHint() {
+    hint.hidden = false;
+    hint.innerHTML = 'רמז: נסו לנסח במילים מה פירוש הדבר שהטענה "לכל <span class="lab-inline-math" dir="ltr" data-tex="x">x</span>" אינה נכונה.';
+    renderMath(hint);
+  }
+
+  function detailedHint() {
+    hint.hidden = false;
+    hint.innerHTML = `
+      <strong>רמז נוסף:</strong> כדי שהטענה תהיה שקרית, צריך למצוא מספר
+      <span class="lab-inline-math" dir="ltr" data-tex="x">x</span> מסוים,
+      שעבורו <em>אף</em> מספר <span class="lab-inline-math" dir="ltr" data-tex="y">y</span>
+      אינו מקיים <span class="lab-inline-math" dir="ltr" data-tex="y>x">y &gt; x</span>.
+      אילו כמתים מבטאים "יש מספר מסוים" ו"לכל מספר"?
+      ואיך שוללים את אי־השוויון
+      <span class="lab-inline-math" dir="ltr" data-tex="y>x">y &gt; x</span>?`;
+    renderMath(hint);
+  }
+
   function unlock(skipped) {
     lockedPages.forEach(page => page.classList.remove('lab-locked'));
     checkpoint.querySelectorAll('button, input').forEach(control => control.disabled = true);
-    feedback.textContent = skipped
-      ? 'דילגתם על השאלה. המשך הפרק פתוח לקריאה.'
-      : 'נכון, זו השלילה של הטענה! שימו לב שבמספרים הממשיים הטענה המקורית נכונה (למשל, אפשר לבחור y=x+1), ולכן השלילה שלה שקרית.';
+    if (skipped) {
+      feedback.textContent = 'דילגתם על השאלה. המשך הפרק פתוח לקריאה.';
+    } else {
+      feedback.innerHTML = `נכון! זו השלילה הלוגית של הטענה. הטענה המקורית נכונה
+        מעל <span class="lab-inline-math" dir="ltr" data-tex="\\mathbb{R}">ℝ</span>:
+        לכל <span class="lab-inline-math" dir="ltr" data-tex="x">x</span>
+        אפשר לבחור <span class="lab-inline-math" dir="ltr" data-tex="y=x+1">y = x + 1</span>.
+        לכן השלילה עצמה שקרית. המשך הפרק פתוח לקריאה.`;
+      renderMath(feedback);
+    }
   }
-  checkpoint.querySelector('.lab-check-answer').addEventListener('click', () => {
+
+  checkButton.addEventListener('click', () => {
     const selected = checkpoint.querySelector('input[name="lab-logic-answer"]:checked');
     if (!selected) {
       feedback.textContent = 'בחרו תחילה אחת מהתשובות.';
-    } else if (selected.value === 'a') {
-      unlock(false);
-    } else {
-      feedback.textContent = 'התשובה אינה נכונה. נסו לחשוב: מה צריך לקרות כדי שהטענה המקורית תהיה שקרית?';
+      return;
     }
+    if (selected.value === 'a') {
+      unlock(false);
+      return;
+    }
+    wrongAttempts += 1;
+    checkButton.textContent = 'בדיקה חוזרת';
+    if (wrongAttempts === 1) {
+      feedback.textContent = 'התשובה אינה נכונה. מה צריך לקרות כדי שהטענה המקורית תהיה שקרית?';
+    } else {
+      feedback.textContent = 'עדיין לא. רמז מפורט יותר מופיע למטה. נסו שוב.';
+      detailedHint();
+    }
+  });
+
+  hintButton.addEventListener('click', () => {
+    if (wrongAttempts >= 2) detailedHint();
+    else firstHint();
   });
   checkpoint.querySelector('.lab-skip').addEventListener('click', () => unlock(true));
 
-  // Temporary styling for this one experiment. Later we can move it to style.css.
+  // Temporary style for this experiment; can later move to style.css.
   const labStyles = document.createElement('style');
   labStyles.textContent = `
     .lab-checkpoint { margin: 26px auto; max-width: 900px; padding: 24px;
@@ -149,12 +198,17 @@ if (chapter === 1 && data && data.pages.length >= 2) {
       cursor: pointer; }
     .lab-checkpoint label > span.lab-math { unicode-bidi: isolate; text-align: left;
       font-size: 1.08rem; overflow-x: auto; }
+    .lab-inline-math { display: inline-block; direction: ltr;
+      unicode-bidi: isolate; vertical-align: baseline; }
     .lab-buttons { display: flex; flex-wrap: wrap; gap: 10px; }
     .lab-buttons button { padding: 10px 16px; border-radius: 6px; cursor: pointer;
       border: 1px solid #165f64; background: #165f64; color: white; }
-    .lab-buttons .lab-skip { background: white; color: #165f64; }
+    .lab-buttons .lab-hint-button, .lab-buttons .lab-skip { background: white; color: #165f64; }
     .lab-buttons button:disabled { opacity: .55; cursor: default; }
     .lab-feedback { min-height: 1.7em; font-weight: 600; }
+    .lab-hint { margin-top: 12px; border-right: 3px solid #165f64;
+      background: #f3f6f7; padding: 12px 14px; line-height: 1.9; }
+    .lab-hint[hidden] { display: none; }
     .page.lab-locked img { filter: blur(12px); pointer-events: none; }
     .page.lab-locked { position: relative; }
     .page.lab-locked::after { content: 'כדי לקרוא בהמשך, ענו על השאלה או לחצו על דלג';
