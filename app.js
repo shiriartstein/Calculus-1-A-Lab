@@ -55,66 +55,6 @@ if(data) {
 }
 
 
-// ===== LAB EXPERIMENT 1: one question, blurring, and Skip =====
-// Everything below is experimental and can be removed as a single block.
-if (chapter === 1 && data && data.pages.length >= 2) {
-  const figures = Array.from(document.querySelectorAll('.pages > figure.page'));
-
-  // The logic section ends on the page where section 1.4 begins.
-  // Put our checkpoint just after that page, leaving at least one later page.
-  const nextSection = data.sections.find(item => item.number === '1.4');
-  const afterPage = Math.max(1, Math.min(nextSection ? nextSection.page : 5, figures.length - 1));
-
-  const checkpoint = document.createElement('section');
-  checkpoint.id = 'lab-logic-001'; // A permanent identifier for this question.
-  checkpoint.className = 'lab-checkpoint';
-  checkpoint.innerHTML = `
-    <h3>שאלת הבנה · לוגיקה</h3>
-    <p>מהי השלילה של הטענה הבאה?</p>
-    <p class="lab-formula" dir="ltr">∀x ∈ ℝ ∃y ∈ ℝ : y &gt; x</p>
-    <fieldset>
-      <legend>בחרו תשובה אחת:</legend>
-      <label><input type="radio" name="lab-logic-answer" value="a">
-        <span dir="ltr">∃x ∈ ℝ ∀y ∈ ℝ : y ≤ x</span></label>
-      <label><input type="radio" name="lab-logic-answer" value="b">
-        <span dir="ltr">∀x ∈ ℝ ∃y ∈ ℝ : y ≤ x</span></label>
-      <label><input type="radio" name="lab-logic-answer" value="c">
-        <span dir="ltr">∃x ∈ ℝ ∃y ∈ ℝ : y ≤ x</span></label>
-      <label><input type="radio" name="lab-logic-answer" value="d">
-        <span dir="ltr">∀x ∈ ℝ ∀y ∈ ℝ : y ≤ x</span></label>
-    </fieldset>
-    <div class="lab-buttons">
-      <button type="button" class="lab-check-answer">בדיקת תשובה</button>
-      <button type="button" class="lab-skip">דלג (במצב ניסוי)</button>
-    </div>
-    <p class="lab-feedback" role="status" aria-live="polite"></p>
-  `;
-  figures[afterPage - 1].after(checkpoint);
-
-  // Every later page is blurred until the student passes or skips.
-  const lockedPages = figures.slice(afterPage);
-  lockedPages.forEach(page => page.classList.add('lab-locked'));
-
-  const feedback = checkpoint.querySelector('.lab-feedback');
-  function unlock(skipped) {
-    lockedPages.forEach(page => page.classList.remove('lab-locked'));
-    checkpoint.querySelectorAll('button, input').forEach(control => control.disabled = true);
-    feedback.textContent = skipped
-      ? 'דילגתם על השאלה. המשך הפרק פתוח לקריאה.'
-      : 'נכון! קיים x כך שאף y אינו גדול ממנו. המשך הפרק פתוח לקריאה.';
-  }
-
-  checkpoint.querySelector('.lab-check-answer').addEventListener('click', () => {
-    const selected = checkpoint.querySelector('input[name="lab-logic-answer"]:checked');
-    if (!selected) {
-      feedback.textContent = 'בחרו תחילה אחת מהתשובות.';
-    } else if (selected.value === 'a') {
-      unlock(false);
-    } else {
-      feedback.textContent = 'לא בדיוק. בשלילה מחליפים ∀ ב־∃, ואת ∃ ב־∀, וגם > הופך ל־≤. נסו שוב.';
-    }
-  });
-  checkpoint.querySelector('.lab-skip').addEventListener('click', () => unlock(true));
 
   // ===== LAB EXPERIMENT 1: one question, blurring, and Skip =====
 // Everything below is experimental and can be removed as a single block.
