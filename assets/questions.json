@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "lab-logic-001",
+      "chapter": 1,
+      "after_section": "1.4",
+      "status": "approved",
+      "type": "multiple_choice",
+      "topic": "לוגיקה וכמתים",
+      "title": "שאלת הבנה · לוגיקה",
+      "question": "מהי השלילה של הטענה הבאה?",
+      "formula": "\\forall x\\in\\mathbb{R}\\;\\exists y\\in\\mathbb{R}: y>x",
+      "choices": [
+        {
+          "id": "a",
+          "latex": "\\exists x\\in\\mathbb{R}\\;\\forall y\\in\\mathbb{R}:y\\leq x"
+        },
+        {
+          "id": "b",
+          "latex": "\\forall x\\in\\mathbb{R}\\;\\exists y\\in\\mathbb{R}:y\\leq x"
+        },
+        {
+          "id": "c",
+          "latex": "\\exists x\\in\\mathbb{R}\\;\\exists y\\in\\mathbb{R}:y\\leq x"
+        },
+        {
+          "id": "d",
+          "latex": "\\forall x\\in\\mathbb{R}\\;\\forall y\\in\\mathbb{R}:y\\leq x"
+        }
+      ],
+      "correct": "a",
+      "hint1": "רמז: נסו לנסח במילים את הפסוק הלוגי. הוא מתחיל ב״לכל $x\\in \\mathbb{R}$״",
+      "hint2": "רמז נוסף: כדי שהטענה תהיה שקרית, צריך למצוא מספר $x$ מסוים, שעבורו אף מספר $y$ אינו מקיים $y>x$. אילו כמתים מבטאים \"יש מספר מסוים\" ו\"לכל מספר\"? ואיך שוללים את אי־השוויון $y>x$?",
+      "wrong1": "התשובה אינה נכונה. מה צריך לקרות כדי שהטענה המקורית תהיה שקרית?",
+      "wrong2": "עדיין לא. רמז מפורט יותר מופיע למטה. נסו שוב.",
+      "explanation": "נכון! זו השלילה הלוגית של הטענה. הטענה המקורית נכונה מעל $\\mathbb{R}$: לכל $x$ אפשר לבחור $y=x+1$. לכן השלילה עצמה שקרית. המשך הפרק פתוח לקריאה."
+    }
+  ]
+}
