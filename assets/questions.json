@@ -37,6 +37,41 @@
       "explanation": "נכון! זו השלילה הלוגית של הטענה. הטענה המקורית נכונה מעל $\\mathbb{R}$: לכל $x$ אפשר לבחור $y=x+1$. לכן השלילה עצמה שקרית. המשך הפרק פתוח לקריאה."
     },
     {
+      "id": "lab-logic-001-copy2",
+      "chapter": 1,
+      "after_section": "1.4",
+      "status": "approved",
+      "type": "multiple_choice",
+      "topic": "לוגיקה וכמתים",
+      "title": "שאלת הבנה · לוגיקה",
+      "question": "מהי השלילה של הטענה הבאה?",
+      "formula": "\\forall x\\in {A}\\;\\exists y\\in {B}: y>x",
+      "choices": [
+        {
+          "id": "a",
+          "latex": "\\exists x\\in {A}\\;\\forall y\\in {B}:y\\leq x"
+        },
+        {
+          "id": "b",
+          "latex": "\\exists x\\in {B}\\;\\forall y\\in{A}:y\\leq x"
+        },
+        {
+          "id": "c",
+          "latex": "\\exists y\\in {B}\\;\\forall x\\in {A}:y\\leq x"
+        },
+        {
+          "id": "d",
+          "latex": "\\exists x\\in {A}\\;\\forall x\\in {B}:y\\geq x"
+        }
+      ],
+      "correct": "a",
+      "hint1": "רמז: נסו לנסח במילים את הפסוק הלוגי. הוא מתחיל ב״לכל $x$ בקבוצה $A$״",
+      "hint2": "רמז נוסף: כדי שהטענה תהיה שקרית, צריך למצוא מספר $x\\in A$ מסוים, שעבורו אף מספר $y\\in B$ אינו מקיים $y>x$. אילו כמתים מבטאים \"יש מספר מסוים\" ו\"לכל מספר\"? ואיך שוללים את אי־השוויון $y>x$?",
+      "wrong1": "התשובה אינה נכונה. מה צריך לקרות כדי שהטענה המקורית תהיה שקרית?",
+      "wrong2": "עדיין לא. רמז מפורט יותר מופיע למטה. נסו שוב.",
+      "explanation": "נכון! זו השלילה הלוגית של הטענה.  המשך הפרק פתוח לקריאה."
+    },
+    {
       "id": "sets-001",
       "chapter": 1,
       "after_section": "1.5",
@@ -70,6 +105,286 @@
       "wrong1": "התשובה אינה נכונה. נסו שוב.",
       "wrong2": "עדיין לא. רמז מפורט יותר מופיע למטה. נסו שוב.",
       "explanation": "מצויין, איחוד וחיתוך אלה פעולות חשובות ובסיסיות. "
+    },
+    {
+      "id": "ch01-s03-q01",
+      "chapter": 1,
+      "after_section": "1.3",
+      "status": "approved",
+      "type": "multiple_choice",
+      "topic": "מעט לוגיקה",
+      "title": "שאלת הבנה · לוגיקה",
+      "question": "אם נתון כי $P \\Rightarrow Q$ וידוע כי $P$ אמת, מה מותר להסיק?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Q אמת"
+        },
+        {
+          "id": "b",
+          "text": "P שקר"
+        },
+        {
+          "id": "c",
+          "text": "Q שקר"
+        },
+        {
+          "id": "d",
+          "text": "לא $P$ גורר  לא $Q$"
+        }
+      ],
+      "correct": "a",
+      "hint1": "$P \\Rightarrow Q$ אומר, בעברית, $P$ גורר $Q$.",
+      "hint2": "$P \\Rightarrow Q$ אומר שבכל פעם ש $P$ אמת אז גם $Q$ בהכרח אמת. ומה נתון?",
+      "wrong1": "התשובה אינה נכונה. נסו שוב.",
+      "wrong2": "עדיין לא. נסו לחשוב על משמעות הטענה ולנסות שוב.",
+      "explanation": "נכון. זהו שימוש ישיר בגרירה.",
+      "sourceInfo": {
+        "project": "collaborative-calculus-1a",
+        "originalId": "ch01-s03-q01",
+        "difficulty": 1,
+        "originalReviewStatus": "ok",
+        "skills": [
+          "logic-quantifiers",
+          "proof-structure"
+        ],
+        "qualityFlags": [],
+        "original": {
+          "prompt": "אם ידוע ש־P ⇒ Q וידוע ש־P אמת, מה מותר להסיק?",
+          "options": [
+            "Q אמת",
+            "P שקר",
+            "Q שקר",
+            "Q ⇒ P"
+          ],
+          "feedback": "נכון. זהו שימוש ישיר בגרירה: מן ההנחה ומן התנאי מסיקים את המסקנה."
+        }
+      }
+    },
+    {
+      "id": "ch01-s03-q02",
+      "chapter": 1,
+      "after_section": "1.3",
+      "status": "approved",
+      "type": "multiple_choice",
+      "topic": "מעט לוגיקה",
+      "title": "שאלת הבנה · לוגיקה",
+      "question": "נתונה הטענה $P \\Rightarrow Q$. איזו טענה מהבאות שקולה לה?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$Q \\Rightarrow P$"
+        },
+        {
+          "id": "b",
+          "text": "$\\neg P \\Rightarrow \\neg Q$"
+        },
+        {
+          "id": "c",
+          "text": "$\\neg Q \\Rightarrow \\neg P$"
+        },
+        {
+          "id": "d",
+          "text": "$P \\land Q$"
+        }
+      ],
+      "correct": "c",
+      "hint1": "כל מי שלא קופץ, אדום. אז כל מי שלא אדום?",
+      "hint2": "הגרירה אומרת שכל דבר שמקיים את $P$ בהרכח מקיים גם את $Q$. לכן אם ניתקל בדבר מה שלא מקיים את $Q$, לא ייתכן שמראש קיים את $P$. ",
+      "wrong1": "התשובה אינה נכונה. נסו שוב.",
+      "wrong2": "עדיין לא. נסו לחשוב על משמעות הטענה ולנסות שוב.",
+      "explanation": "יפה. הקונטרה־פוזיטיב $\\neg Q \\Rightarrow \\neg P$ שקול לגרירה המקורית; הגרירה ההפוכה אינה שקולה לה.",
+      "sourceInfo": {
+        "project": "collaborative-calculus-1a",
+        "originalId": "ch01-s03-q02",
+        "difficulty": 2,
+        "originalReviewStatus": "ok",
+        "skills": [
+          "logic-quantifiers",
+          "proof-structure"
+        ],
+        "qualityFlags": [],
+        "original": {
+          "prompt": "נתונה הטענה P ⇒ Q. איזו טענה שקולה לה תמיד?",
+          "options": [
+            "Q ⇒ P",
+            "¬P ⇒ ¬Q",
+            "¬Q ⇒ ¬P",
+            "P ∧ Q"
+          ],
+          "feedback": "יפה. הקונטרה־פוזיטיב ¬Q ⇒ ¬P שקול לגרירה המקורית; הגרירה ההפוכה אינה שקולה לה."
+        }
+      }
+    },
+    {
+      "id": "ch01-s03-q04",
+      "chapter": 1,
+      "after_section": "1.3",
+      "status": "approved",
+      "type": "multiple_choice",
+      "topic": "מעט לוגיקה",
+      "title": "שאלת הבנה · מעט לוגיקה",
+      "question": "מהי השלילה של הטענה $P \\lor Q$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$\\neg P \\lor \\neg Q$"
+        },
+        {
+          "id": "b",
+          "text": "$\\neg P \\land \\neg Q$"
+        },
+        {
+          "id": "c",
+          "text": "$P \\land Q$"
+        },
+        {
+          "id": "d",
+          "text": "$P \\Rightarrow Q$"
+        }
+      ],
+      "correct": "b",
+      "hint1": "חישבו על קבוצות - כל מי שמקיים לפחות אחת משתי התכונות. איך נשלול זאת?",
+      "hint2": "אם אינני מקיים לפחות אחת משתי תכונות, אינני מקיים אף אחת מהן, זאת אני לא מקיים גם את זו וגם את זו. ",
+      "wrong1": "התשובה אינה נכונה. נסו שוב.",
+      "wrong2": "עדיין לא. נסו לחשוב על משמעות הטענה ולנסות שוב.",
+      "explanation": "נכון. לפי דה־מורגן, לא “או” הופך ל“וגם לא”.",
+      "sourceInfo": {
+        "project": "collaborative-calculus-1a",
+        "originalId": "ch01-s03-q04",
+        "difficulty": 4,
+        "originalReviewStatus": "ok",
+        "skills": [
+          "logic-quantifiers",
+          "proof-structure"
+        ],
+        "qualityFlags": [],
+        "original": {
+          "prompt": "מהי השלילה של הטענה P ∨ Q?",
+          "options": [
+            "¬P ∨ ¬Q",
+            "¬P ∧ ¬Q",
+            "P ∧ Q",
+            "P ⇒ Q"
+          ],
+          "feedback": "נכון. לפי דה־מורגן, לא “או” הופך ל“וגם לא”."
+        }
+      }
+    },
+    {
+      "id": "ch01-s03-q05",
+      "chapter": 1,
+      "after_section": "1.3",
+      "status": "approved",
+      "type": "multiple_choice",
+      "topic": "מעט לוגיקה",
+      "title": "שאלת הבנה · מעט לוגיקה",
+      "question": "איך נהוג לגשת להוכחת טענה מהצורה “לכל x המקיים תנאי מסויים, מתקיים $P(x)$”?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "לוקחים x שרירותי שמקיים את התנאי ומוכיחים עבורו את $P(x)$"
+        },
+        {
+          "id": "b",
+          "text": "בודקים $x$ אחד נוח ומסיימים"
+        },
+        {
+          "id": "c",
+          "text": "מניחים מראש ש־$P(x)$ נכון ומחפשים סתירה"
+        },
+        {
+          "id": "d",
+          "text": "מראים שאם התנאי $P(x)$ מתקיים אז $x$ לא מקיים את התנאי המקורי. "
+        }
+      ],
+      "correct": "a",
+      "hint1": "כיצד תראו שכל המספרים הזוגיים גם הריבוע שלהם זוגי, למשל?",
+      "hint2": "כדי להראות  שכל המספרים הזוגיים גם הריבוע שלהם זוגי, ניקח מספר זוגי כלשהו, שרירותי, נרשום אותו כ $2n$  ואז נעלה אותו בריבוע ונראה שהתוצאה זוגית. ",
+      "wrong1": "התשובה אינה נכונה. נסו שוב.",
+      "wrong2": "עדיין לא. נסו לחשוב על משמעות הטענה ולנסות שוב.",
+      "explanation": "נכון. בהוכחת “לכל” מתחילים באיבר שרירותי שעומד בתנאים, ואז מוכיחים עליו את הטענה.",
+      "sourceInfo": {
+        "project": "collaborative-calculus-1a",
+        "originalId": "ch01-s03-q05",
+        "difficulty": 5,
+        "originalReviewStatus": "ok",
+        "skills": [
+          "logic-quantifiers",
+          "proof-structure"
+        ],
+        "qualityFlags": [],
+        "original": {
+          "prompt": "איך ניגשים להוכחת טענה מהצורה “לכל x המקיים תנאי מתקיים P(x)”?",
+          "options": [
+            "לוקחים x שרירותי שמקיים את התנאי ומוכיחים עבורו את P(x)",
+            "בודקים x אחד נוח ומסיימים",
+            "מניחים מראש ש־P(x) נכון",
+            "מחפשים רק דוגמה נגדית"
+          ],
+          "feedback": "נכון. בהוכחת “לכל” מתחילים באיבר שרירותי שעומד בתנאים, ואז מוכיחים עליו את הטענה."
+        }
+      }
+    },
+    {
+      "id": "ch01-s03-q06",
+      "chapter": 1,
+      "after_section": "1.3",
+      "status": "approved",
+      "type": "multiple_choice",
+      "topic": "מעט לוגיקה",
+      "title": "שאלת הבנה · מעט לוגיקה",
+      "question": "רשמו את השלילה של הטענה\n $$?",
+      "formula": "\\forall \\varepsilon >0 \\,\\,\\exists n\\in {\\mathbb N}\\,\\,:\\,\\, 1/n<\\varepsilon",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$\\exists \\varepsilon >0 \\,\\,\\forall n\\in {\\mathbb N}\\,\\,: \\,\\,1/n\\geq \\varepsilon$"
+        },
+        {
+          "id": "b",
+          "text": "$\\forall \\varepsilon >0 \\,\\,\\exists n\\in {\\mathbb N}\\,\\,: \\,\\,1/n\\geq \\varepsilon$"
+        },
+        {
+          "id": "c",
+          "text": "$\\exists n\\in {\\mathbb N} \\,\\,\\forall \\varepsilon >0\\,\\,: \\,\\,1/n<\\varepsilon$"
+        },
+        {
+          "id": "d",
+          "text": "$\\forall n\\in {\\mathbb N}\\,\\, \\exists \\varepsilon >0\\,\\,: \\,\\,1/n\\geq \\varepsilon$"
+        }
+      ],
+      "correct": "a",
+      "hint1": "כל כמת לכל מתחלך בקיים ולהפך, והשלילה מתקדמת עד לפסוק עצמו ",
+      "hint2": "כל כמת לכל מתחלך בקיים ולהפך, והשלילה מתקדמת עד לפסוק עצמו זאת אומרת $\\varepsilon\\le 1/n$",
+      "wrong1": "התשובה אינה נכונה. נסו שוב.",
+      "wrong2": "עדיין לא. נסו לחשוב על משמעות הטענה ולנסות שוב.",
+      "explanation": "יפה. בשלילה של כמתים מקוננים מחליפים כל “לכל” ב“קיים” ולהפך, וגם שוללים את האי־שוויון הפנימי. כאן הטענה המקורית נכונה ואילו שלילתה איננה נכונה (זוהי תכונת ארכימדס)",
+      "sourceInfo": {
+        "project": "collaborative-calculus-1a",
+        "originalId": "ch01-s03-q06",
+        "difficulty": 6,
+        "originalReviewStatus": "ok",
+        "skills": [
+          "logic-quantifiers",
+          "proof-structure"
+        ],
+        "qualityFlags": [],
+        "original": {
+          "prompt": "מהי השלילה של הטענה ∀ε>0 ∃n∈N: 1/n<ε?",
+          "options": [
+            "∃ε>0 ∀n∈N: 1/n≥ε",
+            "∀ε>0 ∃n∈N: 1/n≥ε",
+            "∃n∈N ∀ε>0: 1/n<ε",
+            "∀n∈N ∃ε>0: 1/n≥ε"
+          ],
+          "feedback": "יפה. בשלילה של כמתים מקוננים מחליפים כל “לכל” ב“קיים” ולהפך, וגם שוללים את האי־שוויון הפנימי."
+        }
+      }
     }
   ]
 }
