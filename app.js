@@ -54,39 +54,16 @@ if(data) {
   const back = el('a', 'action primary', 'לקריאת פרק 1');back.href = '?chapter=1';pending.append(back);section.append(pending);
 }
 
-// ===== LAB EXPERIMENT 2: questions are stored in assets/questions.json =====
-// Change ALLOW_SKIP to false when we are ready to require checkpoints.
+// ===== LAB EXPERIMENT 3: question pools and four-question checkpoints =====
+// Only questions marked "approved" in assets/questions.json can appear.
+// A checkpoint is one section location; up to QUESTIONS_PER_CHECKPOINT are sampled
+// without replacement from the approved questions at that location.
 (() => {
-  const ALLOW_SKIP = true;
+  const QUESTIONS_PER_CHECKPOINT = 4;
+  const ALLOW_SKIP = true;  // A single skip button bypasses the entire checkpoint.
   if (!data || !data.pages.length) return;
   const figures = Array.from(document.querySelectorAll('.pages > figure.page'));
   if (!figures.length) return;
-
-  function addTextWithMath(node, value) {
-    node.replaceChildren();
-    String(value || '').split(/(\$[^$]+\$)/g).forEach(part => {
-      if (part.startsWith('$') && part.endsWith('$') && part.length > 2) {
-        const math = document.createElement('span');
-        math.className = 'lab-inline-math';
-        math.dir = 'ltr';
-        math.dataset.tex = part.slice(1, -1);
-        math.textContent = part.slice(1, -1);  // fallback if KaTeX cannot load
-        node.append(math);
-      } else if (part) {
-        node.append(document.createTextNode(part));
-      }
-    });
-    renderMath(node);
-  }
-
-  function mathNode(tex, cls) {
-    const span = document.createElement('span');
-    span.className = cls;
-    span.dir = 'ltr';
-    span.dataset.tex = tex;
-    span.textContent = tex;  // readable fallback if KaTeX is unavailable
-    return span;
-  }
 
   function renderMath(container) {
     if (!window.katex) return;
@@ -101,6 +78,30 @@ if(data) {
         console.warn('Could not render formula:', error);
       }
     });
+  }
+
+  function addTextWithMath(node, value) {
+    node.replaceChildren();
+    String(value || '').split(/(\$[^$]+\$)/g).forEach(part => {
+      if (part.startsWith('$') && part.endsWith('$') && part.length > 2) {
+        const span = el('span', 'lab-inline-math');
+        span.dir = 'ltr';
+        span.dataset.tex = part.slice(1, -1);
+        span.textContent = span.dataset.tex; // Fallback if KaTeX is unavailable.
+        node.append(span);
+      } else if (part) {
+        node.append(document.createTextNode(part));
+      }
+    });
+    renderMath(node);
+  }
+
+  function mathNode(tex, cls) {
+    const span = el('span', cls);
+    span.dir = 'ltr';
+    span.dataset.tex = tex;
+    span.textContent = tex;
+    return span;
   }
 
   function prepareMath() {
@@ -120,7 +121,7 @@ if(data) {
       Number.isInteger(q.chapter) && q.chapter >= 1 &&
       typeof q.after_section === 'string' &&
       q.type === 'multiple_choice' &&
-      typeof q.question === 'string' && q.question.trim() &&
+      typeof q.question === 'string' && Boolean(q.question.trim()) &&
       Array.isArray(q.choices) && q.choices.length >= 2 &&
       q.choices.every(c => c && typeof c.id === 'string' &&
         (typeof c.latex === 'string' || typeof c.text === 'string')) &&
@@ -128,39 +129,53 @@ if(data) {
       q.choices.some(c => c.id === q.correct);
   }
 
-  function makeCheckpoint(q) {
-    const checkpoint = document.createElement('section');
-    checkpoint.className = 'lab-checkpoint';
-    checkpoint.id = q.id;
-    checkpoint.dir = 'rtl';
-    checkpoint.append(el('h3', '', q.title || 'שאלת הבנה'));
-    const questionText = el('p');
-    addTextWithMath(questionText, q.question);
-    checkpoint.append(questionText);
-    if (q.formula && q.formula.trim()) {
-      const formulaWrapper = el('div', 'lab-formula-wrapper');
-      formulaWrapper.append(mathNode(q.formula, 'lab-formula'));
-      checkpoint.append(formulaWrapper);
+  function chooseQuestions(pool, count) {
+    const candidates = pool.slice();
+    // Fisher-Yates shuffle: every candidate has the same chance to be selected.
+    for (let i = candidates.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [candidates[i], candidates[j]] = [candidates[j], candidates[i]];
     }
+    return candidates.slice(0, Math.min(count, candidates.length));
+  }
 
+  function makeCheckpoint(group) {
+    const questions = chooseQuestions(group.pool, QUESTIONS_PER_CHECKPOINT);
+    const total = questions.length;
+    let position = 0;
+    let solved = 0;
+    let wrongAttempts = 0;
+    let skipped = false;
+    let onCompleted = () => {};
+
+    const checkpoint = el('section', 'lab-checkpoint');
+    checkpoint.id = 'lab-checkpoint-' + group.sectionNumber.replace(/[^a-zA-Z0-9_-]/g, '-');
+    checkpoint.dir = 'rtl';
+    checkpoint.dataset.section = group.sectionNumber;
+    checkpoint.dataset.questionCount = String(total);
+    const top = el('div', 'lab-checkpoint-top');
+    const heading = el('h3', '', 'בדיקת הבנה · סעיף ' + group.sectionNumber);
+    const countLabel = el('span', 'lab-progress-text');
+    top.append(heading, countLabel);
+    checkpoint.append(top);
+
+    const progress = el('div', 'lab-progress');
+    progress.setAttribute('role', 'progressbar');
+    progress.setAttribute('aria-label', 'שאלות שהושלמו בבדיקת ההבנה');
+    progress.setAttribute('aria-valuemin', '0');
+    progress.setAttribute('aria-valuemax', String(total));
+    const dots = [];
+    for (let i = 0; i < total; i++) {
+      const dot = el('span', 'lab-progress-step', String(i + 1));
+      dot.setAttribute('aria-hidden', 'true');
+      progress.append(dot);
+      dots.push(dot);
+    }
+    checkpoint.append(progress);
+
+    const prompt = el('div', 'lab-question-prompt');
+    checkpoint.append(prompt);
     const fieldset = document.createElement('fieldset');
-    fieldset.append(el('legend', '', 'בחרו תשובה אחת:'));
-    q.choices.forEach(choice => {
-      const label = document.createElement('label');
-      const input = document.createElement('input');
-      input.type = 'radio';
-      input.name = `answer-${q.id}`;
-      input.value = choice.id;
-      label.append(input);
-      const answer = el('span', 'lab-choice');
-      if (typeof choice.latex === 'string') {
-        answer.append(mathNode(choice.latex, 'lab-answer-formula'));
-      } else {
-        addTextWithMath(answer, choice.text);
-      }
-      label.append(answer);
-      fieldset.append(label);
-    });
     checkpoint.append(fieldset);
 
     const buttons = el('div', 'lab-buttons');
@@ -168,63 +183,156 @@ if(data) {
     checkButton.type = 'button';
     const hintButton = el('button', 'lab-hint-button', 'רמז');
     hintButton.type = 'button';
-    buttons.append(checkButton, hintButton);
+    const nextButton = el('button', 'lab-next-question', 'לשאלה הבאה');
+    nextButton.type = 'button';
+    nextButton.hidden = true;
+    buttons.append(checkButton, hintButton, nextButton);
+    let skipButton = null;
     if (ALLOW_SKIP) {
-      const skipButton = el('button', 'lab-skip', 'דלג (במצב ניסוי)');
+      skipButton = el('button', 'lab-skip', 'דלג על כל הבדיקה');
       skipButton.type = 'button';
-      skipButton.addEventListener('click', () => unlock(true));
       buttons.append(skipButton);
     }
     checkpoint.append(buttons);
+
     const feedback = el('p', 'lab-feedback');
     feedback.setAttribute('role', 'status');
     feedback.setAttribute('aria-live', 'polite');
     const hint = el('div', 'lab-hint');
     hint.hidden = true;
     checkpoint.append(feedback, hint);
-    let wrongAttempts = 0;
-    let onCompleted = () => {};
+
+    function updateProgress() {
+      countLabel.textContent = skipped
+        ? `${solved} מתוך ${total} הושלמו · דולג`
+        : `${solved} מתוך ${total} הושלמו`;
+      progress.setAttribute('aria-valuenow', String(solved));
+      progress.setAttribute('aria-valuetext', skipped
+        ? `${solved} שאלות נענו נכון מתוך ${total}; יתר הבדיקה דולג`
+        : `${solved} שאלות נענו נכון מתוך ${total}`);
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('done', i < solved);
+        dot.classList.toggle('current', !skipped && solved < total && i === solved);
+        dot.classList.toggle('skipped', skipped && i >= solved);
+        dot.textContent = i < solved ? '✓' : skipped ? '—' : String(i + 1);
+      });
+    }
+
+    function loadQuestion() {
+      const q = questions[position];
+      wrongAttempts = 0;
+      feedback.replaceChildren();
+      hint.replaceChildren();
+      hint.hidden = true;
+      prompt.replaceChildren();
+      const title = el('p', 'lab-question-position', `שאלה ${position + 1} מתוך ${total}`);
+      const text = el('p');
+      addTextWithMath(text, q.question);
+      prompt.append(title, text);
+      if (q.formula && q.formula.trim()) {
+        const wrapper = el('div', 'lab-formula-wrapper');
+        wrapper.append(mathNode(q.formula, 'lab-formula'));
+        prompt.append(wrapper);
+      }
+      fieldset.replaceChildren();
+      fieldset.append(el('legend', '', 'בחרו תשובה אחת:'));
+      q.choices.forEach(choice => {
+        const label = document.createElement('label');
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = `answer-${checkpoint.id}-${position}`;
+        input.value = choice.id;
+        label.append(input);
+        const answer = el('span', 'lab-choice');
+        if (typeof choice.latex === 'string') {
+          answer.append(mathNode(choice.latex, 'lab-answer-formula'));
+        } else {
+          addTextWithMath(answer, choice.text);
+        }
+        label.append(answer);
+        fieldset.append(label);
+      });
+      fieldset.disabled = false;
+      checkButton.hidden = false;
+      hintButton.hidden = false;
+      checkButton.disabled = false;
+      hintButton.disabled = false;
+      checkButton.textContent = 'בדיקת תשובה';
+      nextButton.hidden = true;
+      updateProgress();
+      renderMath(checkpoint);
+    }
 
     function showHint(detailed) {
+      const q = questions[position];
+      const text = detailed ? (q.hint2 || q.hint1 || '') : (q.hint1 || '');
+      if (!text) return;
       hint.hidden = false;
-      addTextWithMath(hint, detailed ? (q.hint2 || q.hint1 || '') : (q.hint1 || ''));
+      addTextWithMath(hint, text);
     }
-    function unlock(skipped) {
-      checkpoint.querySelectorAll('button, input').forEach(control => { control.disabled = true; });
-      if (skipped) {
-        feedback.textContent = 'דילגתם על השאלה. המשך הפרק פתוח לקריאה.';
+
+    function completeCheckpoint(wasSkipped) {
+      skipped = wasSkipped;
+      fieldset.disabled = true;
+      checkButton.hidden = true;
+      hintButton.hidden = true;
+      nextButton.hidden = true;
+      if (skipButton) skipButton.hidden = true;
+      updateProgress();
+      if (wasSkipped) {
+        feedback.textContent = 'דילגתם על שאר השאלות בבדיקה. המשך הפרק פתוח לקריאה.';
       } else {
-        addTextWithMath(feedback, q.explanation || 'נכון! המשך הפרק פתוח לקריאה.');
+        const finish = el('p', 'lab-complete-message', '✓ הבדיקה הושלמה! המשך הפרק פתוח לקריאה.');
+        feedback.append(finish);
       }
-      onCompleted();
+      onCompleted(wasSkipped);
     }
+
     checkButton.addEventListener('click', () => {
+      const q = questions[position];
       const selected = fieldset.querySelector('input[type="radio"]:checked');
       if (!selected) {
         feedback.textContent = 'בחרו תחילה אחת מהתשובות.';
         return;
       }
       if (selected.value === q.correct) {
-        unlock(false);
-      } else {
-        wrongAttempts += 1;
-        checkButton.textContent = 'בדיקה חוזרת';
-        if (wrongAttempts === 1) {
-          addTextWithMath(feedback, q.wrong1 || 'התשובה אינה נכונה. נסו שוב.');
+        solved++;
+        fieldset.disabled = true;
+        checkButton.hidden = true;
+        hintButton.hidden = true;
+        hint.hidden = true;
+        addTextWithMath(feedback, q.explanation || 'נכון!');
+        updateProgress();
+        if (position === total - 1) {
+          completeCheckpoint(false);
         } else {
-          addTextWithMath(feedback, q.wrong2 || 'עדיין לא. נסו שוב.');
-          showHint(true);
+          nextButton.hidden = false;
         }
+      } else {
+        wrongAttempts++;
+        checkButton.textContent = 'בדיקה חוזרת';
+        addTextWithMath(feedback, wrongAttempts === 1
+          ? (q.wrong1 || 'התשובה אינה נכונה. נסו שוב.')
+          : (q.wrong2 || 'עדיין לא. נסו שוב.'));
+        if (wrongAttempts >= 2) showHint(true);
       }
     });
     hintButton.addEventListener('click', () => showHint(wrongAttempts >= 2));
-    return {checkpoint, completed: false, setCompletionCallback(fn) { onCompleted = fn; }};
+    nextButton.addEventListener('click', () => {
+      if (position >= total - 1 || nextButton.hidden) return;
+      position++;
+      loadQuestion();
+    });
+    if (skipButton) skipButton.addEventListener('click', () => completeCheckpoint(true));
+
+    loadQuestion();
+    return {checkpoint, setCompletionCallback(fn) { onCompleted = fn; }};
   }
 
   function showError(error) {
     console.error('The question bank could not be loaded:', error);
-    const warning = el('p', 'lab-load-warning', 'לא ניתן לטעון את שאלות ההבנה כעת. אפשר להמשיך לקרוא את הפרק ללא חסימה.');
-    section.append(warning);
+    section.append(el('p', 'lab-load-warning',
+      'לא ניתן לטעון את שאלות ההבנה כעת. אפשר להמשיך לקרוא את הפרק ללא חסימה.'));
   }
 
   fetch('assets/questions.json', {cache: 'no-store'})
@@ -236,7 +344,7 @@ if(data) {
       if (!bank || bank.version !== 1 || !Array.isArray(bank.questions)) {
         throw new Error('Invalid question-bank format');
       }
-      const located = [];
+      const groups = new Map();
       const usedIds = new Set();
       bank.questions.filter(q => q.status === 'approved' && q.chapter === chapter).forEach(q => {
         if (!validateQuestion(q) || usedIds.has(q.id)) {
@@ -244,25 +352,30 @@ if(data) {
           return;
         }
         usedIds.add(q.id);
-        const dest = data.sections.find(s => s.number === q.after_section);
-        if (!dest || dest.page < 1 || dest.page >= figures.length) {
+        const destination = data.sections.find(s => s.number === q.after_section);
+        if (!destination || destination.page < 1 || destination.page >= figures.length) {
           console.warn(`Skipping question ${q.id}: section ${q.after_section} was not found or is too late in the chapter.`);
           return;
         }
-        located.push({q, afterPage: dest.page});
+        // All approved questions assigned to the same section share ONE checkpoint.
+        const key = String(q.after_section);
+        if (!groups.has(key)) {
+          groups.set(key, {sectionNumber:key, afterPage:destination.page, pool:[]});
+        }
+        groups.get(key).pool.push(q);
       });
-      located.sort((a, b) => a.afterPage - b.afterPage);
-      if (!located.length) return;
+      if (!groups.size) return;
       prepareMath();
-
+      const ordered = Array.from(groups.values()).sort((a,b) => a.afterPage-b.afterPage ||
+        a.sectionNumber.localeCompare(b.sectionNumber, 'en', {numeric:true}));
       const checkpoints = [];
-      const anchors = new Map(); // Keeps multiple questions on the same page in order.
-      located.forEach(item => {
-        const widget = makeCheckpoint(item.q);
-        const anchor = anchors.get(item.afterPage) || figures[item.afterPage - 1];
+      const anchors = new Map();
+      ordered.forEach(group => {
+        const widget = makeCheckpoint(group);
+        const anchor = anchors.get(group.afterPage) || figures[group.afterPage - 1];
         anchor.after(widget.checkpoint);
-        anchors.set(item.afterPage, widget.checkpoint);
-        checkpoints.push({...item, ...widget, completed: false});
+        anchors.set(group.afterPage, widget.checkpoint);
+        checkpoints.push({...group, ...widget, completed:false, skipped:false});
       });
       function refreshLocks() {
         const first = checkpoints.findIndex(item => !item.completed);
@@ -275,7 +388,11 @@ if(data) {
         });
       }
       checkpoints.forEach(item => {
-        item.setCompletionCallback(() => { item.completed = true; refreshLocks(); });
+        item.setCompletionCallback(wasSkipped => {
+          item.completed = true;
+          item.skipped = wasSkipped;
+          refreshLocks();
+        });
       });
       refreshLocks();
       renderMath(section);
@@ -284,42 +401,55 @@ if(data) {
 
   const labStyles = document.createElement('style');
   labStyles.textContent = `
-    .lab-checkpoint { margin: 26px auto; max-width: 900px; padding: 24px;
-      border: 2px solid #165f64; border-radius: 12px; background: #fff; direction: rtl; }
-    .lab-checkpoint[hidden] { display: none; }
-    .lab-checkpoint h3 { margin: 0 0 14px; color: #165f64; }
-    .lab-checkpoint p { line-height: 1.7; }
-    .lab-formula-wrapper { text-align: center; background: #f3f6f7; padding: 12px;
-      overflow-x: auto; }
-    .lab-formula { font-size: 1.15rem; }
-    .lab-formula-wrapper .katex-display { margin: .35em 0; }
-    .lab-checkpoint fieldset { border: 0; padding: 0; margin: 18px 0; }
-    .lab-checkpoint legend { margin-bottom: 10px; font-weight: bold; }
-    .lab-checkpoint label { display: flex; align-items: center; gap: 12px;
-      margin: 8px 0; padding: 10px; border: 1px solid #dbe3e7; border-radius: 6px;
-      cursor: pointer; }
-    .lab-choice { unicode-bidi: isolate; text-align: left;
-      font-size: 1.08rem; overflow-x: auto; }
-    .lab-answer-formula { display: inline-block; direction: ltr; }
-    .lab-inline-math { display: inline-block; direction: ltr;
-      unicode-bidi: isolate; vertical-align: baseline; }
-    .lab-buttons { display: flex; flex-wrap: wrap; gap: 10px; }
-    .lab-buttons button { padding: 10px 16px; border-radius: 6px; cursor: pointer;
-      border: 1px solid #165f64; background: #165f64; color: white; }
-    .lab-buttons .lab-hint-button, .lab-buttons .lab-skip { background: white; color: #165f64; }
-    .lab-buttons button:disabled { opacity: .55; cursor: default; }
-    .lab-feedback { min-height: 1.7em; font-weight: 600; }
-    .lab-hint { margin-top: 12px; border-right: 3px solid #165f64;
-      background: #f3f6f7; padding: 12px 14px; line-height: 1.9; }
-    .lab-hint[hidden] { display: none; }
-    .lab-load-warning { color: #87541d; text-align: center; padding: 10px; }
-    .page.lab-locked img { filter: blur(12px); pointer-events: none; }
-    .page.lab-locked { position: relative; }
-    .page.lab-locked::after { content: 'כדי לקרוא בהמשך, ענו על השאלה או לחצו על דלג';
+    .lab-checkpoint {margin: 26px auto; max-width: 900px; padding: 24px;
+      border: 2px solid #165f64; border-radius: 14px; background: #fff; direction: rtl;}
+    .lab-checkpoint[hidden], .lab-buttons [hidden] {display: none !important;}
+    .lab-checkpoint-top {display: flex; gap: 12px; flex-wrap: wrap;
+      align-items: baseline; justify-content: space-between;}
+    .lab-checkpoint h3 {margin: 0 0 12px; color: #165f64;}
+    .lab-progress-text {color: #34545a; font-size: .88rem; font-weight: 600;}
+    .lab-progress {display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0,1fr);
+      gap: 8px; margin: 8px 0 24px;}
+    .lab-progress-step {display: grid; place-items: center; min-height: 34px;
+      border-radius: 8px; border: 1px solid #d4e1de;
+      background: #f6f8f7; color: #667a7b; font-size: .9rem;}
+    .lab-progress-step.current {border: 2px solid #14636b; color: #14636b;
+      background: #e8f3f1; font-weight: 700;}
+    .lab-progress-step.done {background: #e5f4ed; color: #18734e; border-color: #afd5c3; font-weight: 700;}
+    .lab-progress-step.skipped {background: #f4f4f4; color: #a3a8a8;}
+    .lab-question-position {font-size: .86rem; color: #557174; font-weight: 700; margin: 0 0 4px;}
+    .lab-checkpoint p {line-height: 1.7;}
+    .lab-formula-wrapper {text-align: center; background: #f3f6f7; padding: 12px; overflow-x: auto;}
+    .lab-formula {font-size: 1.15rem;}
+    .lab-formula-wrapper .katex-display {margin: .35em 0;}
+    .lab-checkpoint fieldset {border: 0; padding: 0; margin: 18px 0;}
+    .lab-checkpoint legend {margin-bottom: 10px; font-weight: bold;}
+    .lab-checkpoint label {display: flex; align-items: center; gap: 12px;
+      margin: 8px 0; padding: 10px; border: 1px solid #dbe3e7; border-radius: 6px; cursor: pointer;}
+    .lab-choice {unicode-bidi: isolate; text-align: left; font-size: 1.08rem; overflow-x: auto;}
+    .lab-answer-formula, .lab-inline-math {display: inline-block; direction: ltr; unicode-bidi: isolate;}
+    .lab-buttons {display: flex; flex-wrap: wrap; gap: 10px; align-items: center;}
+    .lab-buttons button {padding: 10px 16px; border-radius: 7px; cursor: pointer;
+      border: 1px solid #165f64; background: #165f64; color: white; font: inherit;}
+    .lab-buttons .lab-hint-button, .lab-buttons .lab-skip {background: white; color: #165f64;}
+    .lab-buttons button:disabled {opacity: .55; cursor: default;}
+    .lab-feedback {min-height: 1.7em; font-weight: 600;}
+    .lab-complete-message {color: #18734e; margin: 8px 0 0;}
+    .lab-hint {margin-top: 12px; border-right: 3px solid #165f64;
+      background: #f3f6f7; padding: 12px 14px; line-height: 1.9;}
+    .lab-hint[hidden] {display: none;}
+    .lab-load-warning {color: #87541d; text-align: center; padding: 10px;}
+    .page.lab-locked img {filter: blur(12px); pointer-events: none;}
+    .page.lab-locked {position: relative;}
+    .page.lab-locked::after {content: 'כדי לקרוא בהמשך, השלימו את בדיקת ההבנה או לחצו על דלג';
       position: absolute; inset: 45px 0 0; display: grid; place-items: start center;
       padding: 26px; font-weight: bold; text-align: center; color: #172d3e;
-      background: rgba(255,255,255,.55); pointer-events: none; }
+      background: rgba(255,255,255,.55); pointer-events: none;}
+    @media(max-width:600px) {
+      .lab-checkpoint {padding: 14px;}
+      .lab-checkpoint-top {display: block;}
+    }
   `;
   document.head.append(labStyles);
 })();
-// ===== END LAB EXPERIMENT 2 =====
+// ===== END LAB EXPERIMENT 3 =====
