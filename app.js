@@ -54,150 +54,253 @@ if(data) {
   const back = el('a', 'action primary', 'לקריאת פרק 1');back.href = '?chapter=1';pending.append(back);section.append(pending);
 }
 
-// ===== LAB EXPERIMENT 1: one question, blurring, Skip, and hints =====
-// Everything below is experimental and can be removed as a single block.
-if (chapter === 1 && data && data.pages.length >= 2) {
+// ===== LAB EXPERIMENT 2: questions are stored in assets/questions.json =====
+// Change ALLOW_SKIP to false when we are ready to require checkpoints.
+(() => {
+  const ALLOW_SKIP = true;
+  if (!data || !data.pages.length) return;
   const figures = Array.from(document.querySelectorAll('.pages > figure.page'));
-  const nextSection = data.sections.find(item => item.number === '1.4');
-  const afterPage = Math.max(1, Math.min(nextSection ? nextSection.page : 5, figures.length - 1));
+  if (!figures.length) return;
 
-  const checkpoint = document.createElement('section');
-  checkpoint.id = 'lab-logic-001';
-  checkpoint.className = 'lab-checkpoint';
-  checkpoint.innerHTML = `
-    <h3>שאלת הבנה · לוגיקה</h3>
-    <p>מהי השלילה של הטענה הבאה?</p>
-    <p class="lab-formula" dir="ltr"
-       data-tex="\\forall x\\in\\mathbb{R}\\;\\exists y\\in\\mathbb{R}:y>x">∀x ∈ ℝ ∃y ∈ ℝ : y &gt; x</p>
-    <fieldset>
-      <legend>בחרו תשובה אחת:</legend>
-      <label><input type="radio" name="lab-logic-answer" value="a">
-        <span class="lab-math" dir="ltr" data-tex="\\exists x\\in\\mathbb{R}\\;\\forall y\\in\\mathbb{R}:y\\leq x">∃x ∈ ℝ ∀y ∈ ℝ : y ≤ x</span></label>
-      <label><input type="radio" name="lab-logic-answer" value="b">
-        <span class="lab-math" dir="ltr" data-tex="\\forall x\\in\\mathbb{R}\\;\\exists y\\in\\mathbb{R}:y\\leq x">∀x ∈ ℝ ∃y ∈ ℝ : y ≤ x</span></label>
-      <label><input type="radio" name="lab-logic-answer" value="c">
-        <span class="lab-math" dir="ltr" data-tex="\\exists x\\in\\mathbb{R}\\;\\exists y\\in\\mathbb{R}:y\\leq x">∃x ∈ ℝ ∃y ∈ ℝ : y ≤ x</span></label>
-      <label><input type="radio" name="lab-logic-answer" value="d">
-        <span class="lab-math" dir="ltr" data-tex="\\forall x\\in\\mathbb{R}\\;\\forall y\\in\\mathbb{R}:y\\leq x">∀x ∈ ℝ ∀y ∈ ℝ : y ≤ x</span></label>
-    </fieldset>
-    <div class="lab-buttons">
-      <button type="button" class="lab-check-answer">בדיקת תשובה</button>
-      <button type="button" class="lab-hint-button">רמז</button>
-      <button type="button" class="lab-skip">דלג (במצב ניסוי)</button>
-    </div>
-    <p class="lab-feedback" role="status" aria-live="polite"></p>
-    <div class="lab-hint" role="status" aria-live="polite" hidden></div>
-  `;
-  figures[afterPage - 1].after(checkpoint);
+  function addTextWithMath(node, value) {
+    node.replaceChildren();
+    String(value || '').split(/(\$[^$]+\$)/g).forEach(part => {
+      if (part.startsWith('$') && part.endsWith('$') && part.length > 2) {
+        const math = document.createElement('span');
+        math.className = 'lab-inline-math';
+        math.dir = 'ltr';
+        math.dataset.tex = part.slice(1, -1);
+        math.textContent = part.slice(1, -1);  // fallback if KaTeX cannot load
+        node.append(math);
+      } else if (part) {
+        node.append(document.createTextNode(part));
+      }
+    });
+    renderMath(node);
+  }
 
-  // The same KaTeX renderer is used for the question, hints, and feedback.
-  // If KaTeX is unavailable, readable math remains as fallback text.
+  function mathNode(tex, cls) {
+    const span = document.createElement('span');
+    span.className = cls;
+    span.dir = 'ltr';
+    span.dataset.tex = tex;
+    span.textContent = tex;  // readable fallback if KaTeX is unavailable
+    return span;
+  }
+
   function renderMath(container) {
     if (!window.katex) return;
     container.querySelectorAll('[data-tex]:not([data-math-ready])').forEach(node => {
-      window.katex.render(node.dataset.tex, node, {
-        throwOnError: false,
-        displayMode: node.classList.contains('lab-formula')
-      });
-      node.dataset.mathReady = 'yes';
+      try {
+        window.katex.render(node.dataset.tex, node, {
+          throwOnError: false,
+          displayMode: node.classList.contains('lab-formula')
+        });
+        node.dataset.mathReady = 'yes';
+      } catch (error) {
+        console.warn('Could not render formula:', error);
+      }
     });
   }
-  const katexCss = document.createElement('link');
-  katexCss.rel = 'stylesheet';
-  katexCss.href = 'https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css';
-  document.head.appendChild(katexCss);
-  const katexScript = document.createElement('script');
-  katexScript.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js';
-  katexScript.onload = () => renderMath(checkpoint);
-  document.head.appendChild(katexScript);
-  renderMath(checkpoint);
 
-  const lockedPages = figures.slice(afterPage);
-  lockedPages.forEach(page => page.classList.add('lab-locked'));
-
-  const feedback = checkpoint.querySelector('.lab-feedback');
-  const hint = checkpoint.querySelector('.lab-hint');
-  const checkButton = checkpoint.querySelector('.lab-check-answer');
-  const hintButton = checkpoint.querySelector('.lab-hint-button');
-  let wrongAttempts = 0;
-
-  function firstHint() {
-    hint.hidden = false;
-    hint.innerHTML = 'רמז: נסו לנסח במילים מה פירוש הדבר שהטענה "לכל <span class="lab-inline-math" dir="ltr" data-tex="x">x</span>" אינה נכונה.';
-    renderMath(hint);
+  function prepareMath() {
+    if (window.katex) return;
+    const css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = 'https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css';
+    document.head.append(css);
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js';
+    script.onload = () => renderMath(section);
+    document.head.append(script);
   }
 
-  function detailedHint() {
-    hint.hidden = false;
-    hint.innerHTML = `
-      <strong>רמז נוסף:</strong> כדי שהטענה תהיה שקרית, צריך למצוא מספר
-      <span class="lab-inline-math" dir="ltr" data-tex="x">x</span> מסוים,
-      שעבורו <em>אף</em> מספר <span class="lab-inline-math" dir="ltr" data-tex="y">y</span>
-      אינו מקיים <span class="lab-inline-math" dir="ltr" data-tex="y>x">y &gt; x</span>.
-      אילו כמתים מבטאים "יש מספר מסוים" ו"לכל מספר"?
-      ואיך שוללים את אי־השוויון
-      <span class="lab-inline-math" dir="ltr" data-tex="y>x">y &gt; x</span>?`;
-    renderMath(hint);
+  function validateQuestion(q) {
+    return q && /^[a-zA-Z0-9_-]+$/.test(q.id) &&
+      Number.isInteger(q.chapter) && q.chapter >= 1 &&
+      typeof q.after_section === 'string' &&
+      q.type === 'multiple_choice' &&
+      typeof q.question === 'string' && q.question.trim() &&
+      Array.isArray(q.choices) && q.choices.length >= 2 &&
+      q.choices.every(c => c && typeof c.id === 'string' &&
+        (typeof c.latex === 'string' || typeof c.text === 'string')) &&
+      new Set(q.choices.map(c => c.id)).size === q.choices.length &&
+      q.choices.some(c => c.id === q.correct);
   }
 
-  function unlock(skipped) {
-    lockedPages.forEach(page => page.classList.remove('lab-locked'));
-    checkpoint.querySelectorAll('button, input').forEach(control => control.disabled = true);
-    if (skipped) {
-      feedback.textContent = 'דילגתם על השאלה. המשך הפרק פתוח לקריאה.';
-    } else {
-      feedback.innerHTML = `נכון! זו השלילה הלוגית של הטענה. הטענה המקורית נכונה
-        מעל <span class="lab-inline-math" dir="ltr" data-tex="\\mathbb{R}">ℝ</span>:
-        לכל <span class="lab-inline-math" dir="ltr" data-tex="x">x</span>
-        אפשר לבחור <span class="lab-inline-math" dir="ltr" data-tex="y=x+1">y = x + 1</span>.
-        לכן השלילה עצמה שקרית. המשך הפרק פתוח לקריאה.`;
-      renderMath(feedback);
+  function makeCheckpoint(q) {
+    const checkpoint = document.createElement('section');
+    checkpoint.className = 'lab-checkpoint';
+    checkpoint.id = q.id;
+    checkpoint.dir = 'rtl';
+    checkpoint.append(el('h3', '', q.title || 'שאלת הבנה'));
+    const questionText = el('p');
+    addTextWithMath(questionText, q.question);
+    checkpoint.append(questionText);
+    if (q.formula && q.formula.trim()) {
+      const formulaWrapper = el('div', 'lab-formula-wrapper');
+      formulaWrapper.append(mathNode(q.formula, 'lab-formula'));
+      checkpoint.append(formulaWrapper);
     }
+
+    const fieldset = document.createElement('fieldset');
+    fieldset.append(el('legend', '', 'בחרו תשובה אחת:'));
+    q.choices.forEach(choice => {
+      const label = document.createElement('label');
+      const input = document.createElement('input');
+      input.type = 'radio';
+      input.name = `answer-${q.id}`;
+      input.value = choice.id;
+      label.append(input);
+      const answer = el('span', 'lab-choice');
+      if (typeof choice.latex === 'string') {
+        answer.append(mathNode(choice.latex, 'lab-answer-formula'));
+      } else {
+        addTextWithMath(answer, choice.text);
+      }
+      label.append(answer);
+      fieldset.append(label);
+    });
+    checkpoint.append(fieldset);
+
+    const buttons = el('div', 'lab-buttons');
+    const checkButton = el('button', 'lab-check-answer', 'בדיקת תשובה');
+    checkButton.type = 'button';
+    const hintButton = el('button', 'lab-hint-button', 'רמז');
+    hintButton.type = 'button';
+    buttons.append(checkButton, hintButton);
+    if (ALLOW_SKIP) {
+      const skipButton = el('button', 'lab-skip', 'דלג (במצב ניסוי)');
+      skipButton.type = 'button';
+      skipButton.addEventListener('click', () => unlock(true));
+      buttons.append(skipButton);
+    }
+    checkpoint.append(buttons);
+    const feedback = el('p', 'lab-feedback');
+    feedback.setAttribute('role', 'status');
+    feedback.setAttribute('aria-live', 'polite');
+    const hint = el('div', 'lab-hint');
+    hint.hidden = true;
+    checkpoint.append(feedback, hint);
+    let wrongAttempts = 0;
+    let onCompleted = () => {};
+
+    function showHint(detailed) {
+      hint.hidden = false;
+      addTextWithMath(hint, detailed ? (q.hint2 || q.hint1 || '') : (q.hint1 || ''));
+    }
+    function unlock(skipped) {
+      checkpoint.querySelectorAll('button, input').forEach(control => { control.disabled = true; });
+      if (skipped) {
+        feedback.textContent = 'דילגתם על השאלה. המשך הפרק פתוח לקריאה.';
+      } else {
+        addTextWithMath(feedback, q.explanation || 'נכון! המשך הפרק פתוח לקריאה.');
+      }
+      onCompleted();
+    }
+    checkButton.addEventListener('click', () => {
+      const selected = fieldset.querySelector('input[type="radio"]:checked');
+      if (!selected) {
+        feedback.textContent = 'בחרו תחילה אחת מהתשובות.';
+        return;
+      }
+      if (selected.value === q.correct) {
+        unlock(false);
+      } else {
+        wrongAttempts += 1;
+        checkButton.textContent = 'בדיקה חוזרת';
+        if (wrongAttempts === 1) {
+          addTextWithMath(feedback, q.wrong1 || 'התשובה אינה נכונה. נסו שוב.');
+        } else {
+          addTextWithMath(feedback, q.wrong2 || 'עדיין לא. נסו שוב.');
+          showHint(true);
+        }
+      }
+    });
+    hintButton.addEventListener('click', () => showHint(wrongAttempts >= 2));
+    return {checkpoint, completed: false, setCompletionCallback(fn) { onCompleted = fn; }};
   }
 
-  checkButton.addEventListener('click', () => {
-    const selected = checkpoint.querySelector('input[name="lab-logic-answer"]:checked');
-    if (!selected) {
-      feedback.textContent = 'בחרו תחילה אחת מהתשובות.';
-      return;
-    }
-    if (selected.value === 'a') {
-      unlock(false);
-      return;
-    }
-    wrongAttempts += 1;
-    checkButton.textContent = 'בדיקה חוזרת';
-    if (wrongAttempts === 1) {
-      feedback.textContent = 'התשובה אינה נכונה. מה צריך לקרות כדי שהטענה המקורית תהיה שקרית?';
-    } else {
-      feedback.textContent = 'עדיין לא. רמז מפורט יותר מופיע למטה. נסו שוב.';
-      detailedHint();
-    }
-  });
+  function showError(error) {
+    console.error('The question bank could not be loaded:', error);
+    const warning = el('p', 'lab-load-warning', 'לא ניתן לטעון את שאלות ההבנה כעת. אפשר להמשיך לקרוא את הפרק ללא חסימה.');
+    section.append(warning);
+  }
 
-  hintButton.addEventListener('click', () => {
-    if (wrongAttempts >= 2) detailedHint();
-    else firstHint();
-  });
-  checkpoint.querySelector('.lab-skip').addEventListener('click', () => unlock(true));
+  fetch('assets/questions.json', {cache: 'no-store'})
+    .then(response => {
+      if (!response.ok) throw new Error(`HTTP ${response.status} loading questions.json`);
+      return response.json();
+    })
+    .then(bank => {
+      if (!bank || bank.version !== 1 || !Array.isArray(bank.questions)) {
+        throw new Error('Invalid question-bank format');
+      }
+      const located = [];
+      const usedIds = new Set();
+      bank.questions.filter(q => q.status === 'approved' && q.chapter === chapter).forEach(q => {
+        if (!validateQuestion(q) || usedIds.has(q.id)) {
+          console.warn('Skipping invalid or duplicate question:', q && q.id);
+          return;
+        }
+        usedIds.add(q.id);
+        const dest = data.sections.find(s => s.number === q.after_section);
+        if (!dest || dest.page < 1 || dest.page >= figures.length) {
+          console.warn(`Skipping question ${q.id}: section ${q.after_section} was not found or is too late in the chapter.`);
+          return;
+        }
+        located.push({q, afterPage: dest.page});
+      });
+      located.sort((a, b) => a.afterPage - b.afterPage);
+      if (!located.length) return;
+      prepareMath();
 
-  // Temporary style for this experiment; can later move to style.css.
+      const checkpoints = [];
+      const anchors = new Map(); // Keeps multiple questions on the same page in order.
+      located.forEach(item => {
+        const widget = makeCheckpoint(item.q);
+        const anchor = anchors.get(item.afterPage) || figures[item.afterPage - 1];
+        anchor.after(widget.checkpoint);
+        anchors.set(item.afterPage, widget.checkpoint);
+        checkpoints.push({...item, ...widget, completed: false});
+      });
+      function refreshLocks() {
+        const first = checkpoints.findIndex(item => !item.completed);
+        const afterPage = first < 0 ? Infinity : checkpoints[first].afterPage;
+        figures.forEach((page, index) => {
+          page.classList.toggle('lab-locked', index + 1 > afterPage);
+        });
+        checkpoints.forEach((item, index) => {
+          item.checkpoint.hidden = first >= 0 && index > first;
+        });
+      }
+      checkpoints.forEach(item => {
+        item.setCompletionCallback(() => { item.completed = true; refreshLocks(); });
+      });
+      refreshLocks();
+      renderMath(section);
+    })
+    .catch(showError);
+
   const labStyles = document.createElement('style');
   labStyles.textContent = `
     .lab-checkpoint { margin: 26px auto; max-width: 900px; padding: 24px;
       border: 2px solid #165f64; border-radius: 12px; background: #fff; direction: rtl; }
+    .lab-checkpoint[hidden] { display: none; }
     .lab-checkpoint h3 { margin: 0 0 14px; color: #165f64; }
     .lab-checkpoint p { line-height: 1.7; }
-    .lab-formula { font-size: 1.15rem; text-align: center; background: #f3f6f7;
-      padding: 12px; overflow-x: auto; }
-    .lab-formula .katex-display { margin: .35em 0; }
+    .lab-formula-wrapper { text-align: center; background: #f3f6f7; padding: 12px;
+      overflow-x: auto; }
+    .lab-formula { font-size: 1.15rem; }
+    .lab-formula-wrapper .katex-display { margin: .35em 0; }
     .lab-checkpoint fieldset { border: 0; padding: 0; margin: 18px 0; }
     .lab-checkpoint legend { margin-bottom: 10px; font-weight: bold; }
     .lab-checkpoint label { display: flex; align-items: center; gap: 12px;
       margin: 8px 0; padding: 10px; border: 1px solid #dbe3e7; border-radius: 6px;
       cursor: pointer; }
-    .lab-checkpoint label > span.lab-math { unicode-bidi: isolate; text-align: left;
+    .lab-choice { unicode-bidi: isolate; text-align: left;
       font-size: 1.08rem; overflow-x: auto; }
+    .lab-answer-formula { display: inline-block; direction: ltr; }
     .lab-inline-math { display: inline-block; direction: ltr;
       unicode-bidi: isolate; vertical-align: baseline; }
     .lab-buttons { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -209,6 +312,7 @@ if (chapter === 1 && data && data.pages.length >= 2) {
     .lab-hint { margin-top: 12px; border-right: 3px solid #165f64;
       background: #f3f6f7; padding: 12px 14px; line-height: 1.9; }
     .lab-hint[hidden] { display: none; }
+    .lab-load-warning { color: #87541d; text-align: center; padding: 10px; }
     .page.lab-locked img { filter: blur(12px); pointer-events: none; }
     .page.lab-locked { position: relative; }
     .page.lab-locked::after { content: 'כדי לקרוא בהמשך, ענו על השאלה או לחצו על דלג';
@@ -216,6 +320,6 @@ if (chapter === 1 && data && data.pages.length >= 2) {
       padding: 26px; font-weight: bold; text-align: center; color: #172d3e;
       background: rgba(255,255,255,.55); pointer-events: none; }
   `;
-  document.head.appendChild(labStyles);
-}
-// ===== END LAB EXPERIMENT 1 =====
+  document.head.append(labStyles);
+})();
+// ===== END LAB EXPERIMENT 2 =====
