@@ -54,6 +54,67 @@ if(data) {
   const back = el('a', 'action primary', 'לקריאת פרק 1');back.href = '?chapter=1';pending.append(back);section.append(pending);
 }
 
+// ===== DEMO PROFILES: browser-local data, NOT real authentication =====
+const demoProgress = (() => {
+  const PREFIX = 'calc1a-lab-demo-v1:';
+  const USERS = ['student1', 'student2', 'student3', 'student4'];
+  let user = null;
+  try { const saved = localStorage.getItem(PREFIX + 'current'); if (USERS.includes(saved)) user = saved; } catch (_) {}
+  function read() {
+    if (!user) return {};
+    try { const value = JSON.parse(localStorage.getItem(PREFIX + user) || '{}'); return value && typeof value === 'object' && !Array.isArray(value) ? value : {}; }
+    catch (_) { return {}; }
+  }
+  function write(value) {
+    if (!user) return;
+    try { localStorage.setItem(PREFIX + user, JSON.stringify(value)); }
+    catch (error) { console.warn('Demo progress could not be saved:', error); alert('לא ניתן לשמור התקדמות בדפדפן זה.'); }
+  }
+  function checkpointKey(ch, sectionNumber) { return String(ch) + ':' + sectionNumber; }
+  function get(ch, sectionNumber) { return read()[checkpointKey(ch, sectionNumber)] || null; }
+  function set(ch, sectionNumber, state) { const all = read(); all[checkpointKey(ch, sectionNumber)] = state; write(all); }
+  function switchUser(next) {
+    if (!USERS.includes(next)) return;
+    user = next;
+    try { localStorage.setItem(PREFIX + 'current', user); } catch (_) {}
+    location.reload();
+  }
+  function reset() { if (user) { try { localStorage.removeItem(PREFIX + user); } catch (_) {} location.reload(); } }
+  function count() { const states = Object.values(read()); return {finished: states.filter(s => s && s.completed).length, started: states.length}; }
+  const panel = el('div', 'demo-account-panel');
+  panel.dir = 'rtl';
+  const heading = el('strong', '', 'משתמשי ניסוי · שמירה בדפדפן זה בלבד');
+  const controls = el('div', 'demo-account-controls');
+  const select = document.createElement('select');
+  select.setAttribute('aria-label', 'בחירת משתמש ניסוי');
+  select.append(new Option('בחרו משתמש', ''));
+  USERS.forEach(name => select.append(new Option(name, name)));
+  select.value = user || '';
+  select.addEventListener('change', () => switchUser(select.value));
+  const status = el('span', '', '');
+  const resetButton = el('button', '', 'התחלה מחדש של כל הקורס');
+  resetButton.type = 'button';
+  resetButton.addEventListener('click', () => {
+    if (user && confirm('למחוק את כל ההתקדמות של ' + user + ' בכל הפרקים? לא ניתן לבטל פעולה זו.')) reset();
+  });
+  controls.append(select, status, resetButton);
+  panel.append(heading, controls);
+  section.before(panel);
+  function refresh() {
+    const n = count();
+    status.textContent = user ? `הושלמו ${n.finished} בדיקות · ${n.started} בדיקות עם התקדמות` : 'בחרו משתמש כדי להתחיל';
+    resetButton.disabled = !user;
+  }
+  refresh();
+  const style = document.createElement('style');
+  style.textContent = `.demo-account-panel{max-width:900px;margin:18px auto;padding:16px 20px;border:1px solid #b9d2ce;border-radius:12px;background:#f2f8f6;direction:rtl}
+  .demo-account-controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:10px}
+  .demo-account-controls select,.demo-account-controls button{font:inherit;padding:7px 12px;border-radius:7px;border:1px solid #165f64;background:white;color:#165f64}
+  .demo-account-controls button{cursor:pointer}.demo-account-controls button:disabled{opacity:.5}`;
+  document.head.append(style);
+  return { get, set, refresh, hasUser: () => Boolean(user) };
+})();
+
 // ===== LAB EXPERIMENT 3: question pools and four-question checkpoints =====
 // Only questions marked "approved" in assets/questions.json can appear.
 // A checkpoint is one section location; up to QUESTIONS_PER_CHECKPOINT are sampled
@@ -140,12 +201,27 @@ if(data) {
   }
 
   function makeCheckpoint(group) {
-    const questions = chooseQuestions(group.pool, QUESTIONS_PER_CHECKPOINT);
+    const saved = demoProgress.get(chapter, group.sectionNumber);
+    const byId = new Map(group.pool.map(q => [q.id, q]));
+    const restored = saved && Array.isArray(saved.questionIds) ? saved.questionIds.map(id => byId.get(id)) : [];
+    const validRestore = restored.length > 0 && restored.every(Boolean) && new Set(restored.map(q => q.id)).size === restored.length;
+    const questions = validRestore ? restored : chooseQuestions(group.pool, QUESTIONS_PER_CHECKPOINT);
     const total = questions.length;
-    let position = 0;
-    let solved = 0;
-    let wrongAttempts = 0;
-    let skipped = false;
+    let position = validRestore ? Math.min(Math.max(0, saved.position || 0), total - 1) : 0;
+    let solved = validRestore ? Math.min(Math.max(0, saved.solved || 0), total) : 0;
+    let wrongAttempts = validRestore ? Math.max(0, saved.wrongAttempts || 0) : 0;
+    let skipped = validRestore ? Boolean(saved.skipped) : false;
+    let completed = validRestore ? Boolean(saved.completed) : false;
+    let awaitingNext = validRestore ? Boolean(saved.awaitingNext) : false;
+    let hintsUsed = validRestore ? Math.max(0, saved.hintsUsed || 0) : 0;
+    let attempts = validRestore && Array.isArray(saved.attempts) ? saved.attempts : [];
+    function persist() {
+      demoProgress.set(chapter, group.sectionNumber, {
+        questionIds: questions.map(q => q.id), position, solved, wrongAttempts,
+        skipped, completed, awaitingNext, hintsUsed, attempts, updatedAt: new Date().toISOString()
+      });
+      demoProgress.refresh();
+    }
     let onCompleted = () => {};
 
     const checkpoint = el('section', 'lab-checkpoint');
@@ -220,7 +296,6 @@ if(data) {
 
     function loadQuestion() {
       const q = questions[position];
-      wrongAttempts = 0;
       feedback.replaceChildren();
       hint.replaceChildren();
       hint.hidden = true;
@@ -258,21 +333,34 @@ if(data) {
       checkButton.disabled = false;
       hintButton.disabled = false;
       checkButton.textContent = 'בדיקת תשובה';
-      nextButton.hidden = true;
+      nextButton.hidden = !awaitingNext;
+      if (awaitingNext) {
+        fieldset.disabled = true;
+        checkButton.hidden = true;
+        hintButton.hidden = true;
+        addTextWithMath(feedback, q.explanation || 'נכון!');
+      } else if (wrongAttempts > 0) {
+        checkButton.textContent = 'בדיקה חוזרת';
+        addTextWithMath(feedback, wrongAttempts === 1 ? (q.wrong1 || 'התשובה אינה נכונה. נסו שוב.') : (q.wrong2 || 'עדיין לא. נסו שוב.'));
+        if (wrongAttempts >= 2) showHint(true, false);
+      }
       updateProgress();
       renderMath(checkpoint);
     }
 
-    function showHint(detailed) {
+    function showHint(detailed, record = true) {
       const q = questions[position];
       const text = detailed ? (q.hint2 || q.hint1 || '') : (q.hint1 || '');
       if (!text) return;
       hint.hidden = false;
       addTextWithMath(hint, text);
+      if (record) { hintsUsed++; persist(); }
     }
 
     function completeCheckpoint(wasSkipped) {
       skipped = wasSkipped;
+      completed = true;
+      awaitingNext = false;
       fieldset.disabled = true;
       checkButton.hidden = true;
       hintButton.hidden = true;
@@ -285,6 +373,7 @@ if(data) {
         const finish = el('p', 'lab-complete-message', '✓ הבדיקה הושלמה! המשך הפרק פתוח לקריאה.');
         feedback.append(finish);
       }
+      persist();
       onCompleted(wasSkipped);
     }
 
@@ -295,8 +384,10 @@ if(data) {
         feedback.textContent = 'בחרו תחילה אחת מהתשובות.';
         return;
       }
+      attempts.push({questionId:q.id, answerId:selected.value, correct:selected.value === q.correct, at:new Date().toISOString()});
       if (selected.value === q.correct) {
         solved++;
+        awaitingNext = position !== total - 1;
         fieldset.disabled = true;
         checkButton.hidden = true;
         hintButton.hidden = true;
@@ -307,6 +398,7 @@ if(data) {
           completeCheckpoint(false);
         } else {
           nextButton.hidden = false;
+          persist();
         }
       } else {
         wrongAttempts++;
@@ -315,18 +407,27 @@ if(data) {
           ? (q.wrong1 || 'התשובה אינה נכונה. נסו שוב.')
           : (q.wrong2 || 'עדיין לא. נסו שוב.'));
         if (wrongAttempts >= 2) showHint(true);
+        persist();
       }
     });
     hintButton.addEventListener('click', () => showHint(wrongAttempts >= 2));
     nextButton.addEventListener('click', () => {
       if (position >= total - 1 || nextButton.hidden) return;
       position++;
+      wrongAttempts = 0;
+      awaitingNext = false;
+      persist();
       loadQuestion();
     });
     if (skipButton) skipButton.addEventListener('click', () => completeCheckpoint(true));
 
     loadQuestion();
-    return {checkpoint, setCompletionCallback(fn) { onCompleted = fn; }};
+    if (completed) {
+      completeCheckpoint(skipped);
+    } else if (!validRestore) {
+      persist();
+    }
+    return {checkpoint, initiallyCompleted:completed, initiallySkipped:skipped, setCompletionCallback(fn) { onCompleted = fn; }};
   }
 
   function showError(error) {
@@ -341,6 +442,10 @@ if(data) {
       return response.json();
     })
     .then(bank => {
+      if (!demoProgress.hasUser()) {
+        section.append(el('p', 'lab-load-warning', 'כדי לפתור שאלות ולשמור התקדמות, בחרו משתמש ניסוי למעלה.'));
+        return;
+      }
       if (!bank || bank.version !== 1 || !Array.isArray(bank.questions)) {
         throw new Error('Invalid question-bank format');
       }
@@ -375,7 +480,7 @@ if(data) {
         const anchor = anchors.get(group.afterPage) || figures[group.afterPage - 1];
         anchor.after(widget.checkpoint);
         anchors.set(group.afterPage, widget.checkpoint);
-        checkpoints.push({...group, ...widget, completed:false, skipped:false});
+        checkpoints.push({...group, ...widget, completed:widget.initiallyCompleted, skipped:widget.initiallySkipped});
       });
       function refreshLocks() {
         const first = checkpoints.findIndex(item => !item.completed);
