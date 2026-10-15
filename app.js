@@ -334,11 +334,15 @@ const demoProgress = (() => {
       progress.setAttribute('aria-valuetext', skipped
         ? `${solved} שאלות נענו נכון מתוך ${total}; יתר הבדיקה דולג`
         : `${solved} שאלות נענו נכון מתוך ${total}`);
+      // Keep the marker on the question being displayed until Next is pressed.
+      // A correct answer is counted immediately, but the visual step advances only
+      // when position changes (or the checkpoint is completed).
+      const visualDone = skipped || completed ? solved : position;
       dots.forEach((dot, i) => {
-        dot.classList.toggle('done', i < solved);
-        dot.classList.toggle('current', !skipped && solved < total && i === solved);
+        dot.classList.toggle('done', i < visualDone);
+        dot.classList.toggle('current', !skipped && !completed && i === position);
         dot.classList.toggle('skipped', skipped && i >= solved);
-        dot.textContent = i < solved ? '✓' : skipped ? '—' : String(i + 1);
+        dot.textContent = i < visualDone ? '✓' : skipped ? '—' : String(i + 1);
       });
     }
 
