@@ -70,6 +70,17 @@ const demoProgress = (() => {
     try { localStorage.setItem(PREFIX + user, JSON.stringify(value)); }
     catch (error) { console.warn('Demo progress could not be saved:', error); alert('לא ניתן לשמור התקדמות בדפדפן זה.'); }
   }
+  // Display names are separate from permanent profile IDs and progress records.
+  function displayNames() {
+    try {
+      const names = JSON.parse(localStorage.getItem(PREFIX + 'display-names') || '{}');
+      return names && typeof names === 'object' && !Array.isArray(names) ? names : {};
+    } catch (_) { return {}; }
+  }
+  function displayName(id) {
+    const name = displayNames()[id];
+    return typeof name === 'string' && name.trim() ? name.trim() : id;
+  }
   function checkpointKey(ch, sectionNumber) { return String(ch) + ':' + sectionNumber; }
   function get(ch, sectionNumber) { return read()[checkpointKey(ch, sectionNumber)] || null; }
   function set(ch, sectionNumber, state) { const all = read(); all[checkpointKey(ch, sectionNumber)] = state; write(all); }
@@ -88,29 +99,66 @@ const demoProgress = (() => {
   const select = document.createElement('select');
   select.setAttribute('aria-label', 'בחירת משתמש ניסוי');
   select.append(new Option('בחרו משתמש', ''));
-  USERS.forEach(name => select.append(new Option(name, name)));
+  function refreshOptions() {
+    const selected = select.value || user || '';
+    select.replaceChildren(new Option('בחרו משתמש', ''));
+    USERS.forEach(id => select.append(new Option(displayName(id), id)));
+    select.value = selected;
+  }
+  refreshOptions();
   select.value = user || '';
   select.addEventListener('change', () => switchUser(select.value));
+  const renameButton = el('button', '', '✎ שינוי שם');
+  renameButton.type = 'button';
+  renameButton.title = 'שינוי שם התצוגה של המשתמש הנבחר';
+  renameButton.addEventListener('click', () => {
+    if (!user) return;
+    const proposed = prompt('שם חדש עבור ' + displayName(user) + ':', displayName(user));
+    if (proposed === null) return;
+    const next = proposed.trim();
+    if (!next) { alert('יש להזין שם שאינו ריק.'); return; }
+    if (next.length > 60) { alert('השם ארוך מדי (עד 60 תווים).'); return; }
+    const names = displayNames();
+    names[user] = next;
+    try { localStorage.setItem(PREFIX + 'display-names', JSON.stringify(names)); }
+    catch (_) { alert('לא ניתן לשמור את השם בדפדפן זה.'); return; }
+    refreshOptions();
+    refresh();
+  });
   const status = el('span', '', '');
   const resetButton = el('button', '', 'התחלה מחדש של כל הקורס');
   resetButton.type = 'button';
   resetButton.addEventListener('click', () => {
-    if (user && confirm('למחוק את כל ההתקדמות של ' + user + ' בכל הפרקים? לא ניתן לבטל פעולה זו.')) reset();
+    if (user && confirm('למחוק את כל ההתקדמות של ' + displayName(user) + ' בכל הפרקים? לא ניתן לבטל פעולה זו.')) reset();
   });
-  controls.append(select, status, resetButton);
+  controls.append(select, renameButton, status, resetButton);
   panel.append(heading, controls);
   section.before(panel);
+  // Always-visible indicator of the active demo profile.
+  const floatingUser = el('button', 'demo-floating-user');
+  floatingUser.type = 'button';
+  floatingUser.title = 'מעבר לבחירת משתמש';
+  floatingUser.setAttribute('aria-label', 'מעבר לבחירת משתמש הניסוי');
+  floatingUser.addEventListener('click', () => panel.scrollIntoView({behavior:'smooth', block:'center'}));
+  document.body.append(floatingUser);
   function refresh() {
     const n = count();
     status.textContent = user ? `הושלמו ${n.finished} בדיקות · ${n.started} בדיקות עם התקדמות` : 'בחרו משתמש כדי להתחיל';
     resetButton.disabled = !user;
+    renameButton.disabled = !user;
+    floatingUser.textContent = user ? '◉ ' + displayName(user) : '◉ בחרו משתמש';
   }
   refresh();
   const style = document.createElement('style');
   style.textContent = `.demo-account-panel{max-width:900px;margin:18px auto;padding:16px 20px;border:1px solid #b9d2ce;border-radius:12px;background:#f2f8f6;direction:rtl}
   .demo-account-controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:10px}
   .demo-account-controls select,.demo-account-controls button{font:inherit;padding:7px 12px;border-radius:7px;border:1px solid #165f64;background:white;color:#165f64}
-  .demo-account-controls button{cursor:pointer}.demo-account-controls button:disabled{opacity:.5}`;
+  .demo-account-controls button{cursor:pointer}.demo-account-controls button:disabled{opacity:.5}
+  .demo-floating-user{position:fixed;right:16px;bottom:16px;z-index:1000;max-width:calc(100vw - 32px);
+    padding:10px 16px;border-radius:999px;border:1px solid #165f64;background:#165f64;color:#fff;
+    box-shadow:0 3px 12px rgba(0,0,0,.2);font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;direction:ltr}
+  .demo-floating-user:focus-visible{outline:3px solid #f5b544;outline-offset:3px}
+  @media(max-width:600px){.demo-floating-user{right:10px;bottom:10px;padding:9px 12px}}`;
   document.head.append(style);
   return { get, set, refresh, hasUser: () => Boolean(user) };
 })();
