@@ -8,6 +8,7 @@ const chapters = [
   'טיילור',
   'פרק בונוס: פונקציות קמורות'
 ];
+const practiceMode = new URLSearchParams(location.search).has('practice');
 let chapter = Number(new URLSearchParams(location.search).get('chapter') || 1);
 if (!Number.isInteger(chapter) || chapter < 1 || chapter > chapters.length) chapter = 1;
 const el = (tag, cls, text) => { const node = document.createElement(tag); if(cls) node.className = cls; if(text) node.textContent = text; return node; };
@@ -22,13 +23,17 @@ chapters.forEach((title, index) => {
   label.append(el('span', 'status', chapterData[number] ? 'זמין לקריאה' : 'המשך יבוא'));
   link.append(label);nav.append(link);
 });
-document.title = `${chapters[chapter - 1]} | סיכומים בחדו״א 1א`;
+const practiceNav = el('a', `chapter-link${practiceMode ? ' active' : ''}`);
+practiceNav.href = '?practice=1';
+practiceNav.textContent = '✎ רוצים לתרגל?';
+nav.append(practiceNav);
+document.title = practiceMode ? 'רוצים לתרגל? | חדו״א 1א' : `${chapters[chapter - 1]} | סיכומים בחדו״א 1א`;
 const section = document.querySelector('#chapter');
 const heading = el('div', 'chapter-heading');
 const titles = el('div');titles.append(el('p', 'chapter-kicker', `פרק ${chapter}`));
 const title = el('h2', '', chapters[chapter - 1]);title.id = 'chapter-title';titles.append(title);heading.append(titles);section.append(heading);
 const data = chapterData[chapter];
-if(data) {
+if(data && !practiceMode) {
   const actions = el('div', 'actions');
   const open = el('a', 'action', 'פתיחת PDF');open.href = data.pdf;open.target = '_blank';open.rel = 'noopener';
   const download = el('a', 'action primary', 'הורדת הפרק');download.href = data.pdf;download.download = `Chedva1_Chapter${chapter}.pdf`;
@@ -49,7 +54,7 @@ if(data) {
     figure.append(caption,img);pages.append(figure);
   }
   section.append(pages);
-} else {
+} else if (!practiceMode) {
   const pending = el('div', 'pending');pending.append(el('span', 'pending-symbol', '…'),el('h3', '', 'המשך יבוא'),el('p', '', 'הפרק יתווסף לרשימות בהמשך.'));
   const back = el('a', 'action primary', 'לקריאת פרק 1');back.href = '?chapter=1';pending.append(back);section.append(pending);
 }
@@ -91,7 +96,7 @@ const demoProgress = (() => {
     location.reload();
   }
   function reset() { if (user) { try { localStorage.removeItem(PREFIX + user); } catch (_) {} location.reload(); } }
-  function count() { const states = Object.values(read()); return {finished: states.filter(s => s && s.completed).length, started: states.length}; }
+  function count() { const states = Object.entries(read()).filter(([key]) => /^[1-7]:/.test(key)).map(([,value]) => value); return {finished: states.filter(s => s && s.completed).length, started: states.length}; }
   const panel = el('div', 'demo-account-panel');
   panel.dir = 'rtl';
   const heading = el('strong', '', 'משתמשי ניסוי · שמירה בדפדפן זה בלבד');
@@ -170,9 +175,9 @@ const demoProgress = (() => {
 (() => {
   const QUESTIONS_PER_CHECKPOINT = 4;
   const ALLOW_SKIP = true;  // A single skip button bypasses the entire checkpoint.
-  if (!data || !data.pages.length) return;
+  if (!practiceMode && (!data || !data.pages.length)) return;
   const figures = Array.from(document.querySelectorAll('.pages > figure.page'));
-  if (!figures.length) return;
+  if (!practiceMode && !figures.length) return;
 
   function renderMath(container) {
     if (!window.katex) return;
@@ -488,12 +493,156 @@ const demoProgress = (() => {
       'לא ניתן לטעון את שאלות ההבנה כעת. אפשר להמשיך לקרוא את הפרק ללא חסימה.'));
   }
 
+  // Practice uses exactly the same published bank and demo profile as checkpoints.
+  // Its history/session live under chapter 0, separate from checkpoint completion.
+  function renderPractice(bank) {
+    section.replaceChildren();
+    section.dir = 'rtl';
+    section.append(el('h2', '', 'רוצים לתרגל?'));
+    if (!demoProgress.hasUser()) {
+      section.append(el('p', 'lab-load-warning', 'בחרו משתמש ניסוי למעלה כדי לתרגל.'));
+      return;
+    }
+    const eligible = bank.questions.filter(q => q.status === 'approved' && validateQuestion(q) &&
+      demoProgress.get(q.chapter, q.after_section)?.completed);
+    const area = el('div', 'lab-practice-area');
+    section.append(area);
+    const uniqueChapters = [...new Set(eligible.map(q => q.chapter))].sort((a,b) => a-b);
+    const sections = [...new Set(eligible.map(q => q.chapter + ':' + q.after_section))]
+      .sort((a,b) => a.localeCompare(b, 'en', {numeric:true}));
+    if (!eligible.length) {
+      area.append(el('p', '', 'עדיין אין סעיפים שהושלמו. השלימו או דלגו על בדיקת הבנה כדי לפתוח שאלות לתרגול.'));
+      return;
+    }
+    const savedSession = demoProgress.get(0, 'practice-session');
+    const history = () => demoProgress.get(0, 'practice-history')?.attempts || [];
+    const controls = el('div', 'lab-practice-controls');
+    const scope = document.createElement('select');
+    scope.setAttribute('aria-label', 'בחירת חומר לתרגול');
+    scope.append(new Option('כל החומר שהושלם', 'all'));
+    uniqueChapters.forEach(c => scope.append(new Option('פרק ' + c, 'chapter:' + c)));
+    sections.forEach(key => {
+      const [c, sec] = key.split(':');
+      scope.append(new Option('סעיף ' + sec + ' (פרק ' + c + ')', 'section:' + key));
+    });
+    const amount = document.createElement('select');
+    amount.setAttribute('aria-label', 'מספר שאלות');
+    [['5','5 שאלות'],['10','10 שאלות'],['all','כל השאלות']].forEach(([v,t]) => amount.append(new Option(t,v)));
+    const start = el('button', '', 'התחלת תרגול');
+    controls.append(scope, amount, start);
+    area.append(controls);
+    const info = el('p', 'lab-progress-text');
+    const work = el('div', 'lab-checkpoint');
+    area.append(info, work);
+    let session = savedSession && Array.isArray(savedSession.questionIds) ? savedSession : null;
+    function saveSession() { demoProgress.set(0, 'practice-session', session); }
+    function showControls() {
+      controls.hidden = false;
+      info.textContent = 'זמינות ' + eligible.length + ' שאלות לתרגול · ' + history().length + ' תשובות נשמרו בהיסטוריה';
+      work.replaceChildren(); work.hidden = true;
+    }
+    function renderSession() {
+      if (!session) { showControls(); return; }
+      const byId = new Map(eligible.map(q => [q.id,q]));
+      const questions = session.questionIds.map(id => byId.get(id));
+      if (!questions.length || questions.some(q => !q)) {
+        session = null; saveSession(); showControls(); return;
+      }
+      if (session.position >= questions.length) {
+        controls.hidden = false;
+        work.hidden = false;
+        work.replaceChildren(el('h3', '', 'התרגול הושלם!'));
+        info.textContent = 'סיימתם ' + questions.length + ' שאלות. אפשר להתחיל תרגול חדש.';
+        session = null; saveSession(); return;
+      }
+      controls.hidden = true; work.hidden = false;
+      const q = questions[session.position];
+      work.replaceChildren();
+      work.append(el('h3', '', 'תרגול · שאלה ' + (session.position+1) + ' מתוך ' + questions.length));
+      const prompt = el('p'); addTextWithMath(prompt, q.question); work.append(prompt);
+      if (q.formula?.trim()) { const formula = el('div', 'lab-formula-wrapper'); formula.append(mathNode(q.formula,'lab-formula')); work.append(formula); }
+      const fieldset = document.createElement('fieldset');
+      fieldset.append(el('legend', '', 'בחרו תשובה אחת:'));
+      q.choices.forEach(c => {
+        const label = document.createElement('label');
+        const radio = document.createElement('input'); radio.type='radio'; radio.name='practice-answer'; radio.value=c.id;
+        const span=el('span','lab-choice');
+        if (typeof c.latex === 'string') span.append(mathNode(c.latex,'lab-answer-formula'));
+        else addTextWithMath(span,c.text);
+        label.append(radio,span); fieldset.append(label);
+      });
+      work.append(fieldset);
+      const buttons = el('div','lab-buttons');
+      const check = el('button','','בדיקת תשובה');
+      const hintButton = el('button','','רמז');
+      const next = el('button','','לשאלה הבאה');
+      const end = el('button','','סיום התרגול');
+      [check,hintButton,next,end].forEach(b=>b.type='button');
+      next.hidden = !session.awaitingNext;
+      buttons.append(check,hintButton,next,end); work.append(buttons);
+      const feedback=el('p','lab-feedback'); feedback.setAttribute('role','status');
+      const hint=el('div','lab-hint'); hint.hidden=true;
+      work.append(feedback,hint);
+      const showHint = detailed => {
+        const content = detailed ? (q.hint2 || q.hint1 || '') : (q.hint1 || '');
+        if (!content) return;
+        hint.hidden=false; addTextWithMath(hint,content);
+      };
+      if (session.awaitingNext) {
+        fieldset.disabled=true; check.hidden=true; hintButton.hidden=true;
+        addTextWithMath(feedback,q.explanation || 'נכון!');
+      } else if (session.wrongAttempts > 0) {
+        check.textContent='בדיקה חוזרת';
+        addTextWithMath(feedback,session.wrongAttempts===1 ? (q.wrong1 || 'התשובה אינה נכונה. נסו שוב.') : (q.wrong2 || 'עדיין לא. נסו שוב.'));
+        if (session.wrongAttempts>=2) showHint(true);
+      }
+      hintButton.onclick = () => { showHint(session.wrongAttempts>=2); };
+      check.onclick = () => {
+        const selected=fieldset.querySelector('input:checked');
+        if (!selected) { feedback.textContent='בחרו תחילה אחת מהתשובות.'; return; }
+        const correct=selected.value===q.correct;
+        const attempts=history();
+        attempts.push({questionId:q.id,chapter:q.chapter,section:q.after_section,answerId:selected.value,correct,at:new Date().toISOString()});
+        demoProgress.set(0,'practice-history',{attempts});
+        if (correct) {
+          session.awaitingNext=true; fieldset.disabled=true; check.hidden=true; hintButton.hidden=true;
+          hint.hidden=true; addTextWithMath(feedback,q.explanation || 'נכון!'); next.hidden=false;
+        } else {
+          session.wrongAttempts=(session.wrongAttempts||0)+1;
+          check.textContent='בדיקה חוזרת';
+          addTextWithMath(feedback,session.wrongAttempts===1 ? (q.wrong1 || 'התשובה אינה נכונה. נסו שוב.') : (q.wrong2 || 'עדיין לא. נסו שוב.'));
+          if (session.wrongAttempts>=2) showHint(true);
+        }
+        saveSession();
+      };
+      next.onclick = () => { session.position++; session.awaitingNext=false; session.wrongAttempts=0; saveSession(); renderSession(); };
+      end.onclick = () => { session=null; saveSession(); showControls(); };
+      renderMath(work);
+    }
+    start.onclick = () => {
+      const filtered=eligible.filter(q => scope.value==='all' ||
+        (scope.value.startsWith('chapter:') && q.chapter===Number(scope.value.slice(8))) ||
+        (scope.value.startsWith('section:') && q.chapter+':'+q.after_section===scope.value.slice(8)));
+      const shuffled=chooseQuestions(filtered,amount.value==='all' ? filtered.length : Number(amount.value));
+      if (!shuffled.length) return;
+      session={questionIds:shuffled.map(q=>q.id),position:0,awaitingNext:false,wrongAttempts:0};
+      saveSession(); renderSession();
+    };
+    prepareMath();
+    renderSession();
+  }
+
   fetch('assets/questions.json', {cache: 'no-store'})
     .then(response => {
       if (!response.ok) throw new Error(`HTTP ${response.status} loading questions.json`);
       return response.json();
     })
     .then(bank => {
+      if (practiceMode) {
+        if (!bank || bank.version !== 1 || !Array.isArray(bank.questions)) throw new Error('Invalid question-bank format');
+        renderPractice(bank);
+        return;
+      }
       if (!demoProgress.hasUser()) {
         section.append(el('p', 'lab-load-warning', 'כדי לפתור שאלות ולשמור התקדמות, בחרו משתמש ניסוי למעלה.'));
         return;
@@ -558,6 +707,10 @@ const demoProgress = (() => {
 
   const labStyles = document.createElement('style');
   labStyles.textContent = `
+    .lab-practice-area{max-width:900px;margin:0 auto;direction:rtl}
+    .lab-practice-controls{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0}
+    .lab-practice-controls select,.lab-practice-controls button{font:inherit;padding:9px;border:1px solid #165f64;border-radius:7px;background:white;color:#165f64}
+    .lab-practice-controls button{background:#165f64;color:white;cursor:pointer}
     .lab-checkpoint {margin: 26px auto; max-width: 900px; padding: 24px;
       border: 2px solid #165f64; border-radius: 14px; background: #fff; direction: rtl;}
     .lab-checkpoint[hidden], .lab-buttons [hidden] {display: none !important;}
