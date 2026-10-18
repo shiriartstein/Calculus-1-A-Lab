@@ -46,7 +46,7 @@ def main():
     if site.exists():
         shutil.rmtree(site)
     site.mkdir()
-    for name in ['index.html', 'style.css', 'app.js']:
+    for name in ['index.html', 'style.css', 'lab.css', 'app.js', 'checkpoint-core.js', 'feedback-config.js', 'question-feedback.js']:
         shutil.copy2(name, site / name)
     shutil.copytree('assets', site / 'assets')
     pages_root = site / 'assets/pages'
@@ -61,7 +61,8 @@ def main():
         pdf = pymupdf.open(source)
         if not len(pdf):
             raise ValueError(f'{source} is empty')
-        digest = hashlib.sha256(source.read_bytes()).hexdigest()[:16]
+        full_digest = hashlib.sha256(source.read_bytes()).hexdigest()
+        digest = full_digest[:16]
         folder = pages_root / f'chapter-{chapter}'
         folder.mkdir()
         pages = []
@@ -72,7 +73,7 @@ def main():
             Image.frombytes('RGB', [pix.width, pix.height], pix.samples).save(buffer, 'WEBP', quality=86, method=6)
             (folder / name).write_bytes(buffer.getvalue())
             pages.append(dict(src=f'assets/pages/chapter-{chapter}/{name}?v={digest}', width=pix.width, height=pix.height))
-        data[chapter] = dict(pdf=f'assets/chapter-{chapter}.pdf?v={digest}', pages=pages, sections=sections_for(pdf, chapter))
+        data[chapter] = dict(pdf=f'assets/chapter-{chapter}.pdf?v={digest}', pdf_sha256=full_digest, pages=pages, sections=sections_for(pdf, chapter))
         print(f'Chapter {chapter}: {len(pages)} pages, {len(data[chapter]["sections"])} section links')
     if not data:
         raise ValueError('No assets/chapter-N.pdf files found')
@@ -87,6 +88,10 @@ def main():
     html, count = re.subn(r'(src=[\"\'])app\.js(?:\?[^\"\']*)?([\"\'])', lambda m: m[1] + f'app.js?v={version}' + m[2], html)
     if not count:
         raise ValueError('Could not find the app.js script reference in index.html')
+    # Also invalidate caches for the new trial scripts and stylesheet on each update.
+    for asset in ['style.css', 'lab.css', 'checkpoint-core.js', 'feedback-config.js', 'question-feedback.js']:
+        digest = hashlib.sha256(Path(asset).read_bytes()).hexdigest()[:16]
+        html = html.replace(f'"{asset}"', f'"{asset}?v={digest}"')
     (site / 'index.html').write_text(html, encoding='utf-8')
     (site / '.nojekyll').touch()
 

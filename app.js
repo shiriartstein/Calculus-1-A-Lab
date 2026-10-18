@@ -96,7 +96,7 @@ const demoProgress = (() => {
     location.reload();
   }
   function reset() { if (user) { try { localStorage.removeItem(PREFIX + user); } catch (_) {} location.reload(); } }
-  function count() { const states = Object.entries(read()).filter(([key]) => /^[1-7]:/.test(key)).map(([,value]) => value); return {finished: states.filter(s => s && s.completed).length, started: states.length}; }
+  function count() { const states = Object.entries(read()).filter(([key,value]) => /^[1-7]:gate-v2:/.test(key) && value?.kind === 'gate').map(([,value]) => value); return {finished: states.filter(s => s && s.completed).length, started: states.length}; }
   const panel = el('div', 'demo-account-panel');
   panel.dir = 'rtl';
   const heading = el('strong', '', 'משתמשי ניסוי · שמירה בדפדפן זה בלבד');
@@ -168,598 +168,321 @@ const demoProgress = (() => {
   return { get, set, refresh, hasUser: () => Boolean(user) };
 })();
 
-// ===== LAB EXPERIMENT 3: question pools and four-question checkpoints =====
-// Only questions marked "approved" in assets/questions.json can appear.
-// A checkpoint is one section location; up to QUESTIONS_PER_CHECKPOINT are sampled
-// without replacement from the approved questions at that location.
+// ===== TRIAL READER: optional practice and three-topic checkpoints =====
 (() => {
-  const QUESTIONS_PER_CHECKPOINT = 4;
-  const ALLOW_SKIP = true;  // A single skip button bypasses the entire checkpoint.
-  if (!practiceMode && (!data || !data.pages.length)) return;
-  const figures = Array.from(document.querySelectorAll('.pages > figure.page'));
-  if (!practiceMode && !figures.length) return;
-
-  function renderMath(container) {
-    if (!window.katex) return;
-    container.querySelectorAll('[data-tex]:not([data-math-ready])').forEach(node => {
-      try {
-        window.katex.render(node.dataset.tex, node, {
-          throwOnError: false,
-          displayMode: node.classList.contains('lab-formula')
-        });
-        node.dataset.mathReady = 'yes';
-      } catch (error) {
-        console.warn('Could not render formula:', error);
-      }
+  'use strict';
+  const core = window.CalcLabCore;
+  const LEVELS = {sanity:'בדיקת מושגים', rehearsal:'בדיקת הבנה', challenge:'אתגר'};
+  const DESCRIPTIONS = {
+    sanity:'אני לא סגור על מה מדברים, רוצה לוודא שבכלל הבנתי את הקטע',
+    rehearsal:'אני מבין סה״כ, תבדקו אותי',
+    challenge:'תשאלו שאלות קשות, נראה אם אני מצליח'
+  };
+  const ROUTES = {normal:'בדקו אם אפשר להמשיך', challenge:'בדקו אם אפשר להמשיך — עם שאלות מאתגרות'};
+  let questions = [], plan = null;
+  const gateKey = gate => 'gate-v2:' + gate.id;
+  const button = (text, cls = '') => { const b = el('button', cls, text); b.type = 'button'; return b; };
+  function rich(host, text) {
+    host.replaceChildren();
+    String(text || '').split(/(\$[^$]+\$)/g).forEach(part => {
+      if (part.startsWith('$') && part.endsWith('$') && part.length > 2) host.append(math(part.slice(1,-1)));
+      else host.append(document.createTextNode(part));
     });
   }
-
-  function addTextWithMath(node, value) {
-    node.replaceChildren();
-    String(value || '').split(/(\$[^$]+\$)/g).forEach(part => {
-      if (part.startsWith('$') && part.endsWith('$') && part.length > 2) {
-        const span = el('span', 'lab-inline-math');
-        span.dir = 'ltr';
-        span.dataset.tex = part.slice(1, -1);
-        span.textContent = span.dataset.tex; // Fallback if KaTeX is unavailable.
-        node.append(span);
-      } else if (part) {
-        node.append(document.createTextNode(part));
-      }
+  function math(tex, display = false) {
+    const n = el('span', display ? 'lab-formula' : 'lab-inline-math'); n.dir = 'ltr';
+    if (window.katex) {
+      try { window.katex.render(tex, n, {throwOnError:true, displayMode:display}); }
+      catch (_) { n.textContent = tex; }
+    } else n.textContent = tex;
+    return n;
+  }
+  function record(event) {
+    if (!demoProgress.hasUser()) return;
+    const old = demoProgress.get(0, 'lab-history-v2');
+    const events = Array.isArray(old?.events) ? old.events : [];
+    events.push({...event, at:new Date().toISOString()});
+    demoProgress.set(0, 'lab-history-v2', {events});
+  }
+  function saveSession(ch, key, value) {
+    if (value) value.updatedAt = new Date().toISOString();
+    demoProgress.set(ch, key, value); demoProgress.refresh();
+  }
+  const gateRestore = gate => core.restoreSession(demoProgress.get(gate.chapter, gateKey(gate)), questions,
+    'gate', core.gateSignature(gate), gate);
+  const layoutFor = ch => core.chapterPlan(plan, ch, chapterData[ch]);
+  function readingLimit(ch) {
+    const layout = layoutFor(ch);
+    const first = layout.gates.find(g => g.kind === 'gate' && !gateRestore(g)?.completed &&
+      ['normal','challenge'].some(route => core.selectGate(questions,g,route)));
+    return first ? first.after_page : chapterData[ch].pages.length;
+  }
+  function readThrough(ch) {
+    const recorded = demoProgress.get(ch, 'reading-v2');
+    const matched = recorded?.pdf_sha256 === chapterData[ch]?.pdf_sha256;
+    const visited = matched ? Math.max(0, Number(recorded.page) || 0) : 0;
+    const passed = layoutFor(ch).gates.filter(g => gateRestore(g)?.completed).map(g => g.after_page);
+    return Math.min(readingLimit(ch), Math.max(visited, 0, ...passed));
+  }
+  function markRead(ch, page) {
+    if (!demoProgress.hasUser()) return;
+    const old = demoProgress.get(ch, 'reading-v2');
+    const previous = old?.pdf_sha256 === chapterData[ch].pdf_sha256 ? Number(old.page) || 0 : 0;
+    if (page <= previous) return;
+    demoProgress.set(ch, 'reading-v2', {page, pdf_sha256:chapterData[ch].pdf_sha256});
+  }
+  function levelPicker(pool, onPick, selected = '') {
+    const host = el('div', 'lab-level-picker'); host.setAttribute('aria-label','בחירת רמת תרגול');
+    Object.entries(LEVELS).forEach(([level, label]) => {
+      const count = pool.filter(q => q.level === level).length;
+      const b = button('', 'lab-level-option'); b.dataset.level = level;
+      b.setAttribute('aria-pressed', String(level === selected));
+      b.append(el('strong','',label), el('span','',DESCRIPTIONS[level]));
+      b.disabled = !count || !demoProgress.hasUser();
+      if (!count) b.append(el('small','','עדיין אין שאלות ברמה הזו בחומר שנקרא'));
+      b.onclick = () => onPick(level); host.append(b);
     });
-    renderMath(node);
+    return host;
   }
-
-  function mathNode(tex, cls) {
-    const span = el('span', cls);
-    span.dir = 'ltr';
-    span.dataset.tex = tex;
-    span.textContent = tex;
-    return span;
-  }
-
-  function prepareMath() {
-    if (window.katex) return;
-    const css = document.createElement('link');
-    css.rel = 'stylesheet';
-    css.href = 'https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css';
-    document.head.append(css);
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js';
-    script.onload = () => renderMath(section);
-    document.head.append(script);
-  }
-
-  function validateQuestion(q) {
-    return q && /^[a-zA-Z0-9_-]+$/.test(q.id) &&
-      Number.isInteger(q.chapter) && q.chapter >= 1 &&
-      typeof q.after_section === 'string' &&
-      q.type === 'multiple_choice' &&
-      typeof q.question === 'string' && Boolean(q.question.trim()) &&
-      Array.isArray(q.choices) && q.choices.length >= 2 &&
-      q.choices.every(c => c && typeof c.id === 'string' &&
-        (typeof c.latex === 'string' || typeof c.text === 'string')) &&
-      new Set(q.choices.map(c => c.id)).size === q.choices.length &&
-      q.choices.some(c => c.id === q.correct);
-  }
-
-  function chooseQuestions(pool, count) {
-    const candidates = pool.slice();
-    // Fisher-Yates shuffle: every candidate has the same chance to be selected.
-    for (let i = candidates.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [candidates[i], candidates[j]] = [candidates[j], candidates[i]];
+  function questionView(host, state, onSave, onComplete, context) {
+    const byId = new Map(questions.map(q => [q.id,q]));
+    const q = byId.get(state.questionIds[state.position]);
+    host.replaceChildren(); host.hidden = false;
+    host.dataset.questionId = q.id; host.dataset.coverageGroup = q.coverage_group;
+    host.dataset.level = q.level;
+    const progress = el('div','lab-progress'); progress.setAttribute('role','progressbar');
+    progress.setAttribute('aria-label','שאלות שנענו נכון'); progress.setAttribute('aria-valuemin','0');
+    progress.setAttribute('aria-valuemax',String(state.questionIds.length));
+    progress.setAttribute('aria-valuenow',String(state.solvedIds.length));
+    state.questionIds.forEach((id, i) => {
+      const done = state.solvedIds.includes(id);
+      const dot = el('span', 'lab-progress-step' + (done ? ' done' : i === state.position ? ' current' : ''), done ? '✓' : String(i+1));
+      dot.setAttribute('aria-hidden','true'); progress.append(dot);
+    });
+    host.append(progress, el('p','lab-question-position',`שאלה ${state.position+1} מתוך ${state.questionIds.length} · ${LEVELS[q.level]}`));
+    const prompt = el('h4','lab-question-prompt'); prompt.tabIndex = -1; rich(prompt,q.question); host.append(prompt);
+    if (q.formula?.trim()) {const f = el('div','lab-formula-wrapper'); f.append(math(q.formula,true)); host.append(f);}
+    const report = window.CalcQuestionFeedback?.createButton(q, {...context, mode:state.mode});
+    if (report) host.append(report);
+    const fieldset = el('fieldset'); fieldset.append(el('legend','','בחרו תשובה אחת:'));
+    q.choices.forEach(choice => {
+      const label = el('label','lab-answer');
+      const radio = el('input'); radio.type = 'radio'; radio.name = 'answer-' + context.key; radio.value = choice.id;
+      radio.checked = state.selectedAnswer === choice.id;
+      radio.onchange = () => {state.selectedAnswer = choice.id; onSave();};
+      const text = el('span','lab-choice');
+      if (typeof choice.latex === 'string') text.append(math(choice.latex)); else rich(text,choice.text);
+      label.append(radio,text); fieldset.append(label);
+    });
+    fieldset.disabled = state.awaitingNext || state.completed; host.append(fieldset);
+    const actions = el('div','lab-buttons');
+    const check = button(state.wrongAttempts ? 'בדיקה חוזרת' : 'בדיקת תשובה','lab-check-answer');
+    const hintButton = button(state.hintsShown ? 'רמז נוסף' : 'רמז','lab-hint-button');
+    hintButton.disabled = state.hintsShown >= 2;
+    check.hidden = hintButton.hidden = state.awaitingNext || state.completed;
+    const next = button('לשאלה הבאה','lab-next-question'); next.hidden = !state.awaitingNext;
+    actions.append(check,hintButton,next); host.append(actions);
+    const feedback = el('p','lab-feedback'); feedback.setAttribute('role','status'); feedback.tabIndex = -1;
+    const hint = el('div','lab-hint'); hint.hidden = !state.hintsShown || state.awaitingNext || state.completed;
+    if (state.hintsShown) rich(hint,state.hintsShown >= 2 ? q.hint2 || q.hint1 : q.hint1);
+    if (state.awaitingNext || state.completed) {
+      // Old bank entries included a UI unlock sentence after every correct answer.
+      rich(feedback,(q.explanation || 'נכון!').replace(/המשך הפרק פתוח לקריאה\.?/g,''));
+    } else if (state.wrongAttempts) {
+      rich(feedback,state.wrongAttempts === 1 ? q.wrong1 || 'התשובה אינה נכונה. נסו שוב.' : q.wrong2 || 'עדיין לא. נסו להיעזר ברמז.');
     }
-    return candidates.slice(0, Math.min(count, candidates.length));
-  }
-
-  function makeCheckpoint(group) {
-    const saved = demoProgress.get(chapter, group.sectionNumber);
-    const byId = new Map(group.pool.map(q => [q.id, q]));
-    const restored = saved && Array.isArray(saved.questionIds) ? saved.questionIds.map(id => byId.get(id)) : [];
-    const validRestore = restored.length > 0 && restored.every(Boolean) && new Set(restored.map(q => q.id)).size === restored.length;
-    const questions = validRestore ? restored : chooseQuestions(group.pool, QUESTIONS_PER_CHECKPOINT);
-    const total = questions.length;
-    let position = validRestore ? Math.min(Math.max(0, saved.position || 0), total - 1) : 0;
-    let solved = validRestore ? Math.min(Math.max(0, saved.solved || 0), total) : 0;
-    let wrongAttempts = validRestore ? Math.max(0, saved.wrongAttempts || 0) : 0;
-    let skipped = validRestore ? Boolean(saved.skipped) : false;
-    let completed = validRestore ? Boolean(saved.completed) : false;
-    let awaitingNext = validRestore ? Boolean(saved.awaitingNext) : false;
-    let hintsUsed = validRestore ? Math.max(0, saved.hintsUsed || 0) : 0;
-    let attempts = validRestore && Array.isArray(saved.attempts) ? saved.attempts : [];
-    function persist() {
-      demoProgress.set(chapter, group.sectionNumber, {
-        questionIds: questions.map(q => q.id), position, solved, wrongAttempts,
-        skipped, completed, awaitingNext, hintsUsed, attempts, updatedAt: new Date().toISOString()
-      });
-      demoProgress.refresh();
-    }
-    let onCompleted = () => {};
-
-    const checkpoint = el('section', 'lab-checkpoint');
-    checkpoint.id = 'lab-checkpoint-' + group.sectionNumber.replace(/[^a-zA-Z0-9_-]/g, '-');
-    checkpoint.dir = 'rtl';
-    checkpoint.dataset.section = group.sectionNumber;
-    checkpoint.dataset.questionCount = String(total);
-    const top = el('div', 'lab-checkpoint-top');
-    const heading = el('h3', '', 'בדיקת הבנה · סעיף ' + group.sectionNumber);
-    const countLabel = el('span', 'lab-progress-text');
-    top.append(heading, countLabel);
-    checkpoint.append(top);
-
-    const progress = el('div', 'lab-progress');
-    progress.setAttribute('role', 'progressbar');
-    progress.setAttribute('aria-label', 'שאלות שהושלמו בבדיקת ההבנה');
-    progress.setAttribute('aria-valuemin', '0');
-    progress.setAttribute('aria-valuemax', String(total));
-    const dots = [];
-    for (let i = 0; i < total; i++) {
-      const dot = el('span', 'lab-progress-step', String(i + 1));
-      dot.setAttribute('aria-hidden', 'true');
-      progress.append(dot);
-      dots.push(dot);
-    }
-    checkpoint.append(progress);
-
-    const prompt = el('div', 'lab-question-prompt');
-    checkpoint.append(prompt);
-    const fieldset = document.createElement('fieldset');
-    checkpoint.append(fieldset);
-
-    const buttons = el('div', 'lab-buttons');
-    const checkButton = el('button', 'lab-check-answer', 'בדיקת תשובה');
-    checkButton.type = 'button';
-    const hintButton = el('button', 'lab-hint-button', 'רמז');
-    hintButton.type = 'button';
-    const nextButton = el('button', 'lab-next-question', 'לשאלה הבאה');
-    nextButton.type = 'button';
-    nextButton.hidden = true;
-    buttons.append(checkButton, hintButton, nextButton);
-    let skipButton = null;
-    if (ALLOW_SKIP) {
-      skipButton = el('button', 'lab-skip', 'דלג על כל הבדיקה');
-      skipButton.type = 'button';
-      buttons.append(skipButton);
-    }
-    checkpoint.append(buttons);
-
-    const feedback = el('p', 'lab-feedback');
-    feedback.setAttribute('role', 'status');
-    feedback.setAttribute('aria-live', 'polite');
-    const hint = el('div', 'lab-hint');
-    hint.hidden = true;
-    checkpoint.append(feedback, hint);
-
-    function updateProgress() {
-      countLabel.textContent = skipped
-        ? `${solved} מתוך ${total} הושלמו · דולג`
-        : `${solved} מתוך ${total} הושלמו`;
-      progress.setAttribute('aria-valuenow', String(solved));
-      progress.setAttribute('aria-valuetext', skipped
-        ? `${solved} שאלות נענו נכון מתוך ${total}; יתר הבדיקה דולג`
-        : `${solved} שאלות נענו נכון מתוך ${total}`);
-      // Keep the marker on the question being displayed until Next is pressed.
-      // A correct answer is counted immediately, but the visual step advances only
-      // when position changes (or the checkpoint is completed).
-      const visualDone = skipped || completed ? solved : position;
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('done', i < visualDone);
-        dot.classList.toggle('current', !skipped && !completed && i === position);
-        dot.classList.toggle('skipped', skipped && i >= solved);
-        dot.textContent = i < visualDone ? '✓' : skipped ? '—' : String(i + 1);
-      });
-    }
-
-    function loadQuestion() {
-      const q = questions[position];
-      feedback.replaceChildren();
-      hint.replaceChildren();
-      hint.hidden = true;
-      prompt.replaceChildren();
-      const title = el('p', 'lab-question-position', `שאלה ${position + 1} מתוך ${total}`);
-      const text = el('p');
-      addTextWithMath(text, q.question);
-      prompt.append(title, text);
-      if (q.formula && q.formula.trim()) {
-        const wrapper = el('div', 'lab-formula-wrapper');
-        wrapper.append(mathNode(q.formula, 'lab-formula'));
-        prompt.append(wrapper);
+    host.append(feedback,hint);
+    if (state.completed) {
+      let text = '✓ התרגול הושלם. אפשר להמשיך לקרוא או לבחור רמה למקבץ נוסף.';
+      if (state.kind === 'gate') text = context.summary ? '✓ בדיקת סיכום הפרק הושלמה.' : '✓ שלוש שאלות משלושה נושאים נענו נכון. המשך הקריאה פתוח.';
+      host.append(el('p','lab-complete-message',text));
+      if (state.kind === 'gate' && !context.summary) {
+        const forward = button('להמשך הקריאה','lab-continue');
+        forward.onclick = () => {const figure = document.getElementById('page-' + (context.afterPage+1)); figure?.scrollIntoView({behavior:'smooth',block:'start'}); figure?.focus({preventScroll:true});};
+        host.append(forward);
       }
-      fieldset.replaceChildren();
-      fieldset.append(el('legend', '', 'בחרו תשובה אחת:'));
-      q.choices.forEach(choice => {
-        const label = document.createElement('label');
-        const input = document.createElement('input');
-        input.type = 'radio';
-        input.name = `answer-${checkpoint.id}-${position}`;
-        input.value = choice.id;
-        label.append(input);
-        const answer = el('span', 'lab-choice');
-        if (typeof choice.latex === 'string') {
-          answer.append(mathNode(choice.latex, 'lab-answer-formula'));
-        } else {
-          addTextWithMath(answer, choice.text);
-        }
-        label.append(answer);
-        fieldset.append(label);
-      });
-      fieldset.disabled = false;
-      checkButton.hidden = false;
-      hintButton.hidden = false;
-      checkButton.disabled = false;
-      hintButton.disabled = false;
-      checkButton.textContent = 'בדיקת תשובה';
-      nextButton.hidden = !awaitingNext;
-      if (awaitingNext) {
-        fieldset.disabled = true;
-        checkButton.hidden = true;
-        hintButton.hidden = true;
-        addTextWithMath(feedback, q.explanation || 'נכון!');
-      } else if (wrongAttempts > 0) {
-        checkButton.textContent = 'בדיקה חוזרת';
-        addTextWithMath(feedback, wrongAttempts === 1 ? (q.wrong1 || 'התשובה אינה נכונה. נסו שוב.') : (q.wrong2 || 'עדיין לא. נסו שוב.'));
-        if (wrongAttempts >= 2) showHint(true, false);
-      }
-      updateProgress();
-      renderMath(checkpoint);
     }
-
-    function showHint(detailed, record = true) {
-      const q = questions[position];
-      const text = detailed ? (q.hint2 || q.hint1 || '') : (q.hint1 || '');
-      if (!text) return;
-      hint.hidden = false;
-      addTextWithMath(hint, text);
-      if (record) { hintsUsed++; persist(); }
-    }
-
-    function completeCheckpoint(wasSkipped) {
-      skipped = wasSkipped;
-      completed = true;
-      awaitingNext = false;
-      fieldset.disabled = true;
-      checkButton.hidden = true;
-      hintButton.hidden = true;
-      nextButton.hidden = true;
-      if (skipButton) skipButton.hidden = true;
-      updateProgress();
-      if (wasSkipped) {
-        feedback.textContent = 'דילגתם על שאר השאלות בבדיקה. המשך הפרק פתוח לקריאה.';
+    const redraw = () => questionView(host,state,onSave,onComplete,context);
+    check.onclick = () => {
+      if (state.completed || state.awaitingNext) return;
+      const selected = fieldset.querySelector('input:checked');
+      if (!selected) {feedback.textContent = 'בחרו תחילה אחת מהתשובות.'; feedback.focus(); return;}
+      const correct = selected.value === q.correct;
+      record({type:'answer', ...context, mode:state.mode, questionId:q.id, coverageGroup:q.coverage_group,
+        level:q.level, answerId:selected.value, correct});
+      if (correct) {
+        if (!state.solvedIds.includes(q.id)) state.solvedIds.push(q.id);
+        state.completed = state.solvedIds.length === state.questionIds.length;
+        state.awaitingNext = !state.completed;
       } else {
-        const finish = el('p', 'lab-complete-message', '✓ הבדיקה הושלמה! המשך הפרק פתוח לקריאה.');
-        feedback.append(finish);
+        state.wrongAttempts++;
+        if (state.wrongAttempts >= 2) state.hintsShown = 2;
       }
-      persist();
-      onCompleted(wasSkipped);
-    }
-
-    checkButton.addEventListener('click', () => {
-      const q = questions[position];
-      const selected = fieldset.querySelector('input[type="radio"]:checked');
-      if (!selected) {
-        feedback.textContent = 'בחרו תחילה אחת מהתשובות.';
-        return;
-      }
-      attempts.push({questionId:q.id, answerId:selected.value, correct:selected.value === q.correct, at:new Date().toISOString()});
-      if (selected.value === q.correct) {
-        solved++;
-        awaitingNext = position !== total - 1;
-        fieldset.disabled = true;
-        checkButton.hidden = true;
-        hintButton.hidden = true;
-        hint.hidden = true;
-        addTextWithMath(feedback, q.explanation || 'נכון!');
-        updateProgress();
-        if (position === total - 1) {
-          completeCheckpoint(false);
-        } else {
-          nextButton.hidden = false;
-          persist();
-        }
-      } else {
-        wrongAttempts++;
-        checkButton.textContent = 'בדיקה חוזרת';
-        addTextWithMath(feedback, wrongAttempts === 1
-          ? (q.wrong1 || 'התשובה אינה נכונה. נסו שוב.')
-          : (q.wrong2 || 'עדיין לא. נסו שוב.'));
-        if (wrongAttempts >= 2) showHint(true);
-        persist();
-      }
-    });
-    hintButton.addEventListener('click', () => showHint(wrongAttempts >= 2));
-    nextButton.addEventListener('click', () => {
-      if (position >= total - 1 || nextButton.hidden) return;
-      position++;
-      wrongAttempts = 0;
-      awaitingNext = false;
-      persist();
-      loadQuestion();
-    });
-    if (skipButton) skipButton.addEventListener('click', () => completeCheckpoint(true));
-
-    loadQuestion();
-    if (completed) {
-      completeCheckpoint(skipped);
-    } else if (!validRestore) {
-      persist();
-    }
-    return {checkpoint, initiallyCompleted:completed, initiallySkipped:skipped, setCompletionCallback(fn) { onCompleted = fn; }};
-  }
-
-  function showError(error) {
-    console.error('The question bank could not be loaded:', error);
-    section.append(el('p', 'lab-load-warning',
-      'לא ניתן לטעון את שאלות ההבנה כעת. אפשר להמשיך לקרוא את הפרק ללא חסימה.'));
-  }
-
-  // Practice uses exactly the same published bank and demo profile as checkpoints.
-  // Its history/session live under chapter 0, separate from checkpoint completion.
-  function renderPractice(bank) {
-    section.replaceChildren();
-    section.dir = 'rtl';
-    section.append(el('h2', '', 'רוצים לתרגל?'));
-    if (!demoProgress.hasUser()) {
-      section.append(el('p', 'lab-load-warning', 'בחרו משתמש ניסוי למעלה כדי לתרגל.'));
-      return;
-    }
-    const eligible = bank.questions.filter(q => q.status === 'approved' && validateQuestion(q) &&
-      demoProgress.get(q.chapter, q.after_section)?.completed);
-    const area = el('div', 'lab-practice-area');
-    section.append(area);
-    const uniqueChapters = [...new Set(eligible.map(q => q.chapter))].sort((a,b) => a-b);
-    const sections = [...new Set(eligible.map(q => q.chapter + ':' + q.after_section))]
-      .sort((a,b) => a.localeCompare(b, 'en', {numeric:true}));
-    if (!eligible.length) {
-      area.append(el('p', '', 'עדיין אין סעיפים שהושלמו. השלימו או דלגו על בדיקת הבנה כדי לפתוח שאלות לתרגול.'));
-      return;
-    }
-    const savedSession = demoProgress.get(0, 'practice-session');
-    const history = () => demoProgress.get(0, 'practice-history')?.attempts || [];
-    const controls = el('div', 'lab-practice-controls');
-    const scope = document.createElement('select');
-    scope.setAttribute('aria-label', 'בחירת חומר לתרגול');
-    scope.append(new Option('כל החומר שהושלם', 'all'));
-    uniqueChapters.forEach(c => scope.append(new Option('פרק ' + c, 'chapter:' + c)));
-    sections.forEach(key => {
-      const [c, sec] = key.split(':');
-      scope.append(new Option('סעיף ' + sec + ' (פרק ' + c + ')', 'section:' + key));
-    });
-    const amount = document.createElement('select');
-    amount.setAttribute('aria-label', 'מספר שאלות');
-    [['5','5 שאלות'],['10','10 שאלות'],['all','כל השאלות']].forEach(([v,t]) => amount.append(new Option(t,v)));
-    const start = el('button', '', 'התחלת תרגול');
-    controls.append(scope, amount, start);
-    area.append(controls);
-    const info = el('p', 'lab-progress-text');
-    const work = el('div', 'lab-checkpoint');
-    area.append(info, work);
-    let session = savedSession && Array.isArray(savedSession.questionIds) ? savedSession : null;
-    function saveSession() { demoProgress.set(0, 'practice-session', session); }
-    function showControls() {
-      controls.hidden = false;
-      info.textContent = 'זמינות ' + eligible.length + ' שאלות לתרגול · ' + history().length + ' תשובות נשמרו בהיסטוריה';
-      work.replaceChildren(); work.hidden = true;
-    }
-    function renderSession() {
-      if (!session) { showControls(); return; }
-      const byId = new Map(eligible.map(q => [q.id,q]));
-      const questions = session.questionIds.map(id => byId.get(id));
-      if (!questions.length || questions.some(q => !q)) {
-        session = null; saveSession(); showControls(); return;
-      }
-      if (session.position >= questions.length) {
-        controls.hidden = false;
-        work.hidden = false;
-        work.replaceChildren(el('h3', '', 'התרגול הושלם!'));
-        info.textContent = 'סיימתם ' + questions.length + ' שאלות. אפשר להתחיל תרגול חדש.';
-        session = null; saveSession(); return;
-      }
-      controls.hidden = true; work.hidden = false;
-      const q = questions[session.position];
-      work.replaceChildren();
-      work.append(el('h3', '', 'תרגול · שאלה ' + (session.position+1) + ' מתוך ' + questions.length));
-      const prompt = el('p'); addTextWithMath(prompt, q.question); work.append(prompt);
-      if (q.formula?.trim()) { const formula = el('div', 'lab-formula-wrapper'); formula.append(mathNode(q.formula,'lab-formula')); work.append(formula); }
-      const fieldset = document.createElement('fieldset');
-      fieldset.append(el('legend', '', 'בחרו תשובה אחת:'));
-      q.choices.forEach(c => {
-        const label = document.createElement('label');
-        const radio = document.createElement('input'); radio.type='radio'; radio.name='practice-answer'; radio.value=c.id;
-        const span=el('span','lab-choice');
-        if (typeof c.latex === 'string') span.append(mathNode(c.latex,'lab-answer-formula'));
-        else addTextWithMath(span,c.text);
-        label.append(radio,span); fieldset.append(label);
-      });
-      work.append(fieldset);
-      const buttons = el('div','lab-buttons');
-      const check = el('button','','בדיקת תשובה');
-      const hintButton = el('button','','רמז');
-      const next = el('button','','לשאלה הבאה');
-      const end = el('button','','סיום התרגול');
-      [check,hintButton,next,end].forEach(b=>b.type='button');
-      next.hidden = !session.awaitingNext;
-      buttons.append(check,hintButton,next,end); work.append(buttons);
-      const feedback=el('p','lab-feedback'); feedback.setAttribute('role','status');
-      const hint=el('div','lab-hint'); hint.hidden=true;
-      work.append(feedback,hint);
-      const showHint = detailed => {
-        const content = detailed ? (q.hint2 || q.hint1 || '') : (q.hint1 || '');
-        if (!content) return;
-        hint.hidden=false; addTextWithMath(hint,content);
-      };
-      if (session.awaitingNext) {
-        fieldset.disabled=true; check.hidden=true; hintButton.hidden=true;
-        addTextWithMath(feedback,q.explanation || 'נכון!');
-      } else if (session.wrongAttempts > 0) {
-        check.textContent='בדיקה חוזרת';
-        addTextWithMath(feedback,session.wrongAttempts===1 ? (q.wrong1 || 'התשובה אינה נכונה. נסו שוב.') : (q.wrong2 || 'עדיין לא. נסו שוב.'));
-        if (session.wrongAttempts>=2) showHint(true);
-      }
-      hintButton.onclick = () => { showHint(session.wrongAttempts>=2); };
-      check.onclick = () => {
-        const selected=fieldset.querySelector('input:checked');
-        if (!selected) { feedback.textContent='בחרו תחילה אחת מהתשובות.'; return; }
-        const correct=selected.value===q.correct;
-        const attempts=history();
-        attempts.push({questionId:q.id,chapter:q.chapter,section:q.after_section,answerId:selected.value,correct,at:new Date().toISOString()});
-        demoProgress.set(0,'practice-history',{attempts});
-        if (correct) {
-          session.awaitingNext=true; fieldset.disabled=true; check.hidden=true; hintButton.hidden=true;
-          hint.hidden=true; addTextWithMath(feedback,q.explanation || 'נכון!'); next.hidden=false;
-        } else {
-          session.wrongAttempts=(session.wrongAttempts||0)+1;
-          check.textContent='בדיקה חוזרת';
-          addTextWithMath(feedback,session.wrongAttempts===1 ? (q.wrong1 || 'התשובה אינה נכונה. נסו שוב.') : (q.wrong2 || 'עדיין לא. נסו שוב.'));
-          if (session.wrongAttempts>=2) showHint(true);
-        }
-        saveSession();
-      };
-      next.onclick = () => { session.position++; session.awaitingNext=false; session.wrongAttempts=0; saveSession(); renderSession(); };
-      end.onclick = () => { session=null; saveSession(); showControls(); };
-      renderMath(work);
-    }
-    start.onclick = () => {
-      const filtered=eligible.filter(q => scope.value==='all' ||
-        (scope.value.startsWith('chapter:') && q.chapter===Number(scope.value.slice(8))) ||
-        (scope.value.startsWith('section:') && q.chapter+':'+q.after_section===scope.value.slice(8)));
-      const shuffled=chooseQuestions(filtered,amount.value==='all' ? filtered.length : Number(amount.value));
-      if (!shuffled.length) return;
-      session={questionIds:shuffled.map(q=>q.id),position:0,awaitingNext:false,wrongAttempts:0};
-      saveSession(); renderSession();
+      onSave(); redraw();
+      if (state.completed) onComplete();
+      host.querySelector('.lab-feedback')?.focus({preventScroll:true});
     };
-    prepareMath();
-    renderSession();
+    hintButton.onclick = () => {
+      state.hintsShown = Math.min(2,state.hintsShown+1);
+      record({type:'hint', ...context, mode:state.mode, questionId:q.id, hint:state.hintsShown});
+      onSave(); redraw(); host.querySelector('.lab-hint')?.scrollIntoView({behavior:'smooth',block:'nearest'});
+    };
+    next.onclick = () => {
+      if (!state.awaitingNext || state.completed) return;
+      state.position++; state.awaitingNext = false; state.wrongAttempts = 0; state.hintsShown = 0; state.selectedAnswer = '';
+      onSave(); redraw(); host.querySelector('.lab-question-prompt')?.focus({preventScroll:true});
+    };
   }
-
-  fetch('assets/questions.json', {cache: 'no-store'})
-    .then(response => {
-      if (!response.ok) throw new Error(`HTTP ${response.status} loading questions.json`);
-      return response.json();
-    })
-    .then(bank => {
-      if (practiceMode) {
-        if (!bank || bank.version !== 1 || !Array.isArray(bank.questions)) throw new Error('Invalid question-bank format');
-        renderPractice(bank);
-        return;
-      }
-      if (!demoProgress.hasUser()) {
-        section.append(el('p', 'lab-load-warning', 'כדי לפתור שאלות ולשמור התקדמות, בחרו משתמש ניסוי למעלה.'));
-        return;
-      }
-      if (!bank || bank.version !== 1 || !Array.isArray(bank.questions)) {
-        throw new Error('Invalid question-bank format');
-      }
-      const groups = new Map();
-      const usedIds = new Set();
-      bank.questions.filter(q => q.status === 'approved' && q.chapter === chapter).forEach(q => {
-        if (!validateQuestion(q) || usedIds.has(q.id)) {
-          console.warn('Skipping invalid or duplicate question:', q && q.id);
-          return;
-        }
-        usedIds.add(q.id);
-        const destination = data.sections.find(s => s.number === q.after_section);
-        if (!destination || destination.page < 1 || destination.page >= figures.length) {
-          console.warn(`Skipping question ${q.id}: section ${q.after_section} was not found or is too late in the chapter.`);
-          return;
-        }
-        // All approved questions assigned to the same section share ONE checkpoint.
-        const key = String(q.after_section);
-        if (!groups.has(key)) {
-          groups.set(key, {sectionNumber:key, afterPage:destination.page, pool:[]});
-        }
-        groups.get(key).pool.push(q);
+  function makeGate(gate, onChanged) {
+    let state = gateRestore(gate);
+    const host = el('section','lab-checkpoint'); host.id = 'checkpoint-' + gate.id; host.dataset.gateId = gate.id;
+    host.dataset.afterPage = String(gate.after_page);
+    const title = el('h3','', (gate.kind === 'summary' ? 'בדיקת סיכום · ' : 'לפני שממשיכים · ') + gate.title);
+    host.append(title,el('p','lab-checkpoint-intro','שלוש תשובות נכונות, בשלושה נושאים שונים. אפשר להיעזר ברמזים ולנסות שוב.'));
+    const routes = el('div','lab-route-picker'); routes.setAttribute('aria-label','בחירת מסלול בדיקה');
+    const ready = Object.fromEntries(Object.keys(ROUTES).map(route => [route,Boolean(core.selectGate(questions,gate,route))]));
+    const work = el('div','lab-session'); work.hidden = true;
+    const persist = () => saveSession(gate.chapter,gateKey(gate),state);
+    const context = {key:gate.id, chapter:gate.chapter, kind:'gate', afterPage:gate.after_page, summary:gate.kind === 'summary'};
+    const refresh = () => {
+      routes.querySelectorAll('button').forEach(b => {b.setAttribute('aria-pressed',String(state?.mode === b.dataset.route)); b.disabled = !ready[b.dataset.route] || !demoProgress.hasUser() || Boolean(state?.completed);});
+      host.classList.toggle('lab-completed',Boolean(state?.completed));
+      if (state) questionView(work,state,persist,() => {refresh(); onChanged();},context);
+    };
+    Object.entries(ROUTES).forEach(([route,label]) => {
+      const b = button(label,'lab-route-option'); b.dataset.route = route;
+      if (!ready[route]) b.title = 'עדיין חסרות שאלות במסלול הזה';
+      b.onclick = () => {
+        if (state?.mode === route) {work.querySelector('.lab-question-prompt')?.focus(); return;}
+        const chosen = core.selectGate(questions,gate,route); if (!chosen) return;
+        state = core.newSession(chosen,'gate',route,core.gateSignature(gate));
+        markRead(gate.chapter,gate.after_page); persist();
+        record({type:'start',...context,mode:route,questionIds:state.questionIds}); refresh(); onChanged();
+        work.querySelector('.lab-question-prompt')?.focus({preventScroll:true});
+      }; routes.append(b);
+    });
+    host.append(routes);
+    if (!ready.normal && !ready.challenge) host.append(el('p','lab-load-warning','השאלות לבדיקה הזו עדיין אינן מוכנות. אפשר להמשיך לקרוא.'));
+    else if (!ready.challenge) host.append(el('p','lab-small','המסלול המאתגר יתווסף כשיהיו בו שאלות לכל שלושת הנושאים.'));
+    if (!demoProgress.hasUser()) host.append(el('p','lab-small','בחרו משתמש ניסוי למעלה כדי לפתור שאלות ולשמור התקדמות.'));
+    else host.append(el('p','lab-small','בחירת מסלול אחר במהלך הבדיקה מתחילה מקבץ חדש של שלוש שאלות.'));
+    host.append(work); refresh();
+    return {host, gate, get completed(){return Boolean(state?.completed);}, blocking:gate.kind === 'gate' && (ready.normal || ready.challenge)};
+  }
+  function makeInlinePractice(page) {
+    const pool = core.available(questions,chapter,page);
+    const key = 'inline-v2:' + page, signature = core.hash([chapter,page,'inline-v2']);
+    let state = core.restoreSession(demoProgress.get(chapter,key),pool,'practice',signature);
+    const host = el('section','lab-optional'); host.dataset.practicePage = String(page);
+    const toggle = button('רוצים לבדוק את ההבנה? · תרגול רשות','lab-practice-toggle');
+    const panel = el('div','lab-optional-panel'); panel.hidden = true; panel.id = 'practice-page-' + page;
+    toggle.setAttribute('aria-expanded','false'); toggle.setAttribute('aria-controls',panel.id);
+    panel.append(el('h3','',`תרגול מהחומר עד עמוד ${page}`),el('p','lab-small','בחרו רמה למקבץ קצר. אפשר לסגור בכל שלב ולהמשיך לקרוא.'));
+    const choices = el('div'), work = el('div','lab-session'); work.hidden = true;
+    const context = {key,chapter,kind:'practice',afterPage:page};
+    const persist = () => saveSession(chapter,key,state);
+    const render = () => {
+      choices.replaceChildren(levelPicker(pool,level => {
+        const selected = core.selectPractice(pool,level); if (!selected.length) return;
+        state = core.newSession(selected,'practice',level,signature); persist(); markRead(chapter,page);
+        record({type:'start',...context,mode:level,questionIds:state.questionIds}); render();
+        work.querySelector('.lab-question-prompt')?.focus({preventScroll:true});
+      },state?.mode));
+      if (state) questionView(work,state,persist,() => {},context);
+    };
+    if (!demoProgress.hasUser()) panel.append(el('p','lab-small','בחרו משתמש ניסוי למעלה כדי להתחיל בתרגול.'));
+    const close = button('סגירת התרגול והמשך קריאה','lab-quiet-button');
+    close.onclick = () => {panel.hidden = true; toggle.setAttribute('aria-expanded','false'); toggle.focus();};
+    toggle.onclick = () => {panel.hidden = !panel.hidden; toggle.setAttribute('aria-expanded',String(!panel.hidden)); if(!panel.hidden) {markRead(chapter,page); render();}};
+    panel.append(choices,work,close); host.append(toggle,panel); return host;
+  }
+  function renderReader(layout) {
+    if (!layout.supported) return;
+    const figures = Array.from(document.querySelectorAll('.pages > .page'));
+    const widgets = [], practices = [];
+    const refreshLocks = () => {
+      const first = demoProgress.hasUser() ? widgets.find(w => w.blocking && !w.completed) : null;
+      const limit = first ? first.gate.after_page : Infinity;
+      figures.forEach((figure,i) => {
+        const locked = i+1 > limit;
+        figure.classList.toggle('lab-locked',locked);
+        figure.querySelector('img').setAttribute('aria-hidden',String(locked));
+        const message = figure.querySelector('.lab-lock-message'); message.hidden = !locked;
+        if (locked) {message.href = '#' + first.host.id; message.textContent = 'כדי להמשיך לקרוא, השלימו את בדיקת ההבנה שמעל';}
       });
-      if (!groups.size) return;
-      prepareMath();
-      const ordered = Array.from(groups.values()).sort((a,b) => a.afterPage-b.afterPage ||
-        a.sectionNumber.localeCompare(b.sectionNumber, 'en', {numeric:true}));
-      const checkpoints = [];
-      const anchors = new Map();
-      ordered.forEach(group => {
-        const widget = makeCheckpoint(group);
-        const anchor = anchors.get(group.afterPage) || figures[group.afterPage - 1];
-        anchor.after(widget.checkpoint);
-        anchors.set(group.afterPage, widget.checkpoint);
-        checkpoints.push({...group, ...widget, completed:widget.initiallyCompleted, skipped:widget.initiallySkipped});
+      widgets.forEach(w => {w.host.hidden = w.gate.after_page > limit;});
+      practices.forEach(p => {p.host.hidden = p.page > limit;});
+    };
+    figures.forEach(figure => {
+      figure.tabIndex = -1;
+      const message = el('a','lab-lock-message'); message.hidden = true;
+      figure.append(message);
+      const marker = el('span','lab-read-marker'); marker.setAttribute('aria-hidden','true'); figure.append(marker);
+    });
+    layout.gates.forEach(gate => {const widget = makeGate(gate,refreshLocks); widgets.push(widget); figures[gate.after_page-1].after(widget.host);});
+    layout.practice.forEach(page => {const host = makeInlinePractice(page); practices.push({page,host}); figures[page-1].after(host);});
+    refreshLocks();
+    const intro = el('div','lab-reading-guide');
+    intro.append(el('strong','','קוראים בקצב שלכם'),el('p','','בין העמודים תמצאו כפתורי תרגול רשות בשלוש רמות. אחרי יחידה שלמה, שלוש שאלות משלושה נושאים יפתחו את המשך הקריאה.'));
+    const firstPractice = practices[0];
+    if (firstPractice) {const link = el('a','lab-guide-link','שלוש רמות התרגול'); link.href = '#' + firstPractice.host.querySelector('.lab-optional-panel').id; link.onclick = e => {e.preventDefault(); const panel = firstPractice.host.querySelector('.lab-optional-panel'); if(panel.hidden) firstPractice.host.querySelector('button').click(); firstPractice.host.scrollIntoView({behavior:'smooth',block:'start'});}; intro.append(link);}
+    document.querySelector('.pages').before(intro);
+    if ('IntersectionObserver' in window && demoProgress.hasUser()) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {if (!entry.isIntersecting) return; const figure = entry.target.closest('.page'); if(!figure.classList.contains('lab-locked')) markRead(chapter,Number(figure.id.slice(5)));});
       });
-      function refreshLocks() {
-        const first = checkpoints.findIndex(item => !item.completed);
-        const afterPage = first < 0 ? Infinity : checkpoints[first].afterPage;
-        figures.forEach((page, index) => {
-          page.classList.toggle('lab-locked', index + 1 > afterPage);
-        });
-        checkpoints.forEach((item, index) => {
-          item.checkpoint.hidden = first >= 0 && index > first;
-        });
-      }
-      checkpoints.forEach(item => {
-        item.setCompletionCallback(wasSkipped => {
-          item.completed = true;
-          item.skipped = wasSkipped;
-          refreshLocks();
-        });
-      });
-      refreshLocks();
-      renderMath(section);
-    })
-    .catch(showError);
-
-  const labStyles = document.createElement('style');
-  labStyles.textContent = `
-    .lab-practice-area{max-width:900px;margin:0 auto;direction:rtl}
-    .lab-practice-controls{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0}
-    .lab-practice-controls select,.lab-practice-controls button{font:inherit;padding:9px;border:1px solid #165f64;border-radius:7px;background:white;color:#165f64}
-    .lab-practice-controls button{background:#165f64;color:white;cursor:pointer}
-    .lab-checkpoint {margin: 26px auto; max-width: 900px; padding: 24px;
-      border: 2px solid #165f64; border-radius: 14px; background: #fff; direction: rtl;}
-    .lab-checkpoint[hidden], .lab-buttons [hidden] {display: none !important;}
-    .lab-checkpoint-top {display: flex; gap: 12px; flex-wrap: wrap;
-      align-items: baseline; justify-content: space-between;}
-    .lab-checkpoint h3 {margin: 0 0 12px; color: #165f64;}
-    .lab-progress-text {color: #34545a; font-size: .88rem; font-weight: 600;}
-    .lab-progress {display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0,1fr);
-      gap: 8px; margin: 8px 0 24px;}
-    .lab-progress-step {display: grid; place-items: center; min-height: 34px;
-      border-radius: 8px; border: 1px solid #d4e1de;
-      background: #f6f8f7; color: #667a7b; font-size: .9rem;}
-    .lab-progress-step.current {border: 2px solid #14636b; color: #14636b;
-      background: #e8f3f1; font-weight: 700;}
-    .lab-progress-step.done {background: #e5f4ed; color: #18734e; border-color: #afd5c3; font-weight: 700;}
-    .lab-progress-step.skipped {background: #f4f4f4; color: #a3a8a8;}
-    .lab-question-position {font-size: .86rem; color: #557174; font-weight: 700; margin: 0 0 4px;}
-    .lab-checkpoint p {line-height: 1.7;}
-    .lab-formula-wrapper {text-align: center; background: #f3f6f7; padding: 12px; overflow-x: auto;}
-    .lab-formula {font-size: 1.15rem;}
-    .lab-formula-wrapper .katex-display {margin: .35em 0;}
-    .lab-checkpoint fieldset {border: 0; padding: 0; margin: 18px 0;}
-    .lab-checkpoint legend {margin-bottom: 10px; font-weight: bold;}
-    .lab-checkpoint label {display: flex; align-items: center; gap: 12px;
-      margin: 8px 0; padding: 10px; border: 1px solid #dbe3e7; border-radius: 6px; cursor: pointer;}
-    .lab-choice {unicode-bidi: isolate; text-align: left; font-size: 1.08rem; overflow-x: auto;}
-    .lab-answer-formula, .lab-inline-math {display: inline-block; direction: ltr; unicode-bidi: isolate;}
-    .lab-buttons {display: flex; flex-wrap: wrap; gap: 10px; align-items: center;}
-    .lab-buttons button {padding: 10px 16px; border-radius: 7px; cursor: pointer;
-      border: 1px solid #165f64; background: #165f64; color: white; font: inherit;}
-    .lab-buttons .lab-hint-button, .lab-buttons .lab-skip {background: white; color: #165f64;}
-    .lab-buttons button:disabled {opacity: .55; cursor: default;}
-    .lab-feedback {min-height: 1.7em; font-weight: 600;}
-    .lab-complete-message {color: #18734e; margin: 8px 0 0;}
-    .lab-hint {margin-top: 12px; border-right: 3px solid #165f64;
-      background: #f3f6f7; padding: 12px 14px; line-height: 1.9;}
-    .lab-hint[hidden] {display: none;}
-    .lab-load-warning {color: #87541d; text-align: center; padding: 10px;}
-    .page.lab-locked img {filter: blur(12px); pointer-events: none;}
-    .page.lab-locked {position: relative;}
-    .page.lab-locked::after {content: 'כדי לקרוא בהמשך, השלימו את בדיקת ההבנה או לחצו על דלג';
-      position: absolute; inset: 45px 0 0; display: grid; place-items: start center;
-      padding: 26px; font-weight: bold; text-align: center; color: #172d3e;
-      background: rgba(255,255,255,.55); pointer-events: none;}
-    @media(max-width:600px) {
-      .lab-checkpoint {padding: 14px;}
-      .lab-checkpoint-top {display: block;}
+      figures.forEach(f => observer.observe(f.querySelector('.lab-read-marker')));
     }
-  `;
-  document.head.append(labStyles);
+  }
+  function renderStandalonePractice() {
+    section.replaceChildren(el('h2','','רוצים לתרגל?'));
+    if (!demoProgress.hasUser()) {section.append(el('p','lab-load-warning','בחרו משתמש ניסוי למעלה כדי לתרגל ולשמור התקדמות.')); return;}
+    const limits = new Map();
+    for (const ch of [...new Set(questions.map(q => q.chapter))]) {
+      try {if(layoutFor(ch).supported) limits.set(ch,readThrough(ch));} catch (_) {}
+    }
+    const eligible = questions.filter(q => q.available_after_page <= (limits.get(q.chapter) || 0));
+    if (!eligible.length) {
+      section.append(el('p','','כאן יופיעו שאלות מהעמודים שכבר קראתם. אפשר להתחיל לקרוא ולפתוח תרגול רשות בין העמודים.'));
+      const link = el('a','action primary','לקריאת פרק 1'); link.href = '?chapter=1'; section.append(link); return;
+    }
+    section.append(el('p','lab-small','שאלות מהחומר שכבר קראתם. בחירת רמה מתחילה מקבץ חדש; התרגול אינו משנה את פתיחת הפרקים.'));
+    const area = el('div','lab-practice-area'), controls = el('div','lab-practice-controls');
+    const scope = el('select'); scope.setAttribute('aria-label','בחירת חומר לתרגול'); scope.append(new Option('כל החומר שנקרא','all'));
+    [...new Set(eligible.map(q => q.chapter))].sort().forEach(ch => scope.append(new Option('פרק '+ch,String(ch))));
+    const amount = el('select'); amount.setAttribute('aria-label','מספר שאלות'); [3,5,10].forEach(n => amount.append(new Option(n+' שאלות',String(n))));
+    controls.append(scope,amount); const picker = el('div'), work = el('div','lab-session'); work.hidden = true;
+    area.append(controls,picker,work); section.append(area);
+    const signature = 'standalone-v2';
+    let state = core.restoreSession(demoProgress.get(0,'practice-v2'),eligible,'practice',signature);
+    if (state?.scope && [...scope.options].some(o => o.value === state.scope)) scope.value = state.scope;
+    const context = {key:'standalone-v2',kind:'practice'};
+    const persist = () => saveSession(0,'practice-v2',state);
+    const render = () => {
+      const pool = eligible.filter(q => scope.value === 'all' || q.chapter === Number(scope.value));
+      picker.replaceChildren(levelPicker(pool,level => {
+        const selected = core.selectPractice(pool,level,Number(amount.value));
+        state = core.newSession(selected,'practice',level,signature); state.scope = scope.value; persist();
+        record({type:'start',...context,mode:level,questionIds:state.questionIds}); render();
+      },state?.mode));
+      if (state) questionView(work,state,persist,() => {},context);
+    };
+    scope.onchange = () => {state = null; persist(); work.replaceChildren(); work.hidden = true; render();};
+    render();
+  }
+  async function start() {
+    if (!core) throw Error('Checkpoint engine did not load');
+    const [bank, locations] = await Promise.all(['assets/questions.json','assets/checkpoints.json'].map(async url => {
+      const response = await fetch(url,{cache:'no-store'}); if(!response.ok) throw Error('Question data unavailable'); return response.json();
+    }));
+    questions = core.cleanBank(bank); plan = locations;
+    if (practiceMode) renderStandalonePractice();
+    else if (data) renderReader(layoutFor(chapter));
+  }
+  start().catch(error => {
+    console.error('Checkpoint reader:',error);
+    section.append(el('p','lab-load-warning','שאלות הפרק אינן זמינות כרגע או ממתינות להתאמה לרשימות המעודכנות. בינתיים אפשר להמשיך לקרוא ללא עצירות.'));
+    document.querySelectorAll('.lab-locked').forEach(n => n.classList.remove('lab-locked'));
+    document.querySelectorAll('.lab-lock-message').forEach(n => {n.hidden = true;});
+  });
 })();
-// ===== END LAB EXPERIMENT 3 =====

@@ -1,0 +1,246 @@
+{
+  "version": 1,
+  "status": "trial",
+  "scope": "פרקים 1–2: תרגול רשות ועצירות הבנה לניסוי",
+  "source_commit": "e38e47d5e549fbce23f5f419ad9f841a19eda1ba",
+  "pdf_sha256": {
+    "1": "2f8d3245ab22fd96a6228867412a557a6f91ad664fe76652e75ed6523d2f04e3",
+    "2": "be82bb04ead981e90f43e8409f5c0ccbc6147ebbb950c6c67692824b997b63f1"
+  },
+  "practice": {
+    "1": [
+      4,
+      6,
+      11,
+      13,
+      15,
+      20,
+      22
+    ],
+    "2": [
+      3,
+      5,
+      8,
+      14,
+      17,
+      19,
+      23,
+      26,
+      28,
+      34,
+      37,
+      39
+    ]
+  },
+  "level_labels": {
+    "sanity": "בדיקת מושגים",
+    "rehearsal": "בדיקת הבנה",
+    "challenge": "אתגר"
+  },
+  "practice_descriptions": [
+    "אני לא סגור על מה מדברים, רוצה לוודא שבכלל הבנתי את הקטע",
+    "אני מבין סה״כ, תבדקו אותי",
+    "תשאלו שאלות קשות, נראה אם אני מצליח"
+  ],
+  "normal_gate_levels": [
+    "sanity",
+    "rehearsal"
+  ],
+  "challenging_gate_levels": [
+    "challenge"
+  ],
+  "selection_policy": "שאלה אחת מכל אחד משלושת אשכולות הכיסוי, ללא שאלות שטרם נלמדו. במסלול מאתגר נדרשת שאלה מסווגת אתגר בכל אשכול. אין להציג מסלול כמוכן אם חסר לו כיסוי.",
+  "gates": [
+    {
+      "id": "ch1-foundations",
+      "chapter": 1,
+      "from_page": 1,
+      "after_page": 8,
+      "printed_page": 8,
+      "title": "לוגיקה, קבוצות וקבוצות מספרים",
+      "kind": "gate",
+      "coverage_buckets": [
+        [
+          "logic"
+        ],
+        [
+          "sets"
+        ],
+        [
+          "numbers"
+        ]
+      ],
+      "questions_required": 3,
+      "note": "סיום נקי לפני המספרים הממשיים. הכיסוי מחושב מחדש לפי המאגר הנוכחי.",
+      "status": "trial"
+    },
+    {
+      "id": "ch1-completeness",
+      "chapter": 1,
+      "from_page": 9,
+      "after_page": 17,
+      "printed_page": 17,
+      "title": "שדה סדור, חסמים ושלמות",
+      "kind": "gate",
+      "coverage_buckets": [
+        [
+          "order"
+        ],
+        [
+          "bounds"
+        ],
+        [
+          "completeness"
+        ]
+      ],
+      "questions_required": 3,
+      "note": "אחרי אפיון הסופרמום ומשפט דדקינד. עמוד 18 מתחיל דיון והתרגילים; עצירה אחרי 18 הייתה חוצה תרגיל.",
+      "status": "trial"
+    },
+    {
+      "id": "ch1-summary",
+      "chapter": 1,
+      "from_page": 18,
+      "after_page": 25,
+      "printed_page": 25,
+      "title": "סיכום הפרק: סופרמום, צפיפות ואי־שוויונים",
+      "kind": "summary",
+      "coverage_buckets": [
+        [
+          "completeness"
+        ],
+        [
+          "density"
+        ],
+        [
+          "inequalities"
+        ]
+      ],
+      "questions_required": 3,
+      "note": "בדיקת סיכום. אין עמוד נוסף בפרק לטשטש; נעילת פרק אחר אינה מוצעת כאן.",
+      "status": "trial"
+    },
+    {
+      "id": "ch2-limits",
+      "chapter": 2,
+      "from_page": 1,
+      "after_page": 11,
+      "printed_page": 37,
+      "title": "סדרות והגדרת הגבול",
+      "kind": "gate",
+      "coverage_buckets": [
+        [
+          "sequence-basics"
+        ],
+        [
+          "limit-definition"
+        ],
+        [
+          "limit-properties",
+          "infinite-limits",
+          "rational-approximation"
+        ]
+      ],
+      "questions_required": 3,
+      "note": "אחרי קירוב רציונלי. בעמוד 11 כבר מופיע ניסוח משפט חשבון הגבולות; ההוכחה מתחילה בעמוד הבא.",
+      "status": "trial"
+    },
+    {
+      "id": "ch2-tools",
+      "chapter": 2,
+      "from_page": 12,
+      "after_page": 21,
+      "printed_page": 47,
+      "title": "כלים לחישוב ולהוכחת גבולות",
+      "kind": "gate",
+      "coverage_buckets": [
+        [
+          "limit-algebra"
+        ],
+        [
+          "squeeze",
+          "ratio-root"
+        ],
+        [
+          "averages"
+        ]
+      ],
+      "questions_required": 3,
+      "note": "אחרי שטולץ. בתחתית העמוד מופיעה רק פתיחה קצרה לסדרות מונוטוניות.",
+      "status": "trial"
+    },
+    {
+      "id": "ch2-existence",
+      "chapter": 2,
+      "from_page": 22,
+      "after_page": 31,
+      "printed_page": 57,
+      "title": "מונוטוניות, תת־סדרות וקומפקטיות",
+      "kind": "gate",
+      "coverage_buckets": [
+        [
+          "monotone",
+          "e"
+        ],
+        [
+          "subsequences"
+        ],
+        [
+          "nested-compact"
+        ]
+      ],
+      "questions_required": 3,
+      "note": "סיום ההוכחה לקומפקטיות; עמוד 32 מתחיל את נושא הגבולות החלקיים.",
+      "status": "trial"
+    },
+    {
+      "id": "ch2-summary",
+      "chapter": 2,
+      "from_page": 32,
+      "after_page": 41,
+      "printed_page": 67,
+      "title": "סיכום: גבולות חלקיים, לימסופ וקושי",
+      "kind": "summary",
+      "coverage_buckets": [
+        [
+          "partial-limits"
+        ],
+        [
+          "limsup-inf"
+        ],
+        [
+          "cauchy"
+        ]
+      ],
+      "questions_required": 3,
+      "note": "בדיקת סיכום הפרק, ללא טשטוש פרק אחר.",
+      "status": "trial"
+    }
+  ],
+  "coverage_groups": {
+    "logic": "לוגיקה וכמתים",
+    "sets": "קבוצות ופעולות",
+    "numbers": "קבוצות מספרים וערך מוחלט",
+    "order": "שדה סדור וארכימדס",
+    "bounds": "חסמים וקיצונים",
+    "completeness": "שלמות וסופרמום",
+    "density": "שורשים וצפיפות",
+    "inequalities": "אי־שוויונים",
+    "sequence-basics": "סדרות, חסימות ומונוטוניות",
+    "limit-definition": "הגדרת הגבול והוכחות ממנה",
+    "limit-properties": "תכונות של סדרות מתכנסות",
+    "infinite-limits": "גבולות אינסופיים",
+    "rational-approximation": "קירוב רציונלי",
+    "limit-algebra": "חשבון גבולות",
+    "squeeze": "סנדוויץ׳ והשוואה",
+    "ratio-root": "מבחני מנה ושורש",
+    "averages": "צזארו ושטולץ",
+    "monotone": "התכנסות של סדרות מונוטוניות",
+    "e": "הגדרת e ויישומים",
+    "subsequences": "תת־סדרות ובולצאנו–ויירשטראס",
+    "nested-compact": "קטעים מקוננים וקומפקטיות",
+    "partial-limits": "גבולות חלקיים",
+    "limsup-inf": "לימסופ ולימאינפ",
+    "cauchy": "סדרות קושי"
+  }
+}

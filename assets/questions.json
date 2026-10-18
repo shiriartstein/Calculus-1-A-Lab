@@ -34,7 +34,12 @@
       "hint2": "רמז נוסף: כדי שהטענה תהיה שקרית, צריך למצוא מספר $x$ מסוים, שעבורו אף מספר $y$ אינו מקיים $y>x$. אילו כמתים מבטאים \"יש מספר מסוים\" ו\"לכל מספר\"? ואיך שוללים את אי־השוויון $y>x$?",
       "wrong1": "התשובה אינה נכונה. מה צריך לקרות כדי שהטענה המקורית תהיה שקרית?",
       "wrong2": "עדיין לא. רמז מפורט יותר מופיע למטה. נסו שוב.",
-      "explanation": "נכון! זו השלילה הלוגית של הטענה. הטענה המקורית נכונה מעל $\\mathbb{R}$: לכל $x$ אפשר לבחור $y=x+1$. לכן השלילה עצמה שקרית. המשך הפרק פתוח לקריאה."
+      "explanation": "נכון! זו השלילה הלוגית של הטענה. הטענה המקורית נכונה מעל $\\mathbb{R}$: לכל $x$ אפשר לבחור $y=x+1$. לכן השלילה עצמה שקרית. המשך הפרק פתוח לקריאה.",
+      "level": "rehearsal",
+      "coverage_group": "logic",
+      "available_after_page": 4,
+      "study_section": "1.3",
+      "approval_stage": "partial"
     },
     {
       "id": "lab-logic-001-copy2",
@@ -69,7 +74,12 @@
       "hint2": "רמז נוסף: כדי שהטענה תהיה שקרית, צריך למצוא מספר $x\\in A$ מסוים, שעבורו אף מספר $y\\in B$ אינו מקיים $y>x$. אילו כמתים מבטאים \"יש מספר מסוים\" ו\"לכל מספר\"? ואיך שוללים את אי־השוויון $y>x$?",
       "wrong1": "התשובה אינה נכונה. מה צריך לקרות כדי שהטענה המקורית תהיה שקרית?",
       "wrong2": "עדיין לא. רמז מפורט יותר מופיע למטה. נסו שוב.",
-      "explanation": "נכון! זו השלילה הלוגית של הטענה.  המשך הפרק פתוח לקריאה."
+      "explanation": "נכון! זו השלילה הלוגית של הטענה.  המשך הפרק פתוח לקריאה.",
+      "level": "rehearsal",
+      "coverage_group": "logic",
+      "available_after_page": 4,
+      "study_section": "1.3",
+      "approval_stage": "partial"
     },
     {
       "id": "sets-001",
@@ -104,7 +114,12 @@
       "hint2": "סימן $\\cup$ מסמל איחוד, כל מה שנמצא בלפחות אחת משתי הקבוצות, ואילו $\\cap$ מסמל חיתוך, מה שנמצא גם בזו וגם בזו",
       "wrong1": "התשובה אינה נכונה. נסו שוב.",
       "wrong2": "עדיין לא. רמז מפורט יותר מופיע למטה. נסו שוב.",
-      "explanation": "מצויין, איחוד וחיתוך אלה פעולות חשובות ובסיסיות. "
+      "explanation": "מצויין, איחוד וחיתוך אלה פעולות חשובות ובסיסיות. ",
+      "level": "sanity",
+      "coverage_group": "sets",
+      "available_after_page": 6,
+      "study_section": "1.4",
+      "approval_stage": "partial"
     },
     {
       "id": "ch01-s03-q01",
@@ -140,27 +155,11 @@
       "wrong1": "התשובה אינה נכונה. נסו שוב.",
       "wrong2": "עדיין לא. נסו לחשוב על משמעות הטענה ולנסות שוב.",
       "explanation": "נכון. זהו שימוש ישיר בגרירה.",
-      "sourceInfo": {
-        "project": "collaborative-calculus-1a",
-        "originalId": "ch01-s03-q01",
-        "difficulty": 1,
-        "originalReviewStatus": "ok",
-        "skills": [
-          "logic-quantifiers",
-          "proof-structure"
-        ],
-        "qualityFlags": [],
-        "original": {
-          "prompt": "אם ידוע ש־P ⇒ Q וידוע ש־P אמת, מה מותר להסיק?",
-          "options": [
-            "Q אמת",
-            "P שקר",
-            "Q שקר",
-            "Q ⇒ P"
-          ],
-          "feedback": "נכון. זהו שימוש ישיר בגרירה: מן ההנחה ומן התנאי מסיקים את המסקנה."
-        }
-      }
+      "level": "sanity",
+      "coverage_group": "logic",
+      "available_after_page": 4,
+      "study_section": "1.3",
+      "approval_stage": "partial"
     },
     {
       "id": "ch01-s03-q02",
@@ -196,27 +195,11 @@
       "wrong1": "התשובה אינה נכונה. נסו שוב.",
       "wrong2": "עדיין לא. נסו לחשוב על משמעות הטענה ולנסות שוב.",
       "explanation": "יפה. הקונטרה־פוזיטיב $\\neg Q \\Rightarrow \\neg P$ שקול לגרירה המקורית; הגרירה ההפוכה אינה שקולה לה.",
-      "sourceInfo": {
-        "project": "collaborative-calculus-1a",
-        "originalId": "ch01-s03-q02",
-        "difficulty": 2,
-        "originalReviewStatus": "ok",
-        "skills": [
-          "logic-quantifiers",
-          "proof-structure"
-        ],
-        "qualityFlags": [],
-        "original": {
-          "prompt": "נתונה הטענה P ⇒ Q. איזו טענה שקולה לה תמיד?",
-          "options": [
-            "Q ⇒ P",
-            "¬P ⇒ ¬Q",
-            "¬Q ⇒ ¬P",
-            "P ∧ Q"
-          ],
-          "feedback": "יפה. הקונטרה־פוזיטיב ¬Q ⇒ ¬P שקול לגרירה המקורית; הגרירה ההפוכה אינה שקולה לה."
-        }
-      }
+      "level": "sanity",
+      "coverage_group": "logic",
+      "available_after_page": 4,
+      "study_section": "1.3",
+      "approval_stage": "partial"
     },
     {
       "id": "ch01-s03-q03",
@@ -252,27 +235,11 @@
       "wrong1": "התשובה אינה נכונה. נסו שוב.",
       "wrong2": "עדיין לא. נסו לחשוב על משמעות הטענה ולנסות שוב.",
       "explanation": "נכון. כדי שגרירה תיכשל צריך שההנחה תתקיים והמסקנה לא תתקיים.",
-      "sourceInfo": {
-        "project": "collaborative-calculus-1a",
-        "originalId": "ch01-s03-q03",
-        "difficulty": 3,
-        "originalReviewStatus": "ok",
-        "skills": [
-          "logic-quantifiers",
-          "proof-structure"
-        ],
-        "qualityFlags": [],
-        "original": {
-          "prompt": "מהי השלילה של הטענה P ⇒ Q?",
-          "options": [
-            "P ∧ ¬Q",
-            "¬P ⇒ ¬Q",
-            "Q ⇒ P",
-            "¬P ∨ Q"
-          ],
-          "feedback": "נכון. כדי שגרירה תיכשל צריך שההנחה תתקיים והמסקנה לא תתקיים."
-        }
-      }
+      "level": "rehearsal",
+      "coverage_group": "logic",
+      "available_after_page": 4,
+      "study_section": "1.3",
+      "approval_stage": "partial"
     },
     {
       "id": "ch01-s03-q04",
@@ -308,27 +275,11 @@
       "wrong1": "התשובה אינה נכונה. נסו שוב.",
       "wrong2": "עדיין לא. נסו לחשוב על משמעות הטענה ולנסות שוב.",
       "explanation": "נכון. לפי דה־מורגן, לא “או” הופך ל“וגם לא”.",
-      "sourceInfo": {
-        "project": "collaborative-calculus-1a",
-        "originalId": "ch01-s03-q04",
-        "difficulty": 4,
-        "originalReviewStatus": "ok",
-        "skills": [
-          "logic-quantifiers",
-          "proof-structure"
-        ],
-        "qualityFlags": [],
-        "original": {
-          "prompt": "מהי השלילה של הטענה P ∨ Q?",
-          "options": [
-            "¬P ∨ ¬Q",
-            "¬P ∧ ¬Q",
-            "P ∧ Q",
-            "P ⇒ Q"
-          ],
-          "feedback": "נכון. לפי דה־מורגן, לא “או” הופך ל“וגם לא”."
-        }
-      }
+      "level": "sanity",
+      "coverage_group": "logic",
+      "available_after_page": 4,
+      "study_section": "1.3",
+      "approval_stage": "partial"
     },
     {
       "id": "ch01-s03-q05",
@@ -364,27 +315,11 @@
       "wrong1": "התשובה אינה נכונה. נסו שוב.",
       "wrong2": "עדיין לא. נסו לחשוב על משמעות הטענה ולנסות שוב.",
       "explanation": "נכון. בהוכחת “לכל” מתחילים באיבר שרירותי שעומד בתנאים, ואז מוכיחים עליו את הטענה.",
-      "sourceInfo": {
-        "project": "collaborative-calculus-1a",
-        "originalId": "ch01-s03-q05",
-        "difficulty": 5,
-        "originalReviewStatus": "ok",
-        "skills": [
-          "logic-quantifiers",
-          "proof-structure"
-        ],
-        "qualityFlags": [],
-        "original": {
-          "prompt": "איך ניגשים להוכחת טענה מהצורה “לכל x המקיים תנאי מתקיים P(x)”?",
-          "options": [
-            "לוקחים x שרירותי שמקיים את התנאי ומוכיחים עבורו את P(x)",
-            "בודקים x אחד נוח ומסיימים",
-            "מניחים מראש ש־P(x) נכון",
-            "מחפשים רק דוגמה נגדית"
-          ],
-          "feedback": "נכון. בהוכחת “לכל” מתחילים באיבר שרירותי שעומד בתנאים, ואז מוכיחים עליו את הטענה."
-        }
-      }
+      "level": "sanity",
+      "coverage_group": "logic",
+      "available_after_page": 4,
+      "study_section": "1.3",
+      "approval_stage": "partial"
     },
     {
       "id": "ch01-s03-q06",
@@ -420,27 +355,11 @@
       "wrong1": "התשובה אינה נכונה. נסו שוב.",
       "wrong2": "עדיין לא. נסו לחשוב על משמעות הטענה ולנסות שוב.",
       "explanation": "יפה. בשלילה של כמתים מקוננים מחליפים כל “לכל” ב“קיים” ולהפך, וגם שוללים את האי־שוויון הפנימי. כאן הטענה המקורית נכונה ואילו שלילתה איננה נכונה (זוהי תכונת ארכימדס)",
-      "sourceInfo": {
-        "project": "collaborative-calculus-1a",
-        "originalId": "ch01-s03-q06",
-        "difficulty": 6,
-        "originalReviewStatus": "ok",
-        "skills": [
-          "logic-quantifiers",
-          "proof-structure"
-        ],
-        "qualityFlags": [],
-        "original": {
-          "prompt": "מהי השלילה של הטענה ∀ε>0 ∃n∈N: 1/n<ε?",
-          "options": [
-            "∃ε>0 ∀n∈N: 1/n≥ε",
-            "∀ε>0 ∃n∈N: 1/n≥ε",
-            "∃n∈N ∀ε>0: 1/n<ε",
-            "∀n∈N ∃ε>0: 1/n≥ε"
-          ],
-          "feedback": "יפה. בשלילה של כמתים מקוננים מחליפים כל “לכל” ב“קיים” ולהפך, וגם שוללים את האי־שוויון הפנימי."
-        }
-      }
+      "level": "rehearsal",
+      "coverage_group": "logic",
+      "available_after_page": 4,
+      "study_section": "1.3",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-1-002",
@@ -476,18 +395,11 @@
       "wrong1": "אותה קבוצת ערכים אינה מבטיחה שאותה פונקציה מוגדרת על האינדקסים.",
       "wrong2": "השוו את האיברים באותו אינדקס, לא רק את רשימת הערכים האפשריים.",
       "explanation": "הסדרות אינן שוות, משום ש-$a_1=-1\\ne 1=b_1$. עם זאת, קבוצת הערכים של כל אחת מהן היא $\\{-1,1\\}$. בסדרה, בניגוד לקבוצה של ערכים, המיקום חשוב.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-1-002",
-        "difficulty": "בינוני",
-        "skills": [
-          "סדר האיברים",
-          "קבוצת ערכים",
-          "השוואת סדרות"
-        ],
-        "basis": "פרק 2, סעיף 2.1 — מהי סדרה",
-        "originalReviewStatus": "טיוטה — נדרשת בדיקה ואישור שלך"
-      }
+      "level": "sanity",
+      "coverage_group": "sequence-basics",
+      "available_after_page": 2,
+      "study_section": "2.1",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-1-003",
@@ -523,17 +435,11 @@
       "wrong1": "שימו לב שבנוסחה מופיע $+n$, שהוא האינדקס של האיבר.",
       "wrong2": "נסו להציב $n=1,2,3$ במפורש.",
       "explanation": "מהנתון $a_1=1$ נקבל $a_2=a_1+1=2$, אחר כך $a_3=a_2+2=4$, ולבסוף $a_4=a_3+3=7$. לכן ארבעת האיברים הם $1,2,4,7$.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-1-003",
-        "difficulty": "קל",
-        "skills": [
-          "רקורסיה",
-          "הצבה באינדקסים"
-        ],
-        "basis": "פרק 2, סעיף 2.1 — מהי סדרה",
-        "originalReviewStatus": "טיוטה — נדרשת בדיקה ואישור שלך"
-      }
+      "level": "sanity",
+      "coverage_group": "sequence-basics",
+      "available_after_page": 2,
+      "study_section": "2.1",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-1-004",
@@ -569,18 +475,11 @@
       "wrong1": "יש כאן הבדל בין חסימות מלעיל לחסימות מלרע.",
       "wrong2": "סדרה שמחזירה ערכים שליליים קטנים כרצוננו אינה חסומה מלרע.",
       "explanation": "עבור $a_n=-n$ מתקיים $a_n\\le -1$ לכל $n$, ולכן היא חסומה מלעיל, למשל על ידי $0$. מצד שני, לכל $m\\in\\mathbb{R}$ יש $n$ טבעי כך ש-$-n<m$, ולכן אין חסם מלרע. הסדרה $n$ חסומה דווקא מלרע; $(-1)^n$ חסומה משני הצדדים; ו-$(-1)^n n$ אינה חסומה באף אחד מהצדדים.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-1-004",
-        "difficulty": "בינוני",
-        "skills": [
-          "חסם מלעיל",
-          "חסם מלרע",
-          "דוגמאות נגדיות"
-        ],
-        "basis": "פרק 2, סעיף 2.1 — מהי סדרה",
-        "originalReviewStatus": "טיוטה — נדרשת בדיקה ואישור שלך"
-      }
+      "level": "sanity",
+      "coverage_group": "sequence-basics",
+      "available_after_page": 2,
+      "study_section": "2.1",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-1-005",
@@ -616,18 +515,11 @@
       "wrong1": "בדקו קודם אם $|a_n|<1$ לכל $n$.",
       "wrong2": "גם בסדרה חסומה אין הכרח שהחסם העליון או התחתון יהיה איבר שלה.",
       "explanation": "לכל $n$ מתקיים $|a_n|=1-1/n<1$, ולכן הסדרה חסומה. לכל איבר חיובי (באינדקס זוגי) קיים איבר זוגי מאוחר יותר וגדול ממנו, ולכן אין מקסימום. לכל איבר שלילי (באינדקס אי־זוגי $n\\ge3$) קיים איבר אי־זוגי מאוחר יותר וקטן ממנו, ולכן אין מינימום. אף אחד מן הערכים $1$ או $-1$ אינו מתקבל.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-1-005",
-        "difficulty": "מאתגר",
-        "skills": [
-          "חסימות",
-          "מקסימום/מינימום",
-          "פיצול זוגי ואי־זוגי"
-        ],
-        "basis": "פרק 2, סעיף 2.1 — מהי סדרה",
-        "originalReviewStatus": "טיוטה — נדרשת בדיקה ואישור שלך"
-      }
+      "level": "rehearsal",
+      "coverage_group": "sequence-basics",
+      "available_after_page": 2,
+      "study_section": "2.1",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-1-006",
@@ -663,18 +555,11 @@
       "wrong1": "ההגדרה של סדרה עולה בסעיף 2.1 מאפשרת גם שוויון.",
       "wrong2": "שימו לב למילה \"ממש\" בהגדרות.",
       "explanation": "בסדרה הקבועה מתקיים גם $a_n\\le a_{n+1}$ וגם $a_n\\ge a_{n+1}$ לכל $n$. לכן היא עולה ויורדת, אך אינה עולה ממש או יורדת ממש כי אף אחד מאי־השוויונים המחמירים אינו מתקיים.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-1-006",
-        "difficulty": "קל",
-        "skills": [
-          "מונוטוניות",
-          "מונוטוניות ממש",
-          "שוויון"
-        ],
-        "basis": "פרק 2, סעיף 2.1 — מהי סדרה",
-        "originalReviewStatus": "טיוטה — נדרשת בדיקה ואישור שלך"
-      }
+      "level": "sanity",
+      "coverage_group": "sequence-basics",
+      "available_after_page": 2,
+      "study_section": "2.1",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-2-001",
@@ -710,19 +595,11 @@
       "wrong1": "בדקו גם את סדר הכמתים וגם את שלילת אי־השוויון.",
       "wrong2": "המשמעות של אי־התכנסות ל-$L$: קיים גודל מסויים קבוע כך תמיד אפשר למצוא איבר מאוחר הנמצא רחוק לפחות כמו גודל זה.",
       "explanation": "הגדרת $a_n\\to L$ היא $\\forall\\varepsilon>0\\ \\exists N\\ \\forall n>N:\\ |a_n-L|<\\varepsilon$. שלילתה היא $\\exists\\varepsilon>0\\ \\forall N\\ \\exists n>N:\\ |a_n-L|\\ge\\varepsilon$.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-2-001",
-        "difficulty": "קשה",
-        "skills": [
-          "כמתים",
-          "שלילת גבול",
-          "דיוק לוגי"
-        ],
-        "basis": "פרק 2, סעיף 2.2.1 ברשימות חדו״א 1א",
-        "suggestedCheckpoint": "אחרי הדוגמאות הראשונות; עוגן זמני 2.2.3",
-        "originalReviewStatus": "טיוטה — נדרשת בדיקה מתמטית ופדגוגית שלך"
-      }
+      "level": "rehearsal",
+      "coverage_group": "limit-definition",
+      "available_after_page": 7,
+      "study_section": "2.2.1",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-2-002",
@@ -758,19 +635,11 @@
       "wrong1": "כמובן שיש כזה :) וגם שימו ללב שכתוב קטן ממש.",
       "wrong2": "נסו את $n=N+1$. האם זה עובד? והאם אפשר להקטין את $N$ בעוד $1$?",
       "explanation": "אם $N=10$, אז $n>N$ גורר $n\\ge11$ ולכן $1/n<1/10$. לעומת זאת עבור $N=9$ אפשר לקחת $n=10$ ולקבל שוויון; לכן $10$ הוא הקטן ביותר. העובדה שיש כזה נובעת מכך שהסדרה שואפת לאפס :)",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-2-002",
-        "difficulty": "בינוני",
-        "skills": [
-          "הגדרת הגבול",
-          "אי־שוויון חד",
-          "בחירת N"
-        ],
-        "basis": "פרק 2, סעיף 2.2.1 ברשימות חדו״א 1א",
-        "suggestedCheckpoint": "אחרי הדוגמאות הראשונות; עוגן זמני 2.2.3",
-        "originalReviewStatus": "טיוטה — נדרשת בדיקה מתמטית ופדגוגית שלך"
-      }
+      "level": "sanity",
+      "coverage_group": "limit-definition",
+      "available_after_page": 7,
+      "study_section": "2.2.1",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-2-003",
@@ -806,19 +675,11 @@
       "wrong1": "שאלו אם השינוי עדיין מחייב שהחל ממקום מסויים האברים יהיו קרובים ל-$L$ כרצוננו.",
       "wrong2": "כדאי לבדוק את היכולת להחליף $\\varepsilon$ ב-$\\varepsilon/2$ ואת העובדה ש-$N$ תלוי ב-$\\varepsilon$.",
       "explanation": "ההחלפה ב-״קטן או שווה״ אינה משנה את ההגדרה: אם עבור $t=\\varepsilon/2$ מתקיים בסופו של דבר $|a_n-L|\\le t$, אז $|a_n-L|<\\varepsilon$. הכיוון השני מיידי.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-2-003",
-        "difficulty": "קשה",
-        "skills": [
-          "הגדרות שקולות",
-          "אפסילון",
-          "כמתים"
-        ],
-        "basis": "פרק 2, סעיף 2.2.1 ברשימות חדו״א 1א",
-        "suggestedCheckpoint": "אחרי הדוגמאות הראשונות; עוגן זמני 2.2.3",
-        "originalReviewStatus": "טיוטה — נדרשת בדיקה מתמטית ופדגוגית שלך"
-      }
+      "level": "rehearsal",
+      "coverage_group": "limit-definition",
+      "available_after_page": 7,
+      "study_section": "2.2.1",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-2-004",
@@ -854,19 +715,11 @@
       "wrong1": "אינסוף פעמים קרוב לגבול עדיין אינו מבטיח שכל הזנב קרוב אליו.",
       "wrong2": "זכרו שהכמת האחרון בהגדרה הוא ״לכל $n>N$״ ולא ״קיים $n>N$״.",
       "explanation": "כל אחד מהערכים $0,1$ מופיע אינסוף פעמים. אם היה גבול $L$, אז עבור $\\varepsilon=1/2$ כל איברי הזנב היו צריכים להימצא במרחק קטן מ-$1/2$ מ-$L$, דבר שאינו אפשרי לשני הערכים יחד.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-2-004",
-        "difficulty": "בינוני",
-        "skills": [
-          "כמתים",
-          "התכנסות",
-          "דוגמה נגדית"
-        ],
-        "basis": "פרק 2, סעיף 2.2.1 ברשימות חדו״א 1א",
-        "suggestedCheckpoint": "אחרי הדוגמאות הראשונות; עוגן זמני 2.2.3",
-        "originalReviewStatus": "טיוטה — נדרשת בדיקה מתמטית ופדגוגית שלך"
-      }
+      "level": "sanity",
+      "coverage_group": "limit-definition",
+      "available_after_page": 7,
+      "study_section": "2.2.1",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-2-005",
@@ -902,19 +755,11 @@
       "wrong1": "אין צורך לחשב גבולות של גורמים בנפרד.",
       "wrong2": "נסו להראות ישירות ש-$|a_n-0|<\\varepsilon$ כאשר $n$ גדול מספיק.",
       "explanation": "לכל $\\varepsilon>0$ נבחר מספר טבעי $N>1/\\varepsilon$. אז לכל $n>N$ מתקיים $|a_n-0|=1/n<\\varepsilon$. שינויי הסימן אינם מפריעים להתכנסות.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-2-005",
-        "difficulty": "בינוני",
-        "skills": [
-          "ערך מוחלט",
-          "הוכחה לפי הגדרה",
-          "סימנים מתחלפים"
-        ],
-        "basis": "פרק 2, סעיף 2.2.2 ברשימות חדו״א 1א",
-        "suggestedCheckpoint": "אחרי הדוגמאות הראשונות; עוגן זמני 2.2.3",
-        "originalReviewStatus": "טיוטה — נדרשת בדיקה מתמטית ופדגוגית שלך"
-      }
+      "level": "rehearsal",
+      "coverage_group": "limit-definition",
+      "available_after_page": 7,
+      "study_section": "2.2.2",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-2-006",
@@ -950,19 +795,11 @@
       "wrong1": "חסם על כל אחד משני האיברים צריך להיות קטן מספיק כדי לשלוט בסכום.",
       "wrong2": "נסו להעריך את $|a_n-3|$ כולו באמצעות ביטוי יחיד שהולך וקטן.",
       "explanation": "עבור $n\\ge1$ מתקיים $|a_n-3|=4/n+2/n^2\\le6/n$. בהינתן $\\varepsilon>0$, בחרו $N>6/\\varepsilon$; לכל $n>N$ יתקיים $|a_n-3|<\\varepsilon$.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-2-006",
-        "difficulty": "בינוני",
-        "skills": [
-          "הערכות",
-          "אפסילון",
-          "הוכחה לפי הגדרה"
-        ],
-        "basis": "פרק 2, סעיף 2.2.2 ברשימות חדו״א 1א",
-        "suggestedCheckpoint": "אחרי הדוגמאות הראשונות; עוגן זמני 2.2.3",
-        "originalReviewStatus": "טיוטה — נדרשת בדיקה מתמטית ופדגוגית שלך"
-      }
+      "level": "rehearsal",
+      "coverage_group": "limit-definition",
+      "available_after_page": 7,
+      "study_section": "2.2.2",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-2-008",
@@ -998,19 +835,11 @@
       "wrong1": "שימו לב לכיוון אי־השוויון כשעוברים להופכי.",
       "wrong2": "נסו קודם לכתוב את $c^n$ בעזרת $(1+d)^n$, ואז השתמשו בברנולי.",
       "explanation": "ברנולי נותן $(1+d)^n\\ge1+nd>0$. לכן $0<c^n=1/(1+d)^n\\le1/(1+nd)$. החסם העליון שואף ל-$0$ על פי הגדרת הגבול.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-2-008",
-        "difficulty": "בינוני",
-        "skills": [
-          "אי־שוויון ברנולי",
-          "חזקה",
-          "הוכחת גבול"
-        ],
-        "basis": "פרק 2, סעיף 2.2.2 ברשימות חדו״א 1א",
-        "suggestedCheckpoint": "אחרי הדוגמאות הראשונות; עוגן זמני 2.2.3",
-        "originalReviewStatus": "טיוטה — נדרשת בדיקה מתמטית ופדגוגית שלך"
-      }
+      "level": "rehearsal",
+      "coverage_group": "limit-definition",
+      "available_after_page": 7,
+      "study_section": "2.2.2",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-2-009",
@@ -1046,19 +875,11 @@
       "wrong1": "האם $n\\varepsilon>n$ כש-$0<\\varepsilon<1$?",
       "wrong2": "חפשו בפיתוח הבינום איבר שתלוי ריבועית ב-$n$ ולא רק לינארית.",
       "explanation": "מפיתוח הבינום $(1+\\varepsilon)^n\\ge\\binom n2\\varepsilon^2=n(n-1)\\varepsilon^2/2$. כאשר $n>1+2/\\varepsilon^2$, החסם הזה גדול מ-$n$, ולכן $n^{1/n}<1+\\varepsilon$. מאחר ש-$n^{1/n}\\ge1$, הגבול הוא $1$.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-2-009",
-        "difficulty": "קשה",
-        "skills": [
-          "בינום ניוטון",
-          "מבנה הוכחה",
-          "גבולות שורש"
-        ],
-        "basis": "פרק 2, סעיף 2.2.2 ברשימות חדו״א 1א",
-        "suggestedCheckpoint": "אחרי הדוגמאות הראשונות; עוגן זמני 2.2.3",
-        "originalReviewStatus": "טיוטה — נדרשת בדיקה מתמטית ופדגוגית שלך"
-      }
+      "level": "rehearsal",
+      "coverage_group": "limit-definition",
+      "available_after_page": 7,
+      "study_section": "2.2.2",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-2-013",
@@ -1094,19 +915,11 @@
       "wrong1": "הערך המוחלט כאן מודד מרחק ממספר קבוע.",
       "wrong2": "נסחו מחדש את הטענה $b_n\\to0$ באמצעות $\\varepsilon$ ו-$N$.",
       "explanation": "בהינתן $\\varepsilon>0$, מן הנתון $b_n\\to0$ נובע שקיים $N$ כך שלכל $n>N$ מתקיים $|b_n-0|=|a_n-4|<\\varepsilon$. זוהי בדיוק הגדרת $a_n\\to4$.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-2-013",
-        "difficulty": "קל",
-        "skills": [
-          "הגדרת גבול",
-          "ערך מוחלט",
-          "שגיאה"
-        ],
-        "basis": "פרק 2, סעיף 2.2.3 ברשימות חדו״א 1א",
-        "suggestedCheckpoint": "בסוף 2.2; עוגן זמני 2.3",
-        "originalReviewStatus": "טיוטה — נדרשת בדיקה מתמטית ופדגוגית שלך"
-      }
+      "level": "sanity",
+      "coverage_group": "limit-properties",
+      "available_after_page": 8,
+      "study_section": "2.2.3",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-2-014",
@@ -1142,19 +955,11 @@
       "wrong1": "איבר יחיד עשוי להיות עצום, ובכל זאת לא לשנות את התנהגות זנב הסדרה.",
       "wrong2": "מה קורה כאשר $n>10^6$? נסו לבחור את $N$ בהתאם ל-$\\varepsilon$.",
       "explanation": "למרות האיבר החריג הגדול, עבור $n>10^6$ מתקיים $a_n=1/n$. לכל $\\varepsilon>0$ נבחר $N>\\max(10^6,1/\\varepsilon)$, ואז לכל $n>N$ מתקיים $|a_n|<\\varepsilon$. לכן הגבול הוא $0$.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-2-014",
-        "difficulty": "בינוני",
-        "skills": [
-          "שינוי סופי",
-          "אינטואיציה לגבול",
-          "דוגמאות"
-        ],
-        "basis": "פרק 2, סעיף 2.2.3 ברשימות חדו״א 1א",
-        "suggestedCheckpoint": "בסוף 2.2; עוגן זמני 2.3",
-        "originalReviewStatus": "טיוטה — נדרשת בדיקה מתמטית ופדגוגית שלך"
-      }
+      "level": "rehearsal",
+      "coverage_group": "limit-properties",
+      "available_after_page": 8,
+      "study_section": "2.2.3",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-2-001-copy2",
@@ -1190,19 +995,11 @@
       "wrong1": "זו כבר לא שאלה בלוגיקה נטו, חשבו על משמעות כל גדול",
       "wrong2": "נוכל לפסול את סעיף א משום שאם ההגדרה מתקיימת עם שוויון רק נצטרך להקטין את $\\varepsilon$ הדרוש. ",
       "explanation": "מצויין! זו שאלה שימושית כי הרבה פעמים נוח להשתמש דווקא בהגדרת גבול שקולה למקורית ושאיננה סטנדרטית, כמו שלוש ההגדרות כאן שלא פסלת. ",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-2-001",
-        "difficulty": "קשה",
-        "skills": [
-          "כמתים",
-          "שלילת גבול",
-          "דיוק לוגי"
-        ],
-        "basis": "פרק 2, סעיף 2.2.1 ברשימות חדו״א 1א",
-        "suggestedCheckpoint": "אחרי הדוגמאות הראשונות; עוגן זמני 2.2.3",
-        "originalReviewStatus": "טיוטה — נדרשת בדיקה מתמטית ופדגוגית שלך"
-      }
+      "level": "rehearsal",
+      "coverage_group": "limit-definition",
+      "available_after_page": 7,
+      "study_section": "2.2.1",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-3-001",
@@ -1238,19 +1035,11 @@
       "wrong1": "שימו לב להבדל בין ״כל האיברים מאינדקס מסוים והלאה״ לבין ״אינסוף איברים״.",
       "wrong2": "הגדרת הגבול דורשת שלכל $\\varepsilon$ יהיו לכל היותר מספר סופי של חריגים, ולא רק שיהיו אינסוף איברים טובים.",
       "explanation": "לכל $\\varepsilon>0$, ההגדרה דורשת $N$ כך שלכל $n>N$ מתקיים $|a_n-L|<\\varepsilon$. לכן החריגים האפשריים נמצאים רק בין $1,\\dots,N$. ולהפך, אם קבוצת החריגים סופית, בחרו $N$ גדול מהאינדקס המקסימלי שלה.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-3-001",
-        "difficulty": "קל",
-        "skills": [
-          "הגדרת גבול",
-          "ניסוח שקול",
-          "כמתים"
-        ],
-        "basis": "חדו״א 1א, פרק 2, סעיף 2.3 (2.3.1)",
-        "suggestedCheckpoint": "אחרי העמוד שבו מתחיל סעיף 2.3.2; זמני, כל 12 השאלות באותו מאגר",
-        "editorialNote": "טיוטה לבדיקה ואישור מתמטיים ופדגוגיים לפני פרסום"
-      }
+      "level": "sanity",
+      "coverage_group": "limit-properties",
+      "available_after_page": 11,
+      "study_section": "2.3.1",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-3-002",
@@ -1286,19 +1075,11 @@
       "wrong1": "כל האיברים המאוחרים צריכים להיות קרובים לשתיים - באיזו מהן זה קורה?",
       "wrong2": "בדקו אם לכל $\\varepsilon>0$ אפשר להבטיח $|a_n-2|<\\varepsilon$ לכל $n$ גדול מספיק.",
       "explanation": "עבור $a_n=2+(-1)^n/n$ מתקיים $|a_n-2|=1/n\\to0$, ולכן רק מספר סופי של איברים יכולים להיות מחוץ לכל סביבה נתונה. באפשרויות האחרות המרחק מ-$2$ אינו שואף ל-$0$.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-3-002",
-        "difficulty": "קל",
-        "skills": [
-          "התכנסות",
-          "דוגמאות",
-          "איברים חריגים"
-        ],
-        "basis": "חדו״א 1א, פרק 2, סעיף 2.3 (2.3.1)",
-        "suggestedCheckpoint": "אחרי העמוד שבו מתחיל סעיף 2.3.2; זמני, כל 12 השאלות באותו מאגר",
-        "editorialNote": "טיוטה לבדיקה ואישור מתמטיים ופדגוגיים לפני פרסום"
-      }
+      "level": "sanity",
+      "coverage_group": "limit-properties",
+      "available_after_page": 11,
+      "study_section": "2.3.1",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-3-003",
@@ -1334,19 +1115,11 @@
       "wrong1": "חסימות הסדרה אינה אומרת שמספר החריגים מוגבל באופן אחיד לכל רדיוס.",
       "wrong2": "ל-$a_n=1/n$, עבור $\\varepsilon=1/m$ יש $m$ אינדקסים עם $|a_n|\\ge\\varepsilon$; לכל $m$ מספרם סופי, אבל אין חסם משותף.",
       "explanation": "התשובה שלילית. קחו $a_n=1/n$ ו-$L=0$. עבור $\\varepsilon=1/m$ כל $n\\le m$ מקיים $|a_n-L|\\ge\\varepsilon$, ולכן יש בדיוק $m$ חריגים. מספר זה גדל עם $m$, אף שהסדרה מתכנסת.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-3-003",
-        "difficulty": "בינוני",
-        "skills": [
-          "כמתים",
-          "תלות באפסילון",
-          "דוגמה נגדית"
-        ],
-        "basis": "חדו״א 1א, פרק 2, סעיף 2.3 (2.3.1)",
-        "suggestedCheckpoint": "אחרי העמוד שבו מתחיל סעיף 2.3.2; זמני, כל 12 השאלות באותו מאגר",
-        "editorialNote": "טיוטה לבדיקה ואישור מתמטיים ופדגוגיים לפני פרסום"
-      }
+      "level": "rehearsal",
+      "coverage_group": "limit-properties",
+      "available_after_page": 11,
+      "study_section": "2.3.1",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-3-004",
@@ -1382,19 +1155,11 @@
       "wrong1": "ההתכנסות מתארת את הזנב של הסדרה, לא בהכרח את כל איבריה.",
       "wrong2": "מאינדקס מסוים מתקיים $2<a_n<4$. אין הכרח שהאיברים יהיו מעל הגבול עצמו, ואין הגבלה על האיברים הראשונים.",
       "explanation": "מהגדרת הגבול עם $\\varepsilon=1$ נקבל שמאינדקס מסוים $|a_n-3|<1$, ולכן $2<a_n<4$. למשל, הסדרה $a_n=3-1/n$ מראה שאין הכרח להיות מעל $3$.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-3-004",
-        "difficulty": "קל",
-        "skills": [
-          "התכנסות",
-          "זנב של סדרה",
-          "אי־שוויונות"
-        ],
-        "basis": "חדו״א 1א, פרק 2, סעיף 2.3 (2.3.1)",
-        "suggestedCheckpoint": "אחרי העמוד שבו מתחיל סעיף 2.3.2; זמני, כל 12 השאלות באותו מאגר",
-        "editorialNote": "טיוטה לבדיקה ואישור מתמטיים ופדגוגיים לפני פרסום"
-      }
+      "level": "sanity",
+      "coverage_group": "limit-properties",
+      "available_after_page": 11,
+      "study_section": "2.3.1",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-3-007",
@@ -1430,19 +1195,11 @@
       "wrong1": "כדי לקבל חסם תחתון, צריך לוודא שהסטייה מן הגבול אינה גדולה מדי.",
       "wrong2": "מן האי־שוויון $|a_n|>|L|-\\varepsilon$ נרצה להסיק $|a_n|>r$; לכן יש לבחור $\\varepsilon$ בהתאם להפרש בין $|L|$ ל-$r$.",
       "explanation": "קחו $\\varepsilon=|L|-r>0$. מאינדקס מסוים $|a_n-L|<\\varepsilon$, ולפי אי־שוויון המשולש ההפוך $|a_n|\\ge|L|-|a_n-L|>|L|-\\varepsilon=r$.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-3-007",
-        "difficulty": "בינוני",
-        "skills": [
-          "בניית הוכחה",
-          "בחירת אפסילון",
-          "אי־שוויון המשולש ההפוך"
-        ],
-        "basis": "חדו״א 1א, פרק 2, סעיף 2.3 (2.3.1)",
-        "suggestedCheckpoint": "אחרי העמוד שבו מתחיל סעיף 2.3.2; זמני, כל 12 השאלות באותו מאגר",
-        "editorialNote": "טיוטה לבדיקה ואישור מתמטיים ופדגוגיים לפני פרסום"
-      }
+      "level": "rehearsal",
+      "coverage_group": "limit-properties",
+      "available_after_page": 11,
+      "study_section": "2.3.1",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-3-008",
@@ -1478,19 +1235,11 @@
       "wrong1": "בדקו היטב מאיזה צד נמצא הקירוב הרציונלי ביחס ל-$x$.",
       "wrong2": "מ-$\\lfloor nx\\rfloor\\le nx<\\lfloor nx\\rfloor+1$ אפשר לקבל חסם חד על $x-q_n$.",
       "explanation": "מהגדרת הערך השלם $nx-1<\\lfloor nx\\rfloor\\le nx$. בחלוקה ב-$n$ נקבל $x-1/n<q_n\\le x$. לכן $q_n$ רציונלי ושואף ל-$x$, גם כאשר $x$ אי־רציונלי.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-3-008",
-        "difficulty": "בינוני",
-        "skills": [
-          "רצפה",
-          "קירוב רציונלי",
-          "הוכחת גבול"
-        ],
-        "basis": "חדו״א 1א, פרק 2, סעיף 2.3 (2.3.2)",
-        "suggestedCheckpoint": "אחרי העמוד שבו מתחיל סעיף 2.3.2; זמני, כל 12 השאלות באותו מאגר",
-        "editorialNote": "טיוטה לבדיקה ואישור מתמטיים ופדגוגיים לפני פרסום"
-      }
+      "level": "rehearsal",
+      "coverage_group": "rational-approximation",
+      "available_after_page": 11,
+      "study_section": "2.3.2",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-3-009",
@@ -1520,25 +1269,17 @@
           "text": "הסדרה אינה יכולה להתכנס, כי היא אינה מונוטונית."
         }
       ],
-      "correct": "a",
+      "correct": "c",
       "hint1": "חשבו במפורש את $\\lfloor3n/5\\rfloor$ עבור $n=1,2,3$.",
       "hint2": "נסו למצוא גם עלייה וגם ירידה בין שלושה איברים עוקבים.",
       "wrong1": "התקרבות אל גבול מאותו צד אינה מחייבת מונוטוניות.",
       "wrong2": "בדקו את אברי הסדרה הראשונים לפי הסדר: יש תחילה עלייה ולאחר מכן ירידה, אף שהסדרה מתכנסת.",
       "explanation": "מתקיים $q_1=\\lfloor3/5\\rfloor=0$, $q_2=\\lfloor6/5\\rfloor/2=1/2$, ו-$q_3=\\lfloor9/5\\rfloor/3=1/3$. לכן $q_1<q_2>q_3$, והסדרה אינה מונוטונית; עם זאת $q_n\\to3/5$.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-3-009",
-        "difficulty": "בינוני",
-        "skills": [
-          "דוגמה נגדית",
-          "מונוטוניות",
-          "קירוב רציונלי"
-        ],
-        "basis": "חדו״א 1א, פרק 2, סעיף 2.3 (2.3.2)",
-        "suggestedCheckpoint": "אחרי העמוד שבו מתחיל סעיף 2.3.2; זמני, כל 12 השאלות באותו מאגר",
-        "editorialNote": "טיוטה לבדיקה ואישור מתמטיים ופדגוגיים לפני פרסום"
-      }
+      "level": "rehearsal",
+      "coverage_group": "rational-approximation",
+      "available_after_page": 11,
+      "study_section": "2.3.2",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-3-010",
@@ -1574,19 +1315,11 @@
       "wrong1": "הקבוצה $\\mathbb Q$ צפופה ב-$\\mathbb R$, אך אינה מכילה את כל הגבולות של סדרות מתוכה.",
       "wrong2": "בדקו איזה חסם לשגיאה מתקבל מהאי־שוויון $x-1/n<\\lfloor nx\\rfloor/n\\le x$.",
       "explanation": "כן. לכל $n$, המספר $q_n=\\lfloor n\\sqrt2\\rfloor/n$ רציונלי, ובנוסף $0\\le\\sqrt2-q_n<1/n$. לכן $q_n\\to\\sqrt2$, אף ש-$\\sqrt2$ אינו רציונלי.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-3-010",
-        "difficulty": "קל",
-        "skills": [
-          "צפיפות הרציונליים",
-          "גבול אי־רציונלי",
-          "דוגמאות"
-        ],
-        "basis": "חדו״א 1א, פרק 2, סעיף 2.3 (2.3.2)",
-        "suggestedCheckpoint": "אחרי העמוד שבו מתחיל סעיף 2.3.2; זמני, כל 12 השאלות באותו מאגר",
-        "editorialNote": "טיוטה לבדיקה ואישור מתמטיים ופדגוגיים לפני פרסום"
-      }
+      "level": "rehearsal",
+      "coverage_group": "rational-approximation",
+      "available_after_page": 11,
+      "study_section": "2.3.2",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-3-011",
@@ -1622,20 +1355,11 @@
       "wrong1": "בדקו שכל שלושת התנאים מתקיימים בבחירה המוצעת, ולא רק אחד מהם.",
       "wrong2": "החסם העליון צריך להיות הקטן מבין $q_n$ לבין $x+1/(n+1)$; צפיפות $\\mathbb Q$ מבטיחה מספר רציונלי בקטע.",
       "explanation": "בחרו $q_{n+1}\\in\\mathbb Q\\cap\\bigl(x,\\min\\{q_n,x+1/(n+1)\\}\\bigr)$. הקטע אינו ריק כי שני הגבולות העליונים גדולים מ-$x$, וצפיפות הרציונליים מבטיחה בחירה. אז $q_{n+1}<q_n$ וגם $0<q_{n+1}-x<1/(n+1)$, ולכן $q_n\\downarrow x$.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-3-011",
-        "difficulty": "בינוני",
-        "skills": [
-          "צפיפות",
-          "בנייה רקורסיבית",
-          "מונוטוניות",
-          "הוכחת גבול"
-        ],
-        "basis": "חדו״א 1א, פרק 2, סעיף 2.3 (2.3.2)",
-        "suggestedCheckpoint": "אחרי העמוד שבו מתחיל סעיף 2.3.2; זמני, כל 12 השאלות באותו מאגר",
-        "editorialNote": "טיוטה לבדיקה ואישור מתמטיים ופדגוגיים לפני פרסום"
-      }
+      "level": "rehearsal",
+      "coverage_group": "rational-approximation",
+      "available_after_page": 11,
+      "study_section": "2.3.2",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-3-012",
@@ -1671,20 +1395,11 @@
       "wrong1": "זכרו שסדרה עולה במובן החלש יכולה להכיל איברים שווים.",
       "wrong2": "הקירוב העשרוני מלמטה אינו פוחת, ושגיאתו קטנה מ-$10^{-n}$. במספרים עם פיתוח עשרוני סופי יש שלבים שבהם הוא כבר שווה ל-$x$.",
       "explanation": "מתקיים $0\\le x-r_n<10^{-n}$ ולכן $r_n\\to x$. בנוסף $\\lfloor10^{n+1}x\\rfloor\\ge10\\lfloor10^nx\\rfloor$, ולכן $r_{n+1}\\ge r_n$. העלייה אינה בהכרח ממש: למשל עבור $x=1/2$ מתקיים $r_n=1/2$ לכל $n\\ge1$.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-3-012",
-        "difficulty": "בינוני",
-        "skills": [
-          "קירוב עשרוני",
-          "מונוטוניות",
-          "דוגמה נגדית",
-          "הגדרת גבול"
-        ],
-        "basis": "חדו״א 1א, פרק 2, סעיף 2.3 (2.3.2)",
-        "suggestedCheckpoint": "אחרי העמוד שבו מתחיל סעיף 2.3.2; זמני, כל 12 השאלות באותו מאגר",
-        "editorialNote": "טיוטה לבדיקה ואישור מתמטיים ופדגוגיים לפני פרסום"
-      }
+      "level": "rehearsal",
+      "coverage_group": "rational-approximation",
+      "available_after_page": 11,
+      "study_section": "2.3.2",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-4-001",
@@ -1720,19 +1435,11 @@
       "wrong1": "חשבו על דוגמה שבה הסימן של המכנה משתנה בכל צעד.",
       "wrong2": "עדיין לא. עבור $n$ גדול מתקיים $|a_n|>1$. מצד שני, $|b_n|$ קטן כרצוננו, ולכן $|a_n/b_n|>1/|b_n|$.",
       "explanation": "כיוון ש-$a_n\\to2$, לבסוף $|a_n|>1$. מכיוון ש-$b_n\\to0$ ואינו מתאפס, לכל $M>0$ לבסוף $|b_n|<1/M$, ולכן $|a_n/b_n|>M$. הסימן של המנה עשוי להשתנות, למשל אם $b_n=(-1)^n/n$.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-4-001",
-        "difficulty": "בינוני",
-        "skills": [
-          "חשבון גבולות",
-          "מכנה שואף לאפס",
-          "ערך מוחלט"
-        ],
-        "basis": "חדו״א 1א, פרק 2, סעיף 2.4 ברשימות הקורס",
-        "suggestedCheckpoint": "עוגן זמני: 2.4.2. יש לבדוק שהוא מופיע אחרי החומר הנדרש, ולא בתחילת סעיף.",
-        "editorialNote": "טיוטת AI לבדיקה מתמטית ופדגוגית לפני אישור; יש לבדוק גם את איכות כל המסיחים."
-      }
+      "level": "rehearsal",
+      "coverage_group": "limit-algebra",
+      "available_after_page": 14,
+      "study_section": "2.4.1",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-4-002",
@@ -1768,19 +1475,11 @@
       "wrong1": "התשובה אינה נכונה. הבעיה במעבר למנה אינה המונה אלא גבול המכנה.",
       "wrong2": "עדיין לא. גם אם כל $b_n$ שונים מאפס, ייתכן שהם שואפים לאפס. במקרה כזה $a/b$ כלל אינו מוגדר.",
       "explanation": "משפט המנה דורש שגבול המכנה יהיה שונה מאפס. הדרישה $b_n\\ne0$ לכל $n$ לבדה אינה מספיקה: למשל $b_n=1/n$.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-4-002",
-        "difficulty": "קל",
-        "skills": [
-          "חשבון גבולות",
-          "הנחות משפט",
-          "חילוק"
-        ],
-        "basis": "חדו״א 1א, פרק 2, סעיף 2.4 ברשימות הקורס",
-        "suggestedCheckpoint": "עוגן זמני: 2.4.2. יש לבדוק שהוא מופיע אחרי החומר הנדרש, ולא בתחילת סעיף.",
-        "editorialNote": "טיוטת AI לבדיקה מתמטית ופדגוגית לפני אישור; יש לבדוק גם את איכות כל המסיחים."
-      }
+      "level": "sanity",
+      "coverage_group": "limit-algebra",
+      "available_after_page": 14,
+      "study_section": "2.4.1",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-4-003",
@@ -1816,19 +1515,11 @@
       "wrong1": "התשובה אינה נכונה. חשבו על משפט שכבר הוכח בסעיף הקודם: איזו תכונה של סדרה מתכנסת נכונה גם לאיבריה הראשונים?",
       "wrong2": "עדיין לא. ההתכנסות מבטיחה חסם אחיד, לפי הגדרתה ועם לקיחת האברים הראשונים גם כן בחשבון.",
       "explanation": "אם $a_n\\to a$, אז $(a_n)$ חסומה, כלומר קיים $M$ כך ש-$|a_n|\\le M$ לכל $n$. לכן האיבר הראשון באי־השוויון נשלט על ידי $M|b_n-b|\\to0$.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-4-003",
-        "difficulty": "בינוני",
-        "skills": [
-          "הוכחת משפט",
-          "חסימות",
-          "מכפלות"
-        ],
-        "basis": "חדו״א 1א, פרק 2, סעיף 2.4 ברשימות הקורס",
-        "suggestedCheckpoint": "עוגן זמני: 2.4.2. יש לבדוק שהוא מופיע אחרי החומר הנדרש, ולא בתחילת סעיף.",
-        "editorialNote": "טיוטת AI לבדיקה מתמטית ופדגוגית לפני אישור; יש לבדוק גם את איכות כל המסיחים."
-      }
+      "level": "sanity",
+      "coverage_group": "limit-algebra",
+      "available_after_page": 14,
+      "study_section": "2.4.1",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-4-004",
@@ -1864,19 +1555,11 @@
       "wrong1": "התשובה אינה נכונה. המשפט על מכפלה של גבולות מניח ששני הגורמים מתכנסים. האם צריך אותו כאן?",
       "wrong2": "עדיין לא. השוו את $|a_nb_n|$ ל-$1/n$. אין צורך של-$a_n$ יהיה גבול.",
       "explanation": "אף ש-$(-1)^n$ אינה מתכנסת, מתקיים $|a_nb_n|=1/n\\to0$, ולכן גם $a_nb_n\\to0$. זהו שימוש בחסימות ובסנדוויץ\\', לא במשפט המכפלה.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-4-004",
-        "difficulty": "בינוני",
-        "skills": [
-          "משפט הסנדוויץ",
-          "חסימות",
-          "מכפלות"
-        ],
-        "basis": "חדו״א 1א, פרק 2, סעיף 2.4 ברשימות הקורס",
-        "suggestedCheckpoint": "עוגן זמני: 2.4.2. יש לבדוק שהוא מופיע אחרי החומר הנדרש, ולא בתחילת סעיף.",
-        "editorialNote": "טיוטת AI לבדיקה מתמטית ופדגוגית לפני אישור; יש לבדוק גם את איכות כל המסיחים."
-      }
+      "level": "rehearsal",
+      "coverage_group": "squeeze",
+      "available_after_page": 18,
+      "study_section": "2.4.2",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-4-006",
@@ -1912,19 +1595,11 @@
       "wrong1": "התשובה אינה נכונה. מהו תפקיד המילים ״אם הסדרה מתכנסת״ בתחילת ההסקה?",
       "wrong2": "עדיין לא. חשבו מה הם האיברים בפועל. האם הסדרה אכן שואפת לאפס?",
       "explanation": "כאן $a_n=(-1)^{n-1}$, שאינה מתכנסת. אילו היה לה גבול, הוא היה חייב לקיים $L=-L$ ולכן להיות $0$; תנאי הכרחי על גבול אפשרי אינו מוכיח קיום גבול.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-4-006",
-        "difficulty": "בינוני",
-        "skills": [
-          "רקורסיה",
-          "שגיאה בהוכחה",
-          "הנחות"
-        ],
-        "basis": "חדו״א 1א, פרק 2, סעיף 2.4 ברשימות הקורס",
-        "suggestedCheckpoint": "עוגן זמני: 2.4.2. יש לבדוק שהוא מופיע אחרי החומר הנדרש, ולא בתחילת סעיף.",
-        "editorialNote": "טיוטת AI לבדיקה מתמטית ופדגוגית לפני אישור; יש לבדוק גם את איכות כל המסיחים."
-      }
+      "level": "rehearsal",
+      "coverage_group": "limit-algebra",
+      "available_after_page": 14,
+      "study_section": "2.4.1",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-4-007",
@@ -1960,19 +1635,11 @@
       "wrong1": "התשובה אינה נכונה. נסו לכפול (ולחלק) בצמוד לפני המעבר לגבול.",
       "wrong2": "עדיין לא. $\\displaystyle n\\left(\\sqrt{1+\\frac{1}{n}}-1\\right)=\\frac{1}{\\sqrt{1+\\frac{1}{n}}+1}$.\n",
       "explanation": "כפל בצמוד נותן בדיוק $\\frac{1}{\\sqrt{1+1/n}+1}$, והביטוי שואף ל-$\\frac12$. אסור להסיק מהצורה המקורית את הגבול באמצעות כפל של ״אינסוף באפס״.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-4-007",
-        "difficulty": "בינוני",
-        "skills": [
-          "כפל בצמוד",
-          "מניפולציות אלגבריות",
-          "גבולות"
-        ],
-        "basis": "חדו״א 1א, פרק 2, סעיף 2.4 ברשימות הקורס",
-        "suggestedCheckpoint": "עוגן זמני: 2.4.2. יש לבדוק שהוא מופיע אחרי החומר הנדרש, ולא בתחילת סעיף.",
-        "editorialNote": "טיוטת AI לבדיקה מתמטית ופדגוגית לפני אישור; יש לבדוק גם את איכות כל המסיחים."
-      }
+      "level": "rehearsal",
+      "coverage_group": "limit-algebra",
+      "available_after_page": 14,
+      "study_section": "2.4.1",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-4-008",
@@ -2008,19 +1675,11 @@
       "wrong1": "התשובה אינה נכונה. האם המרחק $b_n-a_n$ יכול לשאוף לאפס אף שהוא חיובי תמיד?",
       "wrong2": "עדיין לא. נסו $a_n=1-1/n$ ו-$b_n=1+1/n$; שתיהן שואפות ל-$1$.",
       "explanation": "מן האי־שוויון $b_n-a_n>0$ ומחשבון הגבולות נקבל $b-a\\ge0$, כלומר $a\\le b$. אין בהכרח אי־שוויון חזק בגבול.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-4-008",
-        "difficulty": "קל",
-        "skills": [
-          "אי־שוויונות",
-          "מעבר לגבול",
-          "הנחות"
-        ],
-        "basis": "חדו״א 1א, פרק 2, סעיף 2.4 ברשימות הקורס",
-        "suggestedCheckpoint": "עוגן זמני: 2.4.4. יש לבדוק שהוא מופיע אחרי החומר הנדרש, ולא בתחילת סעיף.",
-        "editorialNote": "טיוטת AI לבדיקה מתמטית ופדגוגית לפני אישור; יש לבדוק גם את איכות כל המסיחים."
-      }
+      "level": "sanity",
+      "coverage_group": "squeeze",
+      "available_after_page": 18,
+      "study_section": "2.4.2",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-4-009",
@@ -2056,18 +1715,11 @@
       "wrong1": "התשובה אינה נכונה. לא מספיק שרק אחד החסמים יתקרב לאפס; מה נדרש מהאחר?",
       "wrong2": "עדיין לא. חפשו זוג סדרות חוסמות ששתיהן שואפות ל-$0$. לכל אחת מן האפשרויות האחרות נסו להציב סדרה קבועה מותרת.",
       "explanation": "רק בזוג החסמים $-1/n$ ו-$1/n$ שני הצדדים שואפים ל-$0$. בשאר האפשרויות אפשר לבחור סדרה קבועה שאינה שואפת לאפס ועומדת בתנאים החל ממקום מסוים.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-4-009",
-        "difficulty": "בינוני",
-        "skills": [
-          "משפט הסנדוויץ",
-          "בחירת חסמים"
-        ],
-        "basis": "חדו״א 1א, פרק 2, סעיף 2.4 ברשימות הקורס",
-        "suggestedCheckpoint": "עוגן זמני: 2.4.4. יש לבדוק שהוא מופיע אחרי החומר הנדרש, ולא בתחילת סעיף.",
-        "editorialNote": "טיוטת AI לבדיקה מתמטית ופדגוגית לפני אישור; יש לבדוק גם את איכות כל המסיחים."
-      }
+      "level": "sanity",
+      "coverage_group": "squeeze",
+      "available_after_page": 18,
+      "study_section": "2.4.2",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-4-010",
@@ -2103,19 +1755,11 @@
       "wrong1": "התשובה אינה נכונה. האם הצד הימני חסום על ידי ביטוי פשוט יותר ששואף לאפס?",
       "wrong2": "עדיין לא. לכל $n$ מתקיים $1\\le2+(-1)^n\\le3$. לכן $|u_n-3|\\le3/n$.",
       "explanation": "מאחר ש-$0\\le|u_n-3|\\le3/n\\to0$, נקבל $|u_n-3|\\to0$ ולפיכך $u_n\\to3$. לא דרושה מונוטוניות, וגם תנודות בגבול העליון אינן מפריעות.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-4-010",
-        "difficulty": "בינוני",
-        "skills": [
-          "סנדוויץ",
-          "ערך מוחלט",
-          "תנודות"
-        ],
-        "basis": "חדו״א 1א, פרק 2, סעיף 2.4 ברשימות הקורס",
-        "suggestedCheckpoint": "עוגן זמני: 2.4.4. יש לבדוק שהוא מופיע אחרי החומר הנדרש, ולא בתחילת סעיף.",
-        "editorialNote": "טיוטת AI לבדיקה מתמטית ופדגוגית לפני אישור; יש לבדוק גם את איכות כל המסיחים."
-      }
+      "level": "rehearsal",
+      "coverage_group": "squeeze",
+      "available_after_page": 18,
+      "study_section": "2.4.2",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-4-011",
@@ -2151,19 +1795,11 @@
       "wrong1": "התשובה אינה נכונה. בדקו את הסדרות $1/n$, $n$ וסדרה חיובית מתנודדת.",
       "wrong2": "עדיין לא. גם ל-$a_n=1/n$ וגם ל-$a_n=n$ מתקיים $\\sqrt[n]{a_n}\\to1$. בשביל אי־התכנסות אפשר לבחור $a_n=2+(-1)^n$.",
       "explanation": "בכל שלוש הדוגמאות $a_n=1/n$, $a_n=n$ ו-$a_n=2+(-1)^n$ מתקיים $\\sqrt[n]{a_n}\\to1$, אך התנהגות הסדרה שונה לגמרי. ערך הגבול $1$ אינו מכריע במבחן השורש.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-4-011",
-        "difficulty": "בינוני",
-        "skills": [
-          "מבחן השורש",
-          "מקרה גבולי",
-          "דוגמאות נגדיות"
-        ],
-        "basis": "חדו״א 1א, פרק 2, סעיף 2.4 ברשימות הקורס",
-        "suggestedCheckpoint": "עוגן זמני: 2.4.4. יש לבדוק שהוא מופיע אחרי החומר הנדרש, ולא בתחילת סעיף.",
-        "editorialNote": "טיוטת AI לבדיקה מתמטית ופדגוגית לפני אישור; יש לבדוק גם את איכות כל המסיחים."
-      }
+      "level": "rehearsal",
+      "coverage_group": "ratio-root",
+      "available_after_page": 20,
+      "study_section": "2.4.3",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-4-018",
@@ -2199,19 +1835,11 @@
       "wrong1": "התשובה אינה נכונה. שאלו את עצמכם מה מלמדת הדוגמה $a_n=(-1)^n$.",
       "wrong2": "עדיין לא. המשפט שהוכח הוא: התכנסות רגילה גוררת התכנסות צזארו לאותו גבול, אך לא להפך.",
       "explanation": "משפט צזארו קובע שאם $a_n\\to L$ אז גם ממוצעי צזארו שואפים ל-$L$. הכיוון ההפוך שגוי, למשל עבור $a_n=(-1)^n$, שממוצעיו שואפים לאפס.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-4-018",
-        "difficulty": "בינוני",
-        "skills": [
-          "משפט צזארו",
-          "כיוון משפט",
-          "דוגמאות נגדיות"
-        ],
-        "basis": "חדו״א 1א, פרק 2, סעיף 2.4 ברשימות הקורס",
-        "suggestedCheckpoint": "עוגן זמני: 2.5. יש לבדוק שהוא מופיע אחרי החומר הנדרש, ולא בתחילת סעיף.",
-        "editorialNote": "טיוטת AI לבדיקה מתמטית ופדגוגית לפני אישור; יש לבדוק גם את איכות כל המסיחים."
-      }
+      "level": "rehearsal",
+      "coverage_group": "averages",
+      "available_after_page": 21,
+      "study_section": "2.4.4",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-4-019",
@@ -2247,19 +1875,11 @@
       "wrong1": "התשובה אינה נכונה. משפט שטולץ הנלמד כאן דורש משהו מעבר לעלייה ממש.",
       "wrong2": "עדיין לא. מהו גבול $b_n=1-1/n$? השוו אותו להנחת המשפט על המכנה.",
       "explanation": "אמנם $b_n$ עולה ממש, אך $b_n\\to1$ ולא ל-$+\\infty$, ולכן אי אפשר להפעיל את גרסת שטולץ שנוסחה ברשימות. העובדה שהפרשי $b_n$ חיוביים אינה מספיקה.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-4-019",
-        "difficulty": "בינוני",
-        "skills": [
-          "משפט שטולץ",
-          "בדיקת הנחות",
-          "מכנה"
-        ],
-        "basis": "חדו״א 1א, פרק 2, סעיף 2.4 ברשימות הקורס",
-        "suggestedCheckpoint": "עוגן זמני: 2.5. יש לבדוק שהוא מופיע אחרי החומר הנדרש, ולא בתחילת סעיף.",
-        "editorialNote": "טיוטת AI לבדיקה מתמטית ופדגוגית לפני אישור; יש לבדוק גם את איכות כל המסיחים."
-      }
+      "level": "sanity",
+      "coverage_group": "averages",
+      "available_after_page": 21,
+      "study_section": "2.4.4",
+      "approval_stage": "partial"
     },
     {
       "id": "ai-2-5-001",
@@ -2295,19 +1915,3851 @@
       "wrong1": "התשובה אינה נכונה. חישבו על הסדרה $a_n=1-1/n$. האם יש לה איבר השווה ל-$1$?",
       "wrong2": "עדיין לא. משפט ההתכנסות נותן את הסופרמום של קבוצת האיברים, לא בהכרח מקסימום השייך לה.",
       "explanation": "סדרה עולה וחסומה מלעיל מתכנסת לסופרמום של אבריה. למשל $1-1/n\\uparrow1$, אך שום איבר של הסדרה אינו שווה ל-$1$.",
-      "sourceInfo": {
-        "project": "ai-generated-calculus-1a",
-        "originalId": "ai-2-5-001",
-        "difficulty": "קל",
-        "skills": [
-          "סופרמום",
-          "סדרה מונוטונית",
-          "מקסימום"
-        ],
-        "basis": "חדו״א 1א, פרק 2, סעיף 2.5 ברשימות הקורס",
-        "suggestedCheckpoint": "עוגן זמני: 2.5.2. יש לבדוק שהוא מופיע אחרי החומר הנדרש, ולא בתחילת סעיף.",
-        "editorialNote": "טיוטת AI לבדיקה מתמטית ופדגוגית לפני אישור; יש לבדוק גם את איכות כל המסיחים."
-      }
+      "level": "sanity",
+      "coverage_group": "monotone",
+      "available_after_page": 23,
+      "study_section": "2.5.1",
+      "approval_stage": "partial"
+    },
+    {
+      "id": "trial26-logic-s1",
+      "chapter": 1,
+      "after_section": "1.3",
+      "study_section": "1.3",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "לוגיקה וכמתים",
+      "title": "מתי גרירה נכשלת?",
+      "question": "באיזה מצב הטענה $P\\Rightarrow Q$ שקרית?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$P$ אמת ו־$Q$ שקר"
+        },
+        {
+          "id": "b",
+          "text": "$P$ שקר ו־$Q$ אמת"
+        },
+        {
+          "id": "c",
+          "text": "שניהם שקר"
+        },
+        {
+          "id": "d",
+          "text": "שניהם אמת"
+        }
+      ],
+      "correct": "a",
+      "hint1": "חפשו מצב שבו ההבטחה שבגרירה אינה מתקיימת.",
+      "hint2": "גרירה דורשת את $Q$ רק כאשר $P$ מתקיים.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "כישלון של גרירה הוא בדיוק $P\\land\\neg Q$. כאשר ההנחה שקרית, הגרירה אמת.",
+      "level": "sanity",
+      "coverage_group": "logic",
+      "available_after_page": 4
+    },
+    {
+      "id": "trial26-logic-r1",
+      "chapter": 1,
+      "after_section": "1.3",
+      "study_section": "1.3",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "לוגיקה וכמתים",
+      "title": "מי תלוי במי?",
+      "question": "איזו טענה נכונה מעל $\\mathbb R$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$\\exists x\\,\\forall y:\\ y>x$"
+        },
+        {
+          "id": "b",
+          "text": "$\\forall x\\,\\exists y:\\ y>x$"
+        },
+        {
+          "id": "c",
+          "text": "$\\exists y\\,\\forall x:\\ y>x$"
+        },
+        {
+          "id": "d",
+          "text": "$\\forall x\\,\\forall y:\\ y>x$"
+        }
+      ],
+      "correct": "b",
+      "hint1": "בדקו אם מותר לבחור מספר חדש אחרי שנבחר המספר הראשון.",
+      "hint2": "לכל $x$ אפשר לבחור $y=x+1$. האם מספר יחיד יכול להיות גדול מכל הממשיים?",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "הבחירה $y=x+1$ מוכיחה את הטענה הראשונה. בשאר הטענות אפשר לבחור מספר שווה או גדול יותר כדי להפר את אי־השוויון.",
+      "level": "rehearsal",
+      "coverage_group": "logic",
+      "available_after_page": 4
+    },
+    {
+      "id": "trial26-logic-c1",
+      "chapter": 1,
+      "after_section": "1.3",
+      "study_section": "1.3",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "לוגיקה וכמתים",
+      "title": "עדים משותפים",
+      "question": "נתון שלכל $x\\in A$ קיים $y\\in B$ המקיים $P(x,y)$ וגם $Q(x,y)$. איזו מסקנה מתחייבת?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "לכל $x\\in A$ קיימים שני עדים שונים לתכונות"
+        },
+        {
+          "id": "b",
+          "text": "לכל $x\\in A$ ולכל $y\\in B$ מתקיימות שתי התכונות"
+        },
+        {
+          "id": "c",
+          "text": "לכל $x\\in A$ קיימים $y,z\\in B$ כך ש־$P(x,y)$ וגם $Q(x,z)$"
+        },
+        {
+          "id": "d",
+          "text": "קיים $y\\in B$ המתאים לכל $x\\in A$ לשתי התכונות"
+        }
+      ],
+      "correct": "c",
+      "hint1": "אפשר להשתמש באותו עד פעמיים; אסור להניח שהוא מתאים לכל האיברים.",
+      "hint2": "לבדיקת המסקנות האחרות נסו $A=B=\\{0,1\\}$ ו־$P(x,y)=Q(x,y)$ היא הטענה $x=y$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "לכל $x$ בוחרים עד משותף ומציבים $z=y$. בדוגמת השוויון העד תלוי ב־$x$, הוא יחיד, ולא כל $y$ מתאים; לכן שלוש המסקנות האחרות אינן מתחייבות.",
+      "level": "challenge",
+      "coverage_group": "logic",
+      "available_after_page": 6
+    },
+    {
+      "id": "trial26-sets-s1",
+      "chapter": 1,
+      "after_section": "1.4",
+      "study_section": "1.4",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "קבוצות ופעולות",
+      "title": "שייכות להפרש",
+      "question": "מה פירוש $x\\in A\\setminus B$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$x\\in B$ וגם $x\\notin A$"
+        },
+        {
+          "id": "b",
+          "text": "$x\\in A$ או $x\\in B$"
+        },
+        {
+          "id": "c",
+          "text": "$x\\notin A$ וגם $x\\notin B$"
+        },
+        {
+          "id": "d",
+          "text": "$x\\in A$ וגם $x\\notin B$"
+        }
+      ],
+      "correct": "d",
+      "hint1": "ההפרש מתחיל באיברי הקבוצה הראשונה.",
+      "hint2": "מסירים מן הקבוצה הראשונה את האיברים השייכים גם לשנייה.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "בהפרש $A\\setminus B$ נשארים בדיוק איברי $A$ שאינם שייכים ל־$B$.",
+      "level": "sanity",
+      "coverage_group": "sets",
+      "available_after_page": 6
+    },
+    {
+      "id": "trial26-sets-r1",
+      "chapter": 1,
+      "after_section": "1.4",
+      "study_section": "1.4",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "קבוצות ופעולות",
+      "title": "פירוק קבוצה",
+      "question": "איזה ביטוי שווה תמיד ל־$A$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$(A\\cap B)\\cup(A\\setminus B)$"
+        },
+        {
+          "id": "b",
+          "text": "$(A\\cap B)\\cap(A\\setminus B)$"
+        },
+        {
+          "id": "c",
+          "text": "$(A\\cup B)\\setminus B$"
+        },
+        {
+          "id": "d",
+          "text": "$(A\\setminus B)\\cup(B\\setminus A)$"
+        }
+      ],
+      "correct": "a",
+      "hint1": "חלקו את איברי $A$ לפי השאלה אם הם שייכים ל־$B$.",
+      "hint2": "כל איבר של $A$ שייך בדיוק לאחת משתי קבוצות: החיתוך או ההפרש.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "שני החלקים זרים ואיחודם הוא $A$. החיתוך ביניהם ריק; שני הביטויים האחרים עלולים להשמיט איברים של $A$ או להוסיף איברים מבחוץ.",
+      "level": "rehearsal",
+      "coverage_group": "sets",
+      "available_after_page": 6
+    },
+    {
+      "id": "trial26-sets-c1",
+      "chapter": 1,
+      "after_section": "1.4",
+      "study_section": "1.4",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "קבוצות ופעולות",
+      "title": "מה שתי בדיקות מגלות?",
+      "question": "נתון $A\\cup C=B\\cup C$ וגם $A\\cap C=B\\cap C$. מה מתחייב?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "בהכרח $A\\subseteq C$"
+        },
+        {
+          "id": "b",
+          "text": "$A=B$"
+        },
+        {
+          "id": "c",
+          "text": "ייתכן $A\\ne B$, אך בהכרח $A\\setminus C=B\\setminus C$"
+        },
+        {
+          "id": "d",
+          "text": "בהכרח $C=\\varnothing$"
+        }
+      ],
+      "correct": "b",
+      "hint1": "בדקו בנפרד איברים בתוך $C$ ואיברים מחוץ לו.",
+      "hint2": "מחוץ ל־$C$, השוויון בין האיחודים קובע שייכות; בתוך $C$, השוויון בין החיתוכים קובע שייכות.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "אם $x\\in C$, השייכות ל־$A$ ול־$B$ זהה לפי החיתוכים. אם $x\\notin C$, היא זהה לפי האיחודים. לכן לכל $x$ אותה שייכות, ומתקבל $A=B$.",
+      "level": "challenge",
+      "coverage_group": "sets",
+      "available_after_page": 6
+    },
+    {
+      "id": "trial26-numbers-s1",
+      "chapter": 1,
+      "after_section": "1.5",
+      "study_section": "1.5",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "קבוצות מספרים וערך מוחלט",
+      "title": "מרחק על הישר",
+      "question": "איזה תנאי שקול ל־$|x-2|<3$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$-3<x<3$"
+        },
+        {
+          "id": "b",
+          "text": "$-1\\le x\\le5$"
+        },
+        {
+          "id": "c",
+          "text": "$-1<x<5$"
+        },
+        {
+          "id": "d",
+          "text": "$x<-1$ או $x>5$"
+        }
+      ],
+      "correct": "c",
+      "hint1": "ערך מוחלט מודד מרחק.",
+      "hint2": "כתבו $-3<x-2<3$ והוסיפו 2 לכל אגף.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "הנקודות שמרחקן מ־2 קטן מ־3 הן בדיוק הקטע הפתוח $(-1,5)$. הקצוות אינם כלולים.",
+      "level": "sanity",
+      "coverage_group": "numbers",
+      "available_after_page": 8
+    },
+    {
+      "id": "trial26-numbers-r1",
+      "chapter": 1,
+      "after_section": "1.5",
+      "study_section": "1.5",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "קבוצות מספרים וערך מוחלט",
+      "title": "רציונלי ועוד אי־רציונלי",
+      "question": "נתון $r\\in\\mathbb Q$ ו־$x\\notin\\mathbb Q$. מה נכון תמיד?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$xr\\notin\\mathbb Q$"
+        },
+        {
+          "id": "b",
+          "text": "$x^2\\notin\\mathbb Q$"
+        },
+        {
+          "id": "c",
+          "text": "$x-r\\in\\mathbb Q$"
+        },
+        {
+          "id": "d",
+          "text": "$x+r\\notin\\mathbb Q$"
+        }
+      ],
+      "correct": "d",
+      "hint1": "חשבו מה יקרה אם הסכום דווקא יהיה רציונלי.",
+      "hint2": "הרציונליים סגורים לחיסור. במכפלה זכרו שמותר $r=0$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "אילו $x+r$ היה רציונלי, גם $x=(x+r)-r$ היה רציונלי. מכפלה ב־0 רציונלית, והריבוע של $\\sqrt2$ רציונלי.",
+      "level": "rehearsal",
+      "coverage_group": "numbers",
+      "available_after_page": 8
+    },
+    {
+      "id": "trial26-numbers-c1",
+      "chapter": 1,
+      "after_section": "1.5",
+      "study_section": "1.5",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "קבוצות מספרים וערך מוחלט",
+      "title": "סכום ומכפלה",
+      "question": "נניח ש־$x,y\\in\\mathbb R$, שסכומם רציונלי ומכפלתם אי־רציונלית. מה מתחייב?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "שניהם אי־רציונליים"
+        },
+        {
+          "id": "b",
+          "text": "בדיוק אחד מהם רציונלי"
+        },
+        {
+          "id": "c",
+          "text": "שניהם רציונליים"
+        },
+        {
+          "id": "d",
+          "text": "אי אפשר להסיק דבר על הרציונליות של הגורמים"
+        }
+      ],
+      "correct": "a",
+      "hint1": "אם אחד מהם רציונלי, מה נובע מן הסכום?",
+      "hint2": "כתבו $y=(x+y)-x$ ובדקו מה יקרה למכפלה אם $x$ רציונלי.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "אם אחד רציונלי, הסכום הרציונלי מחייב שגם השני רציונלי, ואז המכפלה רציונלית — סתירה. לכן אף אחד מן השניים אינו יכול להיות רציונלי.",
+      "level": "challenge",
+      "coverage_group": "numbers",
+      "available_after_page": 8
+    },
+    {
+      "id": "trial26-order-s1",
+      "chapter": 1,
+      "after_section": "1.6.2",
+      "study_section": "1.6.2",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "שדה סדור וארכימדס",
+      "title": "כפל במספר שלילי",
+      "question": "נתון $a<b$ ו־$c<0$. מה מתחייב?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$a+c>b+c$"
+        },
+        {
+          "id": "b",
+          "text": "$ac>bc$"
+        },
+        {
+          "id": "c",
+          "text": "$ac<bc$"
+        },
+        {
+          "id": "d",
+          "text": "$ac=bc$"
+        }
+      ],
+      "correct": "b",
+      "hint1": "בדקו קודם דוגמה מספרית.",
+      "hint2": "כפל במספר חיובי שומר סדר; כפל ב־$-1$ הופך אותו.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "כפל שני אגפי אי־שוויון במספר שלילי הופך את כיוון אי־השוויון. חיבור אותו מספר לשני האגפים שומר את הכיוון.",
+      "level": "sanity",
+      "coverage_group": "order",
+      "available_after_page": 13
+    },
+    {
+      "id": "trial26-order-r1",
+      "chapter": 1,
+      "after_section": "1.6.2",
+      "study_section": "1.6.2",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "שדה סדור וארכימדס",
+      "title": "בחירת מספר טבעי",
+      "question": "נתון $\\varepsilon>0$. מה מבטיחה תכונת ארכימדס?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "קיים $n\\ge1$ כך ש־$1/n=\\varepsilon$"
+        },
+        {
+          "id": "b",
+          "text": "קיים $n\\ge1$ כך ש־$n<\\varepsilon$"
+        },
+        {
+          "id": "c",
+          "text": "קיים $n\\in\\mathbb N$, $n\\ge1$, כך ש־$0<1/n<\\varepsilon$"
+        },
+        {
+          "id": "d",
+          "text": "לכל $n\\ge1$ מתקיים $1/n<\\varepsilon$"
+        }
+      ],
+      "correct": "c",
+      "hint1": "הפעילו את התכונה על מספר הקשור לאפסילון.",
+      "hint2": "בחרו טבעי $n>1/\\varepsilon$ ועברו להופכיים.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "מארכימדס קיים $n>1/\\varepsilon$. שני המספרים חיוביים, ולכן $1/n<\\varepsilon$. אין הבטחה לשוויון או לכך שכל טבעי מתאים.",
+      "level": "rehearsal",
+      "coverage_group": "order",
+      "available_after_page": 13
+    },
+    {
+      "id": "trial26-order-c1",
+      "chapter": 1,
+      "after_section": "1.6.2",
+      "study_section": "1.6.2",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "שדה סדור וארכימדס",
+      "title": "מספר קטן מכל הופכי",
+      "question": "נניח $x\\ge0$ ו־$x<1/n$ לכל טבעי $n\\ge1$. מה מתחייב?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$0<x<1$"
+        },
+        {
+          "id": "b",
+          "text": "ייתכן $x>0$ אם הוא אי־רציונלי"
+        },
+        {
+          "id": "c",
+          "text": "ההנחות אינן אפשריות"
+        },
+        {
+          "id": "d",
+          "text": "$x=0$"
+        }
+      ],
+      "correct": "d",
+      "hint1": "נסו להניח $x>0$ ולהשתמש בארכימדס.",
+      "hint2": "אפשר לבחור $n>1/x$. מה זה אומר על $1/n$?",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "אם $x>0$, ארכימדס נותן $n>1/x$, ולכן $1/n<x$, בניגוד להנחה. המספר 0 אכן מקיים את כל התנאים.",
+      "level": "challenge",
+      "coverage_group": "order",
+      "available_after_page": 13
+    },
+    {
+      "id": "trial26-bounds-s1",
+      "chapter": 1,
+      "after_section": "1.6.4",
+      "study_section": "1.6.4",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "חסמים וקיצונים",
+      "title": "חסם לעומת איבר",
+      "question": "איזו טענה מגדירה חסם עליון $M$ של קבוצה $A\\subseteq\\mathbb R$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "לכל $a\\in A$ מתקיים $a\\le M$"
+        },
+        {
+          "id": "b",
+          "text": "$M\\in A$ ולכל $a\\in A$ מתקיים $a\\le M$"
+        },
+        {
+          "id": "c",
+          "text": "קיים $a\\in A$ כך ש־$a\\le M$"
+        },
+        {
+          "id": "d",
+          "text": "לכל $a\\in A$ מתקיים $M\\le a$"
+        }
+      ],
+      "correct": "a",
+      "hint1": "חסם עליון אינו חייב להשתייך לקבוצה.",
+      "hint2": "השוו בין חסם עליון לבין מקסימום.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "חסם עליון גדול או שווה לכל איברי הקבוצה. הוספת הדרישה $M\\in A$ מגדירה מקסימום; האפשרות האחרונה מתארת חסם תחתון.",
+      "level": "sanity",
+      "coverage_group": "bounds",
+      "available_after_page": 15
+    },
+    {
+      "id": "trial26-bounds-r1",
+      "chapter": 1,
+      "after_section": "1.6.4",
+      "study_section": "1.6.6",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "חסמים וקיצונים",
+      "title": "סופרמום בלי מקסימום",
+      "question": "עבור $A=\\{1-1/n:n\\ge1\\}$, מה נכון?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "הקבוצה אינה חסומה מלעיל"
+        },
+        {
+          "id": "b",
+          "text": "$\\inf A=\\min A=0$, $\\sup A=1$, ואין מקסימום"
+        },
+        {
+          "id": "c",
+          "text": "$\\min A=0$ ו־$\\max A=1$"
+        },
+        {
+          "id": "d",
+          "text": "$\\inf A=0$ אך אין מינימום, ו־$\\sup A=1$"
+        }
+      ],
+      "correct": "b",
+      "hint1": "בדקו את האיבר הראשון ואת האפשרות להגיע בדיוק ל־1.",
+      "hint2": "כל האיברים קטנים מ־1, אבל לכל $\\varepsilon>0$ יש איבר גדול מ־$1-\\varepsilon$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "ב־$n=1$ מתקבל 0, וכל האיברים אי־שליליים. הם קטנים מ־1 ומתקרבים אליו כרצוננו, ולכן 1 הוא סופרמום שאינו מקסימום.",
+      "level": "rehearsal",
+      "coverage_group": "bounds",
+      "available_after_page": 17
+    },
+    {
+      "id": "trial26-bounds-c1",
+      "chapter": 1,
+      "after_section": "1.6.4",
+      "study_section": "1.6.6",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "חסמים וקיצונים",
+      "title": "סופרמום של חיתוך",
+      "question": "קבוצות לא ריקות וחסומות $A,B\\subseteq\\mathbb R$ מקיימות $A\\cap B\\ne\\varnothing$. איזו טענה נכונה תמיד?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$\\sup(A\\cap B)=\\max\\{\\sup A,\\sup B\\}$"
+        },
+        {
+          "id": "b",
+          "text": "$\\sup(A\\cap B)\\ge\\min\\{\\sup A,\\sup B\\}$"
+        },
+        {
+          "id": "c",
+          "text": "$\\sup(A\\cap B)\\le\\min\\{\\sup A,\\sup B\\}$"
+        },
+        {
+          "id": "d",
+          "text": "$\\sup(A\\cap B)=\\min\\{\\sup A,\\sup B\\}$"
+        }
+      ],
+      "correct": "c",
+      "hint1": "כל חסם עליון של אחת הקבוצות חוסם גם את החיתוך.",
+      "hint2": "בדקו שוויון בעזרת $A=\\{0,2\\}$ ו־$B=\\{0,3\\}$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "שני הסופרמומים הם חסמים עליונים של החיתוך, ולכן הסופרמום שלו אינו גדול מהמינימום שלהם. בדוגמה החיתוך הוא $\\{0\\}$, והאי־שוויון ממש.",
+      "level": "challenge",
+      "coverage_group": "bounds",
+      "available_after_page": 17
+    },
+    {
+      "id": "trial26-completeness-s1",
+      "chapter": 1,
+      "after_section": "1.6.6",
+      "study_section": "1.6.6",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "שלמות וסופרמום",
+      "title": "למי מבטיחה השלמות סופרמום?",
+      "question": "איזו הנחה מבטיחה שלקבוצה $A\\subseteq\\mathbb R$ יש סופרמום ממשי?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$A$ לא ריקה וחסומה מלרע"
+        },
+        {
+          "id": "b",
+          "text": "$A$ אינסופית"
+        },
+        {
+          "id": "c",
+          "text": "$A$ אינה מכילה מקסימום"
+        },
+        {
+          "id": "d",
+          "text": "$A$ לא ריקה וחסומה מלעיל"
+        }
+      ],
+      "correct": "d",
+      "hint1": "השלמות מתייחסת לחסם הקטן ביותר מבין החסמים העליונים.",
+      "hint2": "חשבו מדוע $\\mathbb N$ אינה דוגמה לקבוצה בעלת סופרמום ממשי.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "אקסיומת השלמות מבטיחה סופרמום ממשי לכל קבוצה לא ריקה וחסומה מלעיל. חסימות מלרע לבדה אינה מספיקה.",
+      "level": "sanity",
+      "coverage_group": "completeness",
+      "available_after_page": 17
+    },
+    {
+      "id": "trial26-completeness-r1",
+      "chapter": 1,
+      "after_section": "1.6.6",
+      "study_section": "1.6.6",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "שלמות וסופרמום",
+      "title": "איזה תנאי חסר?",
+      "question": "נתון ש־$s$ חסם עליון של קבוצה לא ריקה $A$. איזה תנאי נוסף מבטיח $s=\\sup A$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "לכל $\\varepsilon>0$ קיים $a\\in A$ כך ש־$s-\\varepsilon<a$"
+        },
+        {
+          "id": "b",
+          "text": "קיים $\\varepsilon>0$ כך שלכל $a\\in A$ מתקיים $s-\\varepsilon<a$"
+        },
+        {
+          "id": "c",
+          "text": "לכל $a\\in A$ מתקיים $a<s$"
+        },
+        {
+          "id": "d",
+          "text": "קיים $a\\in A$ כך ש־$a<s$"
+        }
+      ],
+      "correct": "a",
+      "hint1": "צריך למנוע מכל מספר קטן יותר להיות חסם עליון.",
+      "hint2": "בדקו את המועמד $s-\\varepsilon$ כחסם עליון.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "אם לכל $\\varepsilon>0$ יש איבר גדול מ־$s-\\varepsilon$, שום מספר קטן מ־$s$ אינו חסם עליון. יחד עם היותו חסם עליון זהו אפיון הסופרמום.",
+      "level": "rehearsal",
+      "coverage_group": "completeness",
+      "available_after_page": 17
+    },
+    {
+      "id": "trial26-completeness-c1",
+      "chapter": 1,
+      "after_section": "1.6.6",
+      "study_section": "1.6.6",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "שלמות וסופרמום",
+      "title": "סכום שתי קבוצות",
+      "question": "קבוצות לא ריקות $A,B\\subseteq\\mathbb R$ חסומות מלעיל. נגדיר $A+B=\\{a+b:a\\in A,b\\in B\\}$. מהו הסופרמום?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ייתכן ש־$A+B$ אינה חסומה מלעיל"
+        },
+        {
+          "id": "b",
+          "text": "$\\sup(A+B)=\\sup A+\\sup B$"
+        },
+        {
+          "id": "c",
+          "text": "השוויון מתקיים רק אם לשתי הקבוצות יש מקסימום"
+        },
+        {
+          "id": "d",
+          "text": "$\\sup(A+B)=\\max\\{\\sup A,\\sup B\\}$"
+        }
+      ],
+      "correct": "b",
+      "hint1": "מצאו תחילה חסם עליון, ואז בדקו שאפשר להתקרב אליו.",
+      "hint2": "בחרו $a>\\sup A-\\varepsilon/2$ ו־$b>\\sup B-\\varepsilon/2$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "כל סכום חסום על ידי $s=\\sup A+\\sup B$. הבחירות שברמז נותנות $a+b>s-\\varepsilon$. לכן $s$ הוא הסופרמום, גם כאשר אף אחד משני הסופרמומים אינו מושג.",
+      "level": "challenge",
+      "coverage_group": "completeness",
+      "available_after_page": 17
+    },
+    {
+      "id": "trial26-density-s1",
+      "chapter": 1,
+      "after_section": "1.6.8",
+      "study_section": "1.6.8",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "שורשים וצפיפות",
+      "title": "משמעות הצפיפות",
+      "question": "מה פירוש שהרציונליים צפופים ב־$\\mathbb R$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "לכל ממשי יש רציונלי עוקב"
+        },
+        {
+          "id": "b",
+          "text": "בכל קטע יש בדיוק רציונלי אחד"
+        },
+        {
+          "id": "c",
+          "text": "לכל $a<b$ יש $q\\in\\mathbb Q$ כך ש־$a<q<b$"
+        },
+        {
+          "id": "d",
+          "text": "כל ממשי הוא רציונלי"
+        }
+      ],
+      "correct": "c",
+      "hint1": "ההגדרה מתייחסת לכל קטע פתוח לא ריק.",
+      "hint2": "אין דרישה שאחד מקצות הקטע יהיה רציונלי.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "צפיפות אומרת שבין כל שני ממשיים שונים יש רציונלי. היא אינה הופכת כל ממשי לרציונלי ואינה נותנת רציונלי עוקב.",
+      "level": "sanity",
+      "coverage_group": "density",
+      "available_after_page": 22
+    },
+    {
+      "id": "trial26-density-r1",
+      "chapter": 1,
+      "after_section": "1.6.8",
+      "study_section": "1.6.8",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "שורשים וצפיפות",
+      "title": "כמה רציונליים?",
+      "question": "כמה מספרים רציונליים יש בקטע פתוח לא ריק $(a,b)$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "בדיוק אחד"
+        },
+        {
+          "id": "b",
+          "text": "מספר סופי התלוי באורך הקטע"
+        },
+        {
+          "id": "c",
+          "text": "ייתכן שאין, אם שני הקצוות אי־רציונליים"
+        },
+        {
+          "id": "d",
+          "text": "אינסוף"
+        }
+      ],
+      "correct": "d",
+      "hint1": "אחרי שמצאתם רציונלי אחד, הפעילו שוב צפיפות בקטע קטן יותר.",
+      "hint2": "אם $a<q_1<b$, בחרו $q_2$ בין $q_1$ ל־$b$, והמשיכו.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "אפשר לבנות כך כמה רציונליים שונים שרוצים בתוך הקטע. לכן מספרם אינסופי, ללא תלות ברציונליות הקצוות.",
+      "level": "rehearsal",
+      "coverage_group": "density",
+      "available_after_page": 22
+    },
+    {
+      "id": "trial26-density-c1",
+      "chapter": 1,
+      "after_section": "1.6.8",
+      "study_section": "1.6.8",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "שורשים וצפיפות",
+      "title": "רציונליים שנחתכו",
+      "question": "נתון $a<b$ ונגדיר $A=\\mathbb Q\\cap(a,b)$. מה נכון?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$\\inf A=a$ ו־$\\sup A=b$, ואין מינימום או מקסימום"
+        },
+        {
+          "id": "b",
+          "text": "התשובה נכונה רק אם $a,b\\in\\mathbb Q$"
+        },
+        {
+          "id": "c",
+          "text": "$\\sup A$ הוא הרציונלי הגדול ביותר הקטן מ־$b$"
+        },
+        {
+          "id": "d",
+          "text": "אם $b$ אי־רציונלי, אין לקבוצה סופרמום ממשי"
+        }
+      ],
+      "correct": "a",
+      "hint1": "הקצוות הם חסמים; צפיפות קובעת אם אפשר לשפר אותם.",
+      "hint2": "לכל $c<b$ יש רציונלי בין $\\max\\{a,c\\}$ לבין $b$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "הצפיפות מראה שכל מספר קטן מ־$b$ אינו חסם עליון, ולכן הסופרמום הוא $b$. הטיעון לאינפימום סימטרי. בתוך הקטע תמיד אפשר למצוא איבר גדול יותר וקטן יותר, ולכן אין קיצונים.",
+      "level": "challenge",
+      "coverage_group": "density",
+      "available_after_page": 22
+    },
+    {
+      "id": "trial26-inequalities-s1",
+      "chapter": 1,
+      "after_section": "1.6.9",
+      "study_section": "1.6.9",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "אי־שוויונים",
+      "title": "אי־שוויון המשולש",
+      "question": "איזו טענה נכונה לכל $x,y\\in\\mathbb R$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$|x+y|\\le|x-y|$"
+        },
+        {
+          "id": "b",
+          "text": "$|x+y|\\le|x|+|y|$"
+        },
+        {
+          "id": "c",
+          "text": "$|x+y|=|x|+|y|$"
+        },
+        {
+          "id": "d",
+          "text": "$|x+y|\\ge|x|+|y|$"
+        }
+      ],
+      "correct": "b",
+      "hint1": "חפשו את ניסוח אי־שוויון המשולש.",
+      "hint2": "בדקו את האפשרויות עם $x=1,y=-1$ ועם $x=y=1$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "אי־שוויון המשולש נותן $|x+y|\\le|x|+|y|$. השוויון והאי־שוויונות האחרים אינם תקפים לכל בחירה.",
+      "level": "sanity",
+      "coverage_group": "inequalities",
+      "available_after_page": 25
+    },
+    {
+      "id": "trial26-inequalities-r1",
+      "chapter": 1,
+      "after_section": "1.6.9",
+      "study_section": "1.6.9",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "אי־שוויונים",
+      "title": "מכפלה וסכום קבוע",
+      "question": "נתון $a,b\\ge0$ ו־$a+b=6$. מהו הערך הגדול ביותר של $ab$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$12$, ומתקבל ב־$a=2,b=4$"
+        },
+        {
+          "id": "b",
+          "text": "אין חסם עליון למכפלה"
+        },
+        {
+          "id": "c",
+          "text": "$9$, ומתקבל רק ב־$a=b=3$"
+        },
+        {
+          "id": "d",
+          "text": "$6$, ומתקבל ב־$a=b=3$"
+        }
+      ],
+      "correct": "c",
+      "hint1": "התחילו מ־$(a-b)^2\\ge0$.",
+      "hint2": "מתקבל $4ab\\le(a+b)^2=36$. בדקו מתי יש שוויון.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "מן הריבוע האי־שלילי נובע $ab\\le9$. שוויון מתקיים בדיוק כאשר $a=b$, ובגלל הסכום שניהם שווים 3.",
+      "level": "rehearsal",
+      "coverage_group": "inequalities",
+      "available_after_page": 25
+    },
+    {
+      "id": "trial26-inequalities-c1",
+      "chapter": 1,
+      "after_section": "1.6.9",
+      "study_section": "1.6.9",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "אי־שוויונים",
+      "title": "שני מרחקים מנוגדים",
+      "question": "נתון $|x+y|\\le1$ וגם $|x-y|\\le1$. מהו החסם העליון החד ביותר ל־$|x|+|y|$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$2$"
+        },
+        {
+          "id": "b",
+          "text": "$\\sqrt2$"
+        },
+        {
+          "id": "c",
+          "text": "$1/2$"
+        },
+        {
+          "id": "d",
+          "text": "$1$"
+        }
+      ],
+      "correct": "d",
+      "hint1": "בדקו מי מבין $|x+y|$ ו־$|x-y|$ שווה ל־$|x|+|y|$.",
+      "hint2": "אם $xy\\ge0$ הסכום מתאים, ואם $xy\\le0$ ההפרש מתאים.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "לממשיים מתקיים $|x|+|y|=\\max\\{|x+y|,|x-y|\\}\\le1$. החסם מושג ב־$(x,y)=(1,0)$, ולכן הוא חד.",
+      "level": "challenge",
+      "coverage_group": "inequalities",
+      "available_after_page": 25
+    },
+    {
+      "id": "trial26-sequence-basics-s1",
+      "chapter": 2,
+      "after_section": "2.1",
+      "study_section": "2.1",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "סדרות, חסימות ומונוטוניות",
+      "title": "מהי מונוטוניות?",
+      "question": "איזה תנאי מגדיר סדרה עולה במובן הרחב?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$a_{n+1}\\ge a_n$ לכל $n\\ge1$"
+        },
+        {
+          "id": "b",
+          "text": "$a_n\\ge0$ לכל $n\\ge1$"
+        },
+        {
+          "id": "c",
+          "text": "$a_{n+1}>a_n$ לכל $n\\ge1$"
+        },
+        {
+          "id": "d",
+          "text": "קיים $n$ שעבורו $a_{n+1}>a_n$"
+        }
+      ],
+      "correct": "a",
+      "hint1": "עולה במובן הרחב מאפשרת גם שוויון בין איברים.",
+      "hint2": "צריך לבדוק כל זוג איברים עוקבים, ולא רק זוג אחד.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "התנאי הוא $a_{n+1}\\ge a_n$ לכל $n$. סדרה חיובית אינה בהכרח עולה, ועלייה ממש היא דרישה חזקה יותר.",
+      "level": "sanity",
+      "coverage_group": "sequence-basics",
+      "available_after_page": 2
+    },
+    {
+      "id": "trial26-sequence-basics-r1",
+      "chapter": 2,
+      "after_section": "2.1",
+      "study_section": "2.1",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "סדרות, חסימות ומונוטוניות",
+      "title": "חסימות בלי סדר",
+      "question": "מה נכון לגבי $a_n=(-1)^n+1/n$ עבור $n\\ge1$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "הסדרה אינה חסומה"
+        },
+        {
+          "id": "b",
+          "text": "הסדרה חסומה ואינה מונוטונית"
+        },
+        {
+          "id": "c",
+          "text": "הסדרה עולה וחסומה"
+        },
+        {
+          "id": "d",
+          "text": "הסדרה יורדת וחסומה"
+        }
+      ],
+      "correct": "b",
+      "hint1": "השוו את שלושת האיברים הראשונים.",
+      "hint2": "$a_1=0$, $a_2=3/2$, $a_3=-2/3$; כמו כן $-1<a_n\\le2$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "העלייה מן האיבר הראשון לשני והירידה מן השני לשלישי שוללות מונוטוניות. החסמים $-1$ ו־2 תקפים לכל האיברים.",
+      "level": "rehearsal",
+      "coverage_group": "sequence-basics",
+      "available_after_page": 2
+    },
+    {
+      "id": "trial26-sequence-basics-c1",
+      "chapter": 2,
+      "after_section": "2.1",
+      "study_section": "2.1",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "סדרות, חסימות ומונוטוניות",
+      "title": "שתי עליות שאינן מצטרפות",
+      "question": "נתון ששתי הסדרות $(a_{2n})$ ו־$(a_{2n-1})$ עולות וחסומות מלעיל. מה מתחייב על $(a_n)$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "היא אינה יכולה להיות מונוטונית"
+        },
+        {
+          "id": "b",
+          "text": "היא אינה בהכרח חסומה מלרע"
+        },
+        {
+          "id": "c",
+          "text": "היא חסומה, אך אינה בהכרח מונוטונית"
+        },
+        {
+          "id": "d",
+          "text": "היא עולה"
+        }
+      ],
+      "correct": "c",
+      "hint1": "לכל אחת משתי הסדרות יש איבר ראשון וחסם עליון.",
+      "hint2": "לחסימות השתמשו במינימום האיברים הראשונים ובמקסימום החסמים; למונוטוניות בדקו סדרה המתחלפת בין 0 ל־1.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "איחוד שני הטווחים החסומים חסום. הסדרה $a_{2n}=1,a_{2n-1}=0$ אינה מונוטונית אף ששתי סדרות האיברים קבועות. סדרה קבועה מראה שגם מונוטוניות אפשרית.",
+      "level": "challenge",
+      "coverage_group": "sequence-basics",
+      "available_after_page": 2
+    },
+    {
+      "id": "trial26-limit-definition-s1",
+      "chapter": 2,
+      "after_section": "2.2.2",
+      "study_section": "2.2.2",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "הגדרת הגבול והוכחות ממנה",
+      "title": "מי נבחר קודם?",
+      "question": "איזה סדר כמתים מופיע בהגדרת $a_n\\to L$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "קיים $N$ כך שלכל $\\varepsilon>0$ ולכל $n\\ge N$ מתקיים $|a_n-L|<\\varepsilon$"
+        },
+        {
+          "id": "b",
+          "text": "לכל $n$ קיים $\\varepsilon>0$ כך ש־$|a_n-L|<\\varepsilon$"
+        },
+        {
+          "id": "c",
+          "text": "קיים $\\varepsilon>0$ כך שלכל $n$ מתקיים $|a_n-L|<\\varepsilon$"
+        },
+        {
+          "id": "d",
+          "text": "לכל $\\varepsilon>0$ קיים $N$ כך שלכל $n\\ge N$ מתקיים $|a_n-L|<\\varepsilon$"
+        }
+      ],
+      "correct": "d",
+      "hint1": "המקום שממנו מתחילים עשוי להיות תלוי בדיוק המבוקש.",
+      "hint2": "בדרך כלל $N$ משתנה כשמקטינים את $\\varepsilon$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "קודם נתון דיוק חיובי שרירותי, ואז בוחרים $N$ המתאים לו. הדרישה צריכה להתקיים לכל האיברים מהמקום הזה והלאה.",
+      "level": "sanity",
+      "coverage_group": "limit-definition",
+      "available_after_page": 7
+    },
+    {
+      "id": "trial26-limit-definition-r1",
+      "chapter": 2,
+      "after_section": "2.2.2",
+      "study_section": "2.2.2",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "הגדרת הגבול והוכחות ממנה",
+      "title": "בחירת מקום מתאים",
+      "question": "עבור $a_n=3+2/n$ ו־$\\varepsilon>0$, איזו בחירה של טבעי $N$ מבטיחה $|a_n-3|<\\varepsilon$ לכל $n\\ge N$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "כל $N>2/\\varepsilon$"
+        },
+        {
+          "id": "b",
+          "text": "כל $N\\ge2/\\varepsilon$"
+        },
+        {
+          "id": "c",
+          "text": "כל $N>\\varepsilon/2$"
+        },
+        {
+          "id": "d",
+          "text": "כל $N>1/\\varepsilon$"
+        }
+      ],
+      "correct": "a",
+      "hint1": "חשבו את המרחק מן הגבול.",
+      "hint2": "צריך $2/n<\\varepsilon$, כולל במקרה $n=N$. שימו לב לאי־השוויון הממש.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "אם $N>2/\\varepsilon$, אז לכל $n\\ge N$ מתקיים $2/n\\le2/N<\\varepsilon$. שוויון $N=2/\\varepsilon$ אינו מבטיח את האי־שוויון הממש.",
+      "level": "rehearsal",
+      "coverage_group": "limit-definition",
+      "available_after_page": 7
+    },
+    {
+      "id": "trial26-limit-definition-c1",
+      "chapter": 2,
+      "after_section": "2.2.2",
+      "study_section": "2.2.2",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "הגדרת הגבול והוכחות ממנה",
+      "title": "כמתים מחוזקים",
+      "question": "נניח שקיים $N$ כך שלכל $\\varepsilon>0$ ולכל $n\\ge N$ מתקיים $|a_n-L|<\\varepsilon$. מה נובע?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ההנחה בלתי אפשרית"
+        },
+        {
+          "id": "b",
+          "text": "$a_n=L$ לכל $n\\ge N$"
+        },
+        {
+          "id": "c",
+          "text": "רק $a_n\\to L$, וייתכן שכל איברי הזנב שונים מ־$L$"
+        },
+        {
+          "id": "d",
+          "text": "$a_n=L$ לכל $n\\ge1$"
+        }
+      ],
+      "correct": "b",
+      "hint1": "קבעו אינדקס אחד בזנב לפני שבוחרים אפסילון.",
+      "hint2": "אם $d=|a_n-L|>0$, בחרו $\\varepsilon=d/2$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "בחירת האפסילון שברמז סותרת $d<\\varepsilon$, ולכן המרחק חייב להיות אפס לכל אינדקס בזנב. ההנחה אינה אומרת דבר על האיברים שלפני $N$.",
+      "level": "challenge",
+      "coverage_group": "limit-definition",
+      "available_after_page": 7
+    },
+    {
+      "id": "trial26-limit-properties-s1",
+      "chapter": 2,
+      "after_section": "2.3.1",
+      "study_section": "2.3.1",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "תכונות של סדרות מתכנסות",
+      "title": "מה נובע מהתכנסות?",
+      "question": "איזו תכונה יש לכל סדרה ממשית המתכנסת לגבול סופי?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "היא קבועה החל ממקום מסוים"
+        },
+        {
+          "id": "b",
+          "text": "כל איבריה חיוביים"
+        },
+        {
+          "id": "c",
+          "text": "היא חסומה"
+        },
+        {
+          "id": "d",
+          "text": "היא מונוטונית"
+        }
+      ],
+      "correct": "c",
+      "hint1": "משפט בסיסי מקשר בין התכנסות לחסימות.",
+      "hint2": "חשבו על $(-1)^n/n$ כדי לבדוק את הדרישות האחרות.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "זנב הסדרה נמצא במרחק קטן מ־1 מהגבול. מספר האיברים שלפני הזנב סופי, ולכן גם אותם אפשר לכלול בחסם משותף.",
+      "level": "sanity",
+      "coverage_group": "limit-properties",
+      "available_after_page": 11
+    },
+    {
+      "id": "trial26-limit-properties-r1",
+      "chapter": 2,
+      "after_section": "2.3.1",
+      "study_section": "2.3.1",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "תכונות של סדרות מתכנסות",
+      "title": "סימן הגבול",
+      "question": "נתון $a_n\\to L$ ו־$a_n>0$ לכל $n$. מה אפשר להסיק תמיד?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$L>0$"
+        },
+        {
+          "id": "b",
+          "text": "$L=0$"
+        },
+        {
+          "id": "c",
+          "text": "הסדרה יורדת"
+        },
+        {
+          "id": "d",
+          "text": "$L\\ge0$"
+        }
+      ],
+      "correct": "d",
+      "hint1": "אי־שוויון ממש עלול להפוך לשוויון בגבול.",
+      "hint2": "השוו בין $a_n=1/n$ לבין $a_n=1$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "גבול של איברים חיוביים אינו שלילי, אך הוא יכול להיות 0. שתי הדוגמאות מראות שלא מוכרחים גבול חיובי ממש או גבול אפס.",
+      "level": "rehearsal",
+      "coverage_group": "limit-properties",
+      "available_after_page": 11
+    },
+    {
+      "id": "trial26-limit-properties-c1",
+      "chapter": 2,
+      "after_section": "2.3.1",
+      "study_section": "2.3.1",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "תכונות של סדרות מתכנסות",
+      "title": "ריבועים וסימנים",
+      "question": "נתון $a_n^2\\to1$. איזו מסקנה מתחייבת?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$|a_n|\\to1$, אך $a_n$ אינה חייבת להתכנס"
+        },
+        {
+          "id": "b",
+          "text": "$a_n\\to1$"
+        },
+        {
+          "id": "c",
+          "text": "$a_n\\to-1$"
+        },
+        {
+          "id": "d",
+          "text": "$a_n$ אינה חסומה"
+        }
+      ],
+      "correct": "a",
+      "hint1": "נסו להעריך את $\\big||a_n|-1\\big|$.",
+      "hint2": "פרקו הפרש ריבועים: $\\big||a_n|-1\\big|=|a_n^2-1|/(|a_n|+1)$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "המכנה לפחות 1, ולכן המרחק של $|a_n|$ מ־1 שואף לאפס. הסדרה $a_n=(-1)^n$ מראה שסימנים מתחלפים יכולים למנוע התכנסות של $a_n$ עצמה.",
+      "level": "challenge",
+      "coverage_group": "limit-properties",
+      "available_after_page": 11
+    },
+    {
+      "id": "trial26-infinite-limits-s1",
+      "chapter": 2,
+      "after_section": "2.2.4",
+      "study_section": "2.2.4",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "גבולות אינסופיים",
+      "title": "הגדרת שאיפה לאינסוף",
+      "question": "מה משמעות $a_n\\to+\\infty$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "הסדרה עולה"
+        },
+        {
+          "id": "b",
+          "text": "לכל $M\\in\\mathbb R$ קיים $N$ כך שלכל $n\\ge N$ מתקיים $a_n>M$"
+        },
+        {
+          "id": "c",
+          "text": "לכל $M$ קיים אינדקס אחד $n$ כך ש־$a_n>M$"
+        },
+        {
+          "id": "d",
+          "text": "לכל $n$ מתקיים $a_n>0$"
+        }
+      ],
+      "correct": "b",
+      "hint1": "דרוש שכל הזנב יעבור את הסף, לא רק איבר אחד.",
+      "hint2": "השוו בין שאיפה לאינסוף לבין אי־חסימות מלעיל.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "בשאיפה לאינסוף כל סף ממשי נעקף לצמיתות החל ממקום מתאים. אי־חסימות לבדה אינה מבטיחה זאת.",
+      "level": "sanity",
+      "coverage_group": "infinite-limits",
+      "available_after_page": 10
+    },
+    {
+      "id": "trial26-infinite-limits-r1",
+      "chapter": 2,
+      "after_section": "2.2.4",
+      "study_section": "2.2.4",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "גבולות אינסופיים",
+      "title": "לא חסומה, ובכל זאת",
+      "question": "נגדיר $a_n=n$ כאשר $n$ זוגי ו־$a_n=0$ כאשר $n$ אי־זוגי. מה נכון?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "הסדרה מתכנסת ל־0"
+        },
+        {
+          "id": "b",
+          "text": "הסדרה חסומה"
+        },
+        {
+          "id": "c",
+          "text": "הסדרה אינה חסומה מלעיל ואינה שואפת ל־$+\\infty$"
+        },
+        {
+          "id": "d",
+          "text": "הסדרה שואפת ל־$+\\infty$"
+        }
+      ],
+      "correct": "c",
+      "hint1": "האיברים הזוגיים בודקים חסימות; האי־זוגיים בודקים את הגדרת הגבול.",
+      "hint2": "עבור הסף $M=1$ תמיד יהיו אינדקסים גדולים שבהם האיבר הוא 0.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "האיברים הזוגיים גדולים כרצוננו, אבל האפסים חוזרים ללא סוף ולכן אין זנב שנמצא כולו מעל 1. גם התכנסות ל־0 אינה אפשרית בגלל האיברים הזוגיים.",
+      "level": "rehearsal",
+      "coverage_group": "infinite-limits",
+      "available_after_page": 10
+    },
+    {
+      "id": "trial26-infinite-limits-c1",
+      "chapter": 2,
+      "after_section": "2.2.4",
+      "study_section": "2.2.4",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "גבולות אינסופיים",
+      "title": "מכפלה לא מוכרעת",
+      "question": "נתון $a_n\\to+\\infty$, $b_n>0$ ו־$b_n\\to0$. איזה גבול של $a_nb_n$ אפשרי?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "רק 0"
+        },
+        {
+          "id": "b",
+          "text": "רק 1"
+        },
+        {
+          "id": "c",
+          "text": "רק $+\\infty$"
+        },
+        {
+          "id": "d",
+          "text": "כל אחת מהאפשרויות $0$, $1$ ו־$+\\infty$ אפשרית"
+        }
+      ],
+      "correct": "d",
+      "hint1": "בחרו אותה סדרה ראשונה ושנו את קצב הדעיכה של השנייה.",
+      "hint2": "קחו $a_n=n$ ובדקו $b_n=1/n^2$, $1/n$, $1/\\sqrt n$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "שלוש הבחירות נותנות בהתאמה מכפלות $1/n$, 1 ו־$\\sqrt n$. לכן הנתונים אינם קובעים את גבול המכפלה.",
+      "level": "challenge",
+      "coverage_group": "infinite-limits",
+      "available_after_page": 10
+    },
+    {
+      "id": "trial26-rational-approximation-s1",
+      "chapter": 2,
+      "after_section": "2.3.2",
+      "study_section": "2.3.2",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "קירוב רציונלי",
+      "title": "החלק השלם",
+      "question": "איזה אי־שוויון נכון לכל $t\\in\\mathbb R$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$\\lfloor t\\rfloor\\le t<\\lfloor t\\rfloor+1$"
+        },
+        {
+          "id": "b",
+          "text": "$t\\le\\lfloor t\\rfloor<t+1$"
+        },
+        {
+          "id": "c",
+          "text": "$\\lfloor t\\rfloor<t\\le\\lfloor t\\rfloor+1$"
+        },
+        {
+          "id": "d",
+          "text": "$|\\lfloor t\\rfloor-t|>1$"
+        }
+      ],
+      "correct": "a",
+      "hint1": "החלק השלם הוא השלם הגדול ביותר שאינו גדול מהמספר.",
+      "hint2": "בדקו גם מספר שלם וגם מספר שלילי שאינו שלם.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "לפי ההגדרה $\\lfloor t\\rfloor$ אינו גדול מ־$t$, והשלם הבא כבר גדול ממנו. כאשר $t$ שלם מתקיים שוויון בצד השמאלי.",
+      "level": "sanity",
+      "coverage_group": "rational-approximation",
+      "available_after_page": 11
+    },
+    {
+      "id": "trial26-rational-approximation-r1",
+      "chapter": 2,
+      "after_section": "2.3.2",
+      "study_section": "2.3.2",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "קירוב רציונלי",
+      "title": "קירוב מלמטה",
+      "question": "נקבע $x\\in\\mathbb R$ ונגדיר $r_n=\\lfloor nx\\rfloor/n$. איזה אומדן נכון לכל $n\\ge1$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$x-r_n<0$"
+        },
+        {
+          "id": "b",
+          "text": "$0\\le x-r_n<1/n$"
+        },
+        {
+          "id": "c",
+          "text": "$0<r_n-x\\le1/n$"
+        },
+        {
+          "id": "d",
+          "text": "$|x-r_n|=1/n$"
+        }
+      ],
+      "correct": "b",
+      "hint1": "הפעילו את הגדרת החלק השלם על $nx$.",
+      "hint2": "חלקו ב־$n>0$ את $\\lfloor nx\\rfloor\\le nx<\\lfloor nx\\rfloor+1$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "מתקבל $r_n\\le x<r_n+1/n$. זה נותן את האומדן, ובפרט $r_n\\to x$ גם כאשר הסדרה אינה מונוטונית.",
+      "level": "rehearsal",
+      "coverage_group": "rational-approximation",
+      "available_after_page": 11
+    },
+    {
+      "id": "trial26-rational-approximation-c1",
+      "chapter": 2,
+      "after_section": "2.3.2",
+      "study_section": "2.3.2",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "קירוב רציונלי",
+      "title": "קירוב עשרוני מונוטוני",
+      "question": "למספר ממשי $x$ נגדיר $r_n=\\lfloor10^n x\\rfloor/10^n$. איזו טענה נכונה תמיד?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$r_n$ עולה ממש לכל $x$"
+        },
+        {
+          "id": "b",
+          "text": "עבור $x<0$ הסדרה מתכנסת ל־$-x$"
+        },
+        {
+          "id": "c",
+          "text": "$r_n$ עולה במובן הרחב ומתכנסת ל־$x$"
+        },
+        {
+          "id": "d",
+          "text": "$r_n$ יורדת ומתכנסת ל־$x$"
+        }
+      ],
+      "correct": "c",
+      "hint1": "השוו בין $\\lfloor10t\\rfloor$ לבין $10\\lfloor t\\rfloor$.",
+      "hint2": "מתקיים $\\lfloor10t\\rfloor\\ge10\\lfloor t\\rfloor$, וכן $0\\le x-r_n<10^{-n}$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "האי־שוויון הראשון מוכיח מונוטוניות אחרי חלוקה ב־$10^{n+1}$, והשני מוכיח התכנסות. ייתכנו שוויונות בין איברים, למשל כאשר $x$ שלם. הטיעון תקף גם ל־$x$ שלילי.",
+      "level": "challenge",
+      "coverage_group": "rational-approximation",
+      "available_after_page": 11
+    },
+    {
+      "id": "trial26-limit-algebra-s1",
+      "chapter": 2,
+      "after_section": "2.4.1",
+      "study_section": "2.4.1",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "חשבון גבולות",
+      "title": "מתי מותר לחלק גבולות?",
+      "question": "נתון $a_n\\to a$ ו־$b_n\\to b$. איזה תנאי נוסף מאפשר להסיק $a_n/b_n\\to a/b$, כשהמנה מוגדרת בזנב?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$b_n\\ne0$ לכל $n$ בלבד"
+        },
+        {
+          "id": "b",
+          "text": "$a\\ne0$"
+        },
+        {
+          "id": "c",
+          "text": "$a=b$"
+        },
+        {
+          "id": "d",
+          "text": "$b\\ne0$"
+        }
+      ],
+      "correct": "d",
+      "hint1": "צריך שגם המכנה בגבול לא יתאפס.",
+      "hint2": "אם $b_n\\to b\\ne0$, המכנים רחוקים מאפס החל ממקום מסוים.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "התנאי $b\\ne0$ מבטיח שהמנה מוגדרת בזנב ושמשפט גבול המנה חל. מכנים שאינם אפס אך שואפים לאפס אינם מספיקים.",
+      "level": "sanity",
+      "coverage_group": "limit-algebra",
+      "available_after_page": 14
+    },
+    {
+      "id": "trial26-limit-algebra-r1",
+      "chapter": 2,
+      "after_section": "2.4.1",
+      "study_section": "2.4.1",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "חשבון גבולות",
+      "title": "אפס חלקי אפס",
+      "question": "נתון $a_n\\to0$, $b_n\\to0$ ו־$b_n\\ne0$. מה נובע לגבי $a_n/b_n$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "אין מסקנה קבועה: ייתכנו גבולות שונים או אי־התכנסות"
+        },
+        {
+          "id": "b",
+          "text": "המנה תמיד שואפת ל־0"
+        },
+        {
+          "id": "c",
+          "text": "המנה תמיד שואפת ל־1"
+        },
+        {
+          "id": "d",
+          "text": "המנה תמיד שואפת ל־$+\\infty$"
+        }
+      ],
+      "correct": "a",
+      "hint1": "בחרו שני קצבי דעיכה שונים.",
+      "hint2": "עם $b_n=1/n$, בדקו $a_n=1/n^2$, $1/n$ ו־$(-1)^n/n$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "המנות בדוגמאות הן $1/n$, 1 ו־$(-1)^n$. לכן הנתונים מאפשרים גבול 0, גבול 1 וגם אי־התכנסות.",
+      "level": "rehearsal",
+      "coverage_group": "limit-algebra",
+      "available_after_page": 14
+    },
+    {
+      "id": "trial26-limit-algebra-c1",
+      "chapter": 2,
+      "after_section": "2.4.1",
+      "study_section": "2.4.1",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "חשבון גבולות",
+      "title": "צירוף של הפרשים גדולים",
+      "question": "מהו הגבול של $n(\\sqrt{n^2+1}-n)$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$+\\infty$"
+        },
+        {
+          "id": "b",
+          "text": "$1/2$"
+        },
+        {
+          "id": "c",
+          "text": "$0$"
+        },
+        {
+          "id": "d",
+          "text": "$1$"
+        }
+      ],
+      "correct": "b",
+      "hint1": "הכפלה בצמוד מסלקת את ההפרש בין שני מספרים גדולים.",
+      "hint2": "אחרי כפל בצמוד מתקבל $n/(\\sqrt{n^2+1}+n)$. חלקו מונה ומכנה ב־$n$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "הביטוי שווה ל־$1/(\\sqrt{1+1/n^2}+1)$, ולכן שואף ל־$1/2$. אין להחליף את ההפרש בגבול 0 לפני הכפלתו ב־$n$.",
+      "level": "challenge",
+      "coverage_group": "limit-algebra",
+      "available_after_page": 14
+    },
+    {
+      "id": "trial26-squeeze-s1",
+      "chapter": 2,
+      "after_section": "2.4.2",
+      "study_section": "2.4.2",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "סנדוויץ׳ והשוואה",
+      "title": "מה דורש משפט הסנדוויץ׳?",
+      "question": "נתון $a_n\\le b_n\\le c_n$ החל ממקום מסוים. איזה נתון מאפשר להסיק $b_n\\to L$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$a_n\\to L$ בלבד"
+        },
+        {
+          "id": "b",
+          "text": "$a_n\\to L$ ו־$c_n\\to L+1$"
+        },
+        {
+          "id": "c",
+          "text": "$a_n\\to L$ וגם $c_n\\to L$"
+        },
+        {
+          "id": "d",
+          "text": "$a_n$ ו־$c_n$ חסומות בלבד"
+        }
+      ],
+      "correct": "c",
+      "hint1": "שתי סדרות החסימה צריכות להיפגש בגבול.",
+      "hint2": "חסימות או שני גבולות שונים אינם מצמצמים את הרווח לאפס.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "כאשר שתי סדרות החסימה מתכנסות לאותו $L$, המרחק האפשרי של הסדרה שביניהן מן הגבול הולך לאפס.",
+      "level": "sanity",
+      "coverage_group": "squeeze",
+      "available_after_page": 18
+    },
+    {
+      "id": "trial26-squeeze-r1",
+      "chapter": 2,
+      "after_section": "2.4.2",
+      "study_section": "2.4.2",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "סנדוויץ׳ והשוואה",
+      "title": "תנודה חסומה",
+      "question": "נתון $|u_n|\\le5$ לכל $n$. מהו הגבול של $u_n/n$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$5$"
+        },
+        {
+          "id": "b",
+          "text": "תלוי בשאלה אם $u_n$ מתכנסת"
+        },
+        {
+          "id": "c",
+          "text": "לא קיים אם $u_n$ מחליפה סימן"
+        },
+        {
+          "id": "d",
+          "text": "$0$"
+        }
+      ],
+      "correct": "d",
+      "hint1": "חסמו את הערך המוחלט של המנה.",
+      "hint2": "$0\\le|u_n/n|\\le5/n$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "משפט הסנדוויץ׳ נותן $|u_n/n|\\to0$, ולכן $u_n/n\\to0$. לא נדרשת התכנסות של המונה.",
+      "level": "rehearsal",
+      "coverage_group": "squeeze",
+      "available_after_page": 18
+    },
+    {
+      "id": "trial26-squeeze-c1",
+      "chapter": 2,
+      "after_section": "2.4.2",
+      "study_section": "2.4.2",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "סנדוויץ׳ והשוואה",
+      "title": "סנדוויץ׳ חד־צדדי",
+      "question": "נתון $a_n\\ge0$ ולכל $n\\ge1$ מתקיים $a_{n+1}\\le\\tfrac12a_n+1/n$. איזו מסקנה נכונה?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$a_n\\to0$"
+        },
+        {
+          "id": "b",
+          "text": "$a_n\\to1$ בהכרח"
+        },
+        {
+          "id": "c",
+          "text": "$a_n\\to+\\infty$"
+        },
+        {
+          "id": "d",
+          "text": "ייתכן גבול חיובי סופי"
+        }
+      ],
+      "correct": "a",
+      "hint1": "השאירו את האיברים הראשונים בחלק אחד ואת השגיאות המאוחרות בחלק אחר.",
+      "hint2": "קבעו $N$ כך ש־$1/n<\\varepsilon/4$ לכל $n\\ge N$. איטרציה נותנת $a_{N+k}\\le2^{-k}a_N+\\varepsilon/2$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "לכל $\\varepsilon>0$ בוחרים $N$ כרמז. סכום השגיאות הגאומטרי קטן מ־$\\varepsilon/2$, ול־$k$ גדול גם $2^{-k}a_N<\\varepsilon/2$. לכן $0\\le a_{N+k}<\\varepsilon$ והסדרה שואפת לאפס.",
+      "level": "challenge",
+      "coverage_group": "squeeze",
+      "available_after_page": 18
+    },
+    {
+      "id": "trial26-ratio-root-s1",
+      "chapter": 2,
+      "after_section": "2.4.3.2",
+      "study_section": "2.4.3.2",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "מבחני מנה ושורש",
+      "title": "מנה קטנה מאחד",
+      "question": "נתון $a_n>0$ ו־$a_{n+1}/a_n\\to q$ כאשר $q<1$. מה מתחייב?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$a_n=q^n$ לכל $n$"
+        },
+        {
+          "id": "b",
+          "text": "$a_n\\to0$"
+        },
+        {
+          "id": "c",
+          "text": "$a_n\\to q$"
+        },
+        {
+          "id": "d",
+          "text": "$a_n\\to+\\infty$"
+        }
+      ],
+      "correct": "b",
+      "hint1": "מבחן המנה נותן השוואה לסדרה הנדסית בזנב.",
+      "hint2": "בחרו $r$ עם $q<r<1$; לבסוף $a_{n+1}\\le r a_n$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "איטרציה מן המקום שבו המנה קטנה מ־$r$ נותנת חסם גאומטרי שדועך לאפס. אין הכרח שהסדרה עצמה תהיה הנדסית.",
+      "level": "sanity",
+      "coverage_group": "ratio-root",
+      "available_after_page": 20
+    },
+    {
+      "id": "trial26-ratio-root-r1",
+      "chapter": 2,
+      "after_section": "2.4.3.2",
+      "study_section": "2.4.3.2",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "מבחני מנה ושורש",
+      "title": "המקרה שהמבחן לא מכריע",
+      "question": "נתון $a_n>0$ ו־$a_{n+1}/a_n\\to1$. מה נובע?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$a_n\\to0$"
+        },
+        {
+          "id": "b",
+          "text": "הסדרה חסומה"
+        },
+        {
+          "id": "c",
+          "text": "אין הכרעה: ייתכנו גבול 0, גבול חיובי או שאיפה לאינסוף"
+        },
+        {
+          "id": "d",
+          "text": "$a_n\\to1$"
+        }
+      ],
+      "correct": "c",
+      "hint1": "השוו שלוש סדרות פשוטות עם אותו גבול של מנות.",
+      "hint2": "בדקו $a_n=1/n$, $a_n=1$ ו־$a_n=n$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "בכל שלוש הדוגמאות המנה שואפת ל־1, אך גבולות הסדרות שונים. לכן גבול מנה 1 אינו מכריע.",
+      "level": "rehearsal",
+      "coverage_group": "ratio-root",
+      "available_after_page": 20
+    },
+    {
+      "id": "trial26-ratio-root-c1",
+      "chapter": 2,
+      "after_section": "2.4.3.2",
+      "study_section": "2.4.3.2",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "מבחני מנה ושורש",
+      "title": "שורשים בלי גבול מנה",
+      "question": "נגדיר $a_n=2^{-n}$ כאשר $n$ זוגי, ו־$a_n=3\\cdot2^{-n}$ כאשר $n$ אי־זוגי. מה נכון?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "המנות שואפות ל־$1/2$ ולכן $a_n\\to0$"
+        },
+        {
+          "id": "b",
+          "text": "השורשים מתחלפים בין $1/2$ ל־$3/2$"
+        },
+        {
+          "id": "c",
+          "text": "$a_n$ אינה מתכנסת כי המנות אינן מתכנסות"
+        },
+        {
+          "id": "d",
+          "text": "$\\sqrt[n]{a_n}\\to1/2$ ו־$a_n\\to0$, אך למנות אין גבול"
+        }
+      ],
+      "correct": "d",
+      "hint1": "המקדם 3 נעלם תחת שורש מסדר הולך וגדל.",
+      "hint2": "המנות הן לסירוגין $3/2$ ו־$1/6$; השורשים הם $1/2$ או $3^{1/n}/2$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "שתי אפשרויות השורש שואפות ל־$1/2$, ולכן מבחן השורש נותן גבול אפס. המנות מקבלות שני ערכים שונים, כך שאין להן גבול.",
+      "level": "challenge",
+      "coverage_group": "ratio-root",
+      "available_after_page": 20
+    },
+    {
+      "id": "trial26-averages-s1",
+      "chapter": 2,
+      "after_section": "2.4.4",
+      "study_section": "2.4.4",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "צזארו ושטולץ",
+      "title": "משפט צזארו",
+      "question": "אם $a_n\\to L$, מהו גבול הממוצעים $b_n=(a_1+\\cdots+a_n)/n$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$L$"
+        },
+        {
+          "id": "b",
+          "text": "$0$ תמיד"
+        },
+        {
+          "id": "c",
+          "text": "$L/n$"
+        },
+        {
+          "id": "d",
+          "text": "לא ניתן לדעת בלי מונוטוניות"
+        }
+      ],
+      "correct": "a",
+      "hint1": "זהו בדיוק המשפט על ממוצעי סדרה מתכנסת.",
+      "hint2": "האיברים הראשונים מקבלים משקל קטן יותר ויותר, ורוב האיברים קרובים לגבול.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "משפט צזארו נותן $b_n\\to L$ ללא דרישת מונוטוניות. התרומה של ראשית סופית נעלמת בממוצע.",
+      "level": "sanity",
+      "coverage_group": "averages",
+      "available_after_page": 21
+    },
+    {
+      "id": "trial26-averages-r1",
+      "chapter": 2,
+      "after_section": "2.4.4",
+      "study_section": "2.4.4",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "צזארו ושטולץ",
+      "title": "הכיוון ההפוך",
+      "question": "אם ממוצעי צזארו של סדרה מתכנסים ל־0, האם הסדרה עצמה חייבת להתכנס ל־0?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "לא; אבל הסדרה חייבת להתכנס לגבול אחר"
+        },
+        {
+          "id": "b",
+          "text": "לא; $a_n=(-1)^n$ היא דוגמה נגדית"
+        },
+        {
+          "id": "c",
+          "text": "כן, לפי צזארו"
+        },
+        {
+          "id": "d",
+          "text": "כן, בתנאי שהסדרה חסומה"
+        }
+      ],
+      "correct": "b",
+      "hint1": "חפשו תנודה שהממוצע שלה מבטל את עצמו.",
+      "hint2": "סכומי $(-1)^k$ עד $n$ הם 0 או $-1$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "הממוצעים הם 0 או $-1/n$, ולכן שואפים ל־0, בעוד הסדרה חסומה ואינה מתכנסת. משפט צזארו אינו טוען את הכיוון ההפוך.",
+      "level": "rehearsal",
+      "coverage_group": "averages",
+      "available_after_page": 21
+    },
+    {
+      "id": "trial26-averages-c1",
+      "chapter": 2,
+      "after_section": "2.4.4",
+      "study_section": "2.4.4",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "צזארו ושטולץ",
+      "title": "איברים נדירים שגדלים",
+      "question": "נגדיר $a_n=\\sqrt n$ אם $n$ ריבוע שלם, ו־$a_n=0$ אחרת. לאן שואף $(a_1+\\cdots+a_n)/n$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$1$"
+        },
+        {
+          "id": "b",
+          "text": "$+\\infty$"
+        },
+        {
+          "id": "c",
+          "text": "$1/2$"
+        },
+        {
+          "id": "d",
+          "text": "$0$"
+        }
+      ],
+      "correct": "c",
+      "hint1": "סכמו רק על האינדקסים שהם ריבועים.",
+      "hint2": "אם $m=\\lfloor\\sqrt n\\rfloor$, הסכום הוא $1+\\cdots+m=m(m+1)/2$, ו־$m^2\\le n<(m+1)^2$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "מן האומדנים נובע $m^2/n\\to1$ וגם $m/n\\to0$. לכן $m(m+1)/(2n)\\to1/2$. נדירות האיברים הלא־אפסיים לבדה אינה מבטיחה ממוצע אפס.",
+      "level": "challenge",
+      "coverage_group": "averages",
+      "available_after_page": 21
+    },
+    {
+      "id": "trial26-monotone-s1",
+      "chapter": 2,
+      "after_section": "2.5.2",
+      "study_section": "2.5.2",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "התכנסות של סדרות מונוטוניות",
+      "title": "מתי מונוטוניות מספיקה?",
+      "question": "סדרה עולה במובן הרחב חסומה מלעיל. מה מתחייב?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "היא מתכנסת למקסימום שלה, שקיים בהכרח"
+        },
+        {
+          "id": "b",
+          "text": "היא מתכנסת ל־0"
+        },
+        {
+          "id": "c",
+          "text": "היא קבועה החל ממקום מסוים"
+        },
+        {
+          "id": "d",
+          "text": "היא מתכנסת לסופרמום קבוצת ערכיה"
+        }
+      ],
+      "correct": "d",
+      "hint1": "המשפט אינו דורש שהחסם העליון יושג.",
+      "hint2": "חשבו על $1-1/n$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "משפט ההתכנסות המונוטונית נותן גבול סופי השווה לסופרמום הערכים. הסופרמום אינו חייב להיות איבר של הסדרה.",
+      "level": "sanity",
+      "coverage_group": "monotone",
+      "available_after_page": 24
+    },
+    {
+      "id": "trial26-monotone-r1",
+      "chapter": 2,
+      "after_section": "2.5.2",
+      "study_section": "2.5.2",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "התכנסות של סדרות מונוטוניות",
+      "title": "משוואת גבול אינה הוכחה",
+      "question": "נתון $a_1=1$ ו־$a_{n+1}=\\sqrt{2+a_n}$. איזה נימוק תקין מוכיח $a_n\\to2$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "מוכיחים באינדוקציה שהסדרה עולה וחסומה ב־2, ואז פותרים את משוואת הגבול"
+        },
+        {
+          "id": "b",
+          "text": "פותרים $L=\\sqrt{2+L}$; עצם קיום הפתרון מוכיח התכנסות"
+        },
+        {
+          "id": "c",
+          "text": "מאחר שכל האיברים חיוביים, הסדרה מתכנסת"
+        },
+        {
+          "id": "d",
+          "text": "מאחר ש־$a_2>a_1$, הסדרה עולה ולכן מתכנסת"
+        }
+      ],
+      "correct": "a",
+      "hint1": "יש לבסס תחילה את עצם קיום הגבול.",
+      "hint2": "אם $1\\le a_n\\le2$, אז $\\sqrt{2+a_n}\\le2$ וגם $2+a_n\\ge a_n^2$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "האי־שוויונות מוכיחים חסימות ומונוטוניות באינדוקציה. הגבול קיים, אינו שלילי ומקיים $L^2=L+2$, ולכן $L=2$. משוואת גבול לבדה אינה מוכיחה התכנסות.",
+      "level": "rehearsal",
+      "coverage_group": "monotone",
+      "available_after_page": 24
+    },
+    {
+      "id": "trial26-monotone-c1",
+      "chapter": 2,
+      "after_section": "2.5.2",
+      "study_section": "2.5.2",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "התכנסות של סדרות מונוטוניות",
+      "title": "איטרציה המתקרבת לשורש",
+      "question": "נתון $a_1=2$ ו־$a_{n+1}=\\tfrac12(a_n+2/a_n)$. איזו טענה נכונה?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "האיברים מתחלפים משני צדי $\\sqrt2$"
+        },
+        {
+          "id": "b",
+          "text": "הסדרה יורדת וחסומה מלרע ב־$\\sqrt2$, ומתכנסת ל־$\\sqrt2$"
+        },
+        {
+          "id": "c",
+          "text": "הסדרה עולה ומתכנסת ל־2"
+        },
+        {
+          "id": "d",
+          "text": "הסדרה יורדת ומתכנסת ל־0"
+        }
+      ],
+      "correct": "b",
+      "hint1": "הוכיחו שהאיטרציה נשארת מעל השורש.",
+      "hint2": "ל־$x>0$, הביטוי $\\tfrac12(x+2/x)-\\sqrt2=(x-\\sqrt2)^2/(2x)$. אם $x\\ge\\sqrt2$, אז $\\tfrac12(x+2/x)\\le x$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "שני האומדנים מוכיחים חסם תחתון וירידה. הגבול חיובי ומקיים $L=(L+2/L)/2$, ולכן $L^2=2$ ו־$L=\\sqrt2$.",
+      "level": "challenge",
+      "coverage_group": "monotone",
+      "available_after_page": 24
+    },
+    {
+      "id": "trial26-e-s1",
+      "chapter": 2,
+      "after_section": "2.5.3",
+      "study_section": "2.5.3",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "הגדרת e ויישומים",
+      "title": "סדרת ההגדרה",
+      "question": "לאן מתכנסת הסדרה $(1+1/n)^n$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$2$"
+        },
+        {
+          "id": "b",
+          "text": "$+\\infty$"
+        },
+        {
+          "id": "c",
+          "text": "$e$"
+        },
+        {
+          "id": "d",
+          "text": "$1$"
+        }
+      ],
+      "correct": "c",
+      "hint1": "זהו אחד האפיונים המרכזיים של הקבוע.",
+      "hint2": "הבסיס מתקרב ל־1, אבל גם המעריך משתנה.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "הסדרה $(1+1/n)^n$ מתכנסת ל־$e$. אי אפשר להציב 1 בבסיס ולהתעלם מן המעריך הגדל.",
+      "level": "sanity",
+      "coverage_group": "e",
+      "available_after_page": 26
+    },
+    {
+      "id": "trial26-e-r1",
+      "chapter": 2,
+      "after_section": "2.5.3",
+      "study_section": "2.5.3",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "הגדרת e ויישומים",
+      "title": "מעריך נוסף קבוע",
+      "question": "מהו הגבול של $(1+1/n)^{n+3}$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$e^3$"
+        },
+        {
+          "id": "b",
+          "text": "$3e$"
+        },
+        {
+          "id": "c",
+          "text": "$1$"
+        },
+        {
+          "id": "d",
+          "text": "$e$"
+        }
+      ],
+      "correct": "d",
+      "hint1": "פרקו את החזקה לשני גורמים.",
+      "hint2": "כתבו $(1+1/n)^n(1+1/n)^3$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "הגורם הראשון שואף ל־$e$, והשני ל־1. לכן המכפלה שואפת ל־$e$. הוספת 3 למעריך אינה שקולה להכפלתו ב־3.",
+      "level": "rehearsal",
+      "coverage_group": "e",
+      "available_after_page": 26
+    },
+    {
+      "id": "trial26-e-c1",
+      "chapter": 2,
+      "after_section": "2.5.3",
+      "study_section": "2.5.3",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "הגדרת e ויישומים",
+      "title": "בסיס קטן מאחד",
+      "question": "מהו הגבול של $(1-1/n)^n$ כאשר $n\\ge2$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$1/e$"
+        },
+        {
+          "id": "b",
+          "text": "$e$"
+        },
+        {
+          "id": "c",
+          "text": "$0$"
+        },
+        {
+          "id": "d",
+          "text": "$1$"
+        }
+      ],
+      "correct": "a",
+      "hint1": "השתמשו בהופכי ובשינוי אינדקס.",
+      "hint2": "כתבו $(1-1/n)^n=(1+1/(n-1))^{-n}$ והציבו $m=n-1$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "הביטוי הוא $1/(1+1/m)^{m+1}$. המכנה שואף ל־$e$, ולכן הגבול הוא $1/e$.",
+      "level": "challenge",
+      "coverage_group": "e",
+      "available_after_page": 26
+    },
+    {
+      "id": "trial26-subsequences-s1",
+      "chapter": 2,
+      "after_section": "2.6.3",
+      "study_section": "2.6.3",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "תת־סדרות ובולצאנו–ויירשטראס",
+      "title": "אינדקסים של תת־סדרה",
+      "question": "איזה תנאי נדרש באינדקסים $n_k$ כדי ש־$(a_{n_k})$ תהיה תת־סדרה?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "חובה $n_k=2k$"
+        },
+        {
+          "id": "b",
+          "text": "$n_1<n_2<\\cdots$ וכולם טבעיים"
+        },
+        {
+          "id": "c",
+          "text": "האינדקסים שונים, אך סדרם שרירותי"
+        },
+        {
+          "id": "d",
+          "text": "מותר להשתמש שוב ושוב באותו אינדקס"
+        }
+      ],
+      "correct": "b",
+      "hint1": "תת־סדרה שומרת על סדר הופעת האיברים.",
+      "hint2": "מותר לדלג על איברים, אך אסור לחזור לאחור או לחזור על אינדקס.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "אינדקסים טבעיים עולים ממש הם הדרישה. זוגיים הם רק דוגמה אחת מתוך אפשרויות רבות.",
+      "level": "sanity",
+      "coverage_group": "subsequences",
+      "available_after_page": 29
+    },
+    {
+      "id": "trial26-subsequences-r1",
+      "chapter": 2,
+      "after_section": "2.6.3",
+      "study_section": "2.6.3",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "תת־סדרות ובולצאנו–ויירשטראס",
+      "title": "שני סוגי אינדקסים",
+      "question": "נתון $a_{2n}\\to L$ וגם $a_{2n-1}\\to L$. מה נובע?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "הסדרה מתכנסת רק אם היא מונוטונית"
+        },
+        {
+          "id": "b",
+          "text": "כל האיברים שווים ל־$L$"
+        },
+        {
+          "id": "c",
+          "text": "$a_n\\to L$"
+        },
+        {
+          "id": "d",
+          "text": "אין מסקנה על הסדרה כולה"
+        }
+      ],
+      "correct": "c",
+      "hint1": "שתי תתי־הסדרות מכסות את כל האינדקסים.",
+      "hint2": "לדיוק נתון בחרו סף שמתאים גם לזוגיים וגם לאי־זוגיים.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "מעבר לסף המשותף כל איבר, זוגי או אי־זוגי, קרוב ל־$L$ כרצוננו. לכן כל הסדרה מתכנסת לאותו גבול.",
+      "level": "rehearsal",
+      "coverage_group": "subsequences",
+      "available_after_page": 29
+    },
+    {
+      "id": "trial26-subsequences-c1",
+      "chapter": 2,
+      "after_section": "2.6.3",
+      "study_section": "2.6.3",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "תת־סדרות ובולצאנו–ויירשטראס",
+      "title": "גבול משותף לתת־סדרות",
+      "question": "סדרה ממשית חסומה, וכל תת־סדרה שלה שמתכנסת לגבול ממשי מתכנסת לאותו $L$. מה מתחייב?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ייתכן שהסדרה אינה מתכנסת"
+        },
+        {
+          "id": "b",
+          "text": "הסדרה קבועה החל ממקום מסוים"
+        },
+        {
+          "id": "c",
+          "text": "הסדרה מונוטונית"
+        },
+        {
+          "id": "d",
+          "text": "הסדרה כולה מתכנסת ל־$L$"
+        }
+      ],
+      "correct": "d",
+      "hint1": "אם אין התכנסות, אפשר לבחור תת־סדרה שנשארת רחוקה מהגבול.",
+      "hint2": "לאותה תת־סדרה חסומה יש לפי בולצאנו–ויירשטראס תת־סדרה מתכנסת. מה אפשר לומר על גבולה?",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "אי־התכנסות ל־$L$ נותנת $\\varepsilon>0$ ותת־סדרה שמרחק כל איבריה מ־$L$ לפחות $\\varepsilon$. תת־סדרה מתכנסת שלה נותנת גבול שונה מ־$L$ — סתירה. קביעות ומונוטוניות אינן נדרשות.",
+      "level": "challenge",
+      "coverage_group": "subsequences",
+      "available_after_page": 29
+    },
+    {
+      "id": "trial26-nested-compact-s1",
+      "chapter": 2,
+      "after_section": "2.6.6",
+      "study_section": "2.6.6",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "קטעים מקוננים וקומפקטיות",
+      "title": "קומפקטיות על הישר",
+      "question": "איזו מן הקבוצות הבאות קומפקטית ב־$\\mathbb R$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$[0,1]$"
+        },
+        {
+          "id": "b",
+          "text": "$(0,1)$"
+        },
+        {
+          "id": "c",
+          "text": "$[0,+\\infty)$"
+        },
+        {
+          "id": "d",
+          "text": "$\\mathbb Q\\cap[0,1]$"
+        }
+      ],
+      "correct": "a",
+      "hint1": "בישר הממשי קומפקטיות שקולה לסגירות וחסימות.",
+      "hint2": "בדקו בשתי דרישות נפרדות: חסימות וסגירות.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "$[0,1]$ סגורה וחסומה. הקטע הפתוח וקבוצת הרציונליים שבקטע אינם סגורים; חצי הישר אינו חסום.",
+      "level": "sanity",
+      "coverage_group": "nested-compact",
+      "available_after_page": 31
+    },
+    {
+      "id": "trial26-nested-compact-r1",
+      "chapter": 2,
+      "after_section": "2.6.6",
+      "study_section": "2.6.6",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "קטעים מקוננים וקומפקטיות",
+      "title": "קטעים פתוחים מקוננים",
+      "question": "נגדיר $I_n=(0,1/n)$ עבור $n\\ge1$. מהו $\\bigcap_{n=1}^{\\infty}I_n$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$(0,1/2)$"
+        },
+        {
+          "id": "b",
+          "text": "$\\varnothing$"
+        },
+        {
+          "id": "c",
+          "text": "$\\{0\\}$"
+        },
+        {
+          "id": "d",
+          "text": "$(0,1)$"
+        }
+      ],
+      "correct": "b",
+      "hint1": "בדקו את 0 בנפרד מכל מספר חיובי.",
+      "hint2": "0 אינו באף קטע; לכל $x>0$ אפשר לבחור $n>1/x$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "אפס אינו כלול, וכל מספר חיובי יוצא מן הקטעים כאשר $n$ מספיק גדול. מספר שלילי אינו נמצא בהם כלל. הדרישה לסגירות במשפט הקטעים המקוננים חשובה.",
+      "level": "rehearsal",
+      "coverage_group": "nested-compact",
+      "available_after_page": 31
+    },
+    {
+      "id": "trial26-nested-compact-c1",
+      "chapter": 2,
+      "after_section": "2.6.6",
+      "study_section": "2.6.6",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "קטעים מקוננים וקומפקטיות",
+      "title": "לכידת האיברים בזנב",
+      "question": "קטעים סגורים לא ריקים $I_n=[u_n,v_n]$ מקוננים, ואורכיהם שואפים לאפס. נסמן את הנקודה היחידה בחיתוכם ב־$L$. אם $x_n\\in I_n$ לכל $n$, מה נובע?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ייתכן גבול אחר אם בוחרים כל פעם קצה אחר"
+        },
+        {
+          "id": "b",
+          "text": "בהכרח $x_n=L$ החל ממקום מסוים"
+        },
+        {
+          "id": "c",
+          "text": "$x_n\\to L$"
+        },
+        {
+          "id": "d",
+          "text": "$x_n$ בהכרח מונוטונית"
+        }
+      ],
+      "correct": "c",
+      "hint1": "גם האיבר הנבחר וגם נקודת החיתוך נמצאים באותו קטע.",
+      "hint2": "$|x_n-L|\\le v_n-u_n$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "המרחק חסום על ידי אורך הקטע, השואף לאפס, ולכן $x_n\\to L$. אפשר לבחור נקודות לסירוגין משני צדי הגבול, ואין דרישה למונוטוניות או לשוויון ממש.",
+      "level": "challenge",
+      "coverage_group": "nested-compact",
+      "available_after_page": 31
+    },
+    {
+      "id": "trial26-partial-limits-s1",
+      "chapter": 2,
+      "after_section": "2.6.12",
+      "study_section": "2.6.12",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "גבולות חלקיים",
+      "title": "הגדרת גבול חלקי",
+      "question": "מתי מספר ממשי $L$ הוא גבול חלקי של $(a_n)$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "כאשר קיים איבר השווה ל־$L$"
+        },
+        {
+          "id": "b",
+          "text": "כאשר $L$ חסם עליון"
+        },
+        {
+          "id": "c",
+          "text": "כאשר כל תת־סדרה מתכנסת ל־$L$"
+        },
+        {
+          "id": "d",
+          "text": "כאשר קיימת תת־סדרה המתכנסת ל־$L$"
+        }
+      ],
+      "correct": "d",
+      "hint1": "גבול חלקי מתייחס להתכנסות לאורך אינדקסים נבחרים.",
+      "hint2": "הדרישה היא לקיום תת־סדרה אחת, לא לכל תתי־הסדרות.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "לפי ההגדרה $L$ הוא גבול של תת־סדרה כלשהי. הוא אינו חייב להופיע כאיבר, ולהופיע כאיבר פעם אחת אינו מספיק.",
+      "level": "sanity",
+      "coverage_group": "partial-limits",
+      "available_after_page": 37
+    },
+    {
+      "id": "trial26-partial-limits-r1",
+      "chapter": 2,
+      "after_section": "2.6.12",
+      "study_section": "2.6.12",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "גבולות חלקיים",
+      "title": "שני גבולות חלקיים",
+      "question": "מהי קבוצת הגבולות החלקיים הממשיים של $a_n=(-1)^n+1/n$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$\\{-1,1\\}$"
+        },
+        {
+          "id": "b",
+          "text": "$[-1,1]$"
+        },
+        {
+          "id": "c",
+          "text": "$\\{0\\}$"
+        },
+        {
+          "id": "d",
+          "text": "$\\{-1,0,1\\}$"
+        }
+      ],
+      "correct": "a",
+      "hint1": "בדקו את האינדקסים הזוגיים והאי־זוגיים.",
+      "hint2": "בכל איבר המרחק מאחת הנקודות $-1,1$ הוא $1/n$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "הזוגיים שואפים ל־1 והאי־זוגיים ל־$-1$. כל איבר בזנב קרוב לאחת משתי הנקודות האלה, ולכן לא ייתכן גבול חלקי אחר.",
+      "level": "rehearsal",
+      "coverage_group": "partial-limits",
+      "available_after_page": 37
+    },
+    {
+      "id": "trial26-partial-limits-c1",
+      "chapter": 2,
+      "after_section": "2.6.12",
+      "study_section": "2.6.12",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "גבולות חלקיים",
+      "title": "כל נקודות הקטע",
+      "question": "סדרה ב־$[0,1]$ נבנית משרשור הבלוקים $(0,1)$, $(0,1/2,1)$, $(0,1/3,2/3,1)$, וכן הלאה. מהי קבוצת גבולותיה החלקיים?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$\\{0\\}$"
+        },
+        {
+          "id": "b",
+          "text": "$[0,1]$"
+        },
+        {
+          "id": "c",
+          "text": "$\\mathbb Q\\cap[0,1]$"
+        },
+        {
+          "id": "d",
+          "text": "$\\{0,1\\}$"
+        }
+      ],
+      "correct": "b",
+      "hint1": "לכל נקודה בקטע בחרו איבר קרוב מתוך כל בלוק.",
+      "hint2": "בבלוק שמכנהו $m$ אפשר לבחור את $\\lfloor mx\\rfloor/m$, שמרחקו מ־$x$ קטן מ־$1/m$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "בחירה מבלוקים עוקבים יוצרת תת־סדרה עם אינדקסים עולים המתכנסת לכל $x\\in[0,1]$. אין גבולות חלקיים מחוץ לקטע הסגור. בפרט גם נקודות אי־רציונליות הן גבולות חלקיים.",
+      "level": "challenge",
+      "coverage_group": "partial-limits",
+      "available_after_page": 37
+    },
+    {
+      "id": "trial26-limsup-inf-s1",
+      "chapter": 2,
+      "after_section": "2.6.13",
+      "study_section": "2.6.13",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "לימסופ ולימאינפ",
+      "title": "שני קצות התנודה",
+      "question": "מהם $\\limsup a_n$ ו־$\\liminf a_n$ עבור $a_n=(-1)^n$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "שניהם 1"
+        },
+        {
+          "id": "b",
+          "text": "הלימסופ הוא $-1$ והלימאינפ הוא 1"
+        },
+        {
+          "id": "c",
+          "text": "$\\limsup a_n=1$, $\\liminf a_n=-1$"
+        },
+        {
+          "id": "d",
+          "text": "שניהם 0"
+        }
+      ],
+      "correct": "c",
+      "hint1": "כל זנב מכיל את שני הערכים.",
+      "hint2": "הסופרמום של כל זנב הוא 1 והאינפימום שלו הוא $-1$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "גבולות סדרות הסופרמומים והאינפימומים של הזנבות הם בהתאמה 1 ו־$-1$.",
+      "level": "sanity",
+      "coverage_group": "limsup-inf",
+      "available_after_page": 38
+    },
+    {
+      "id": "trial26-limsup-inf-r1",
+      "chapter": 2,
+      "after_section": "2.6.13",
+      "study_section": "2.6.13",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "לימסופ ולימאינפ",
+      "title": "איבר ראשון אינו קובע",
+      "question": "נתון $a_1=100$ ו־$a_n=1/n$ עבור $n\\ge2$. מה נכון?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "הסופרמום והלימסופ שניהם 100"
+        },
+        {
+          "id": "b",
+          "text": "הסופרמום והלימסופ שניהם 0"
+        },
+        {
+          "id": "c",
+          "text": "הלימסופ הוא $1/2$"
+        },
+        {
+          "id": "d",
+          "text": "$\\sup\\{a_n:n\\ge1\\}=100$, אך $\\limsup a_n=0$"
+        }
+      ],
+      "correct": "d",
+      "hint1": "הלימסופ מתייחס לזנבות, ולכן מתעלם מראשית סופית.",
+      "hint2": "ל־$N\\ge2$, הסופרמום של הזנב המתחיל ב־$N$ הוא $1/N$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "האיבר הראשון קובע את סופרמום כל הערכים, אבל סופרמומי הזנבות שואפים ל־0. לכן הלימסופ 0.",
+      "level": "rehearsal",
+      "coverage_group": "limsup-inf",
+      "available_after_page": 38
+    },
+    {
+      "id": "trial26-limsup-inf-c1",
+      "chapter": 2,
+      "after_section": "2.6.13",
+      "study_section": "2.6.13",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "לימסופ ולימאינפ",
+      "title": "לימסופ של סכום",
+      "question": "נתון ששתי סדרות חסומות $a_n,b_n$ מקיימות $\\limsup a_n=\\limsup b_n=1$. איזו מסקנה נכונה תמיד?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$\\limsup(a_n+b_n)\\le2$, אך לא מוכרח שוויון"
+        },
+        {
+          "id": "b",
+          "text": "$\\limsup(a_n+b_n)=2$"
+        },
+        {
+          "id": "c",
+          "text": "$\\limsup(a_n+b_n)\\ge2$"
+        },
+        {
+          "id": "d",
+          "text": "$\\limsup(a_n+b_n)=1$"
+        }
+      ],
+      "correct": "a",
+      "hint1": "האיברים הגדולים של שתי הסדרות לא חייבים להופיע באותם אינדקסים.",
+      "hint2": "בדקו $a_n=(-1)^n$, $b_n=-(-1)^n$. לחסם השתמשו באומדני זנב $a_n,b_n<1+\\varepsilon$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "בזנב הסכום קטן מ־$2+2\\varepsilon$, ולכן הלימסופ לכל היותר 2. בדוגמה הסכום תמיד 0, אף שלכל אחת מהסדרות לימסופ 1. סדרות קבועות 1 נותנות שוויון.",
+      "level": "challenge",
+      "coverage_group": "limsup-inf",
+      "available_after_page": 38
+    },
+    {
+      "id": "trial26-cauchy-s1",
+      "chapter": 2,
+      "after_section": "2.7.3",
+      "study_section": "2.7.3",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "סדרות קושי",
+      "title": "הגדרת קושי",
+      "question": "איזו דרישה מגדירה סדרת קושי ב־$\\mathbb R$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$a_n\\to0$"
+        },
+        {
+          "id": "b",
+          "text": "לכל $\\varepsilon>0$ קיים $N$ כך שלכל $m,n\\ge N$ מתקיים $|a_m-a_n|<\\varepsilon$"
+        },
+        {
+          "id": "c",
+          "text": "$|a_{n+1}-a_n|\\to0$"
+        },
+        {
+          "id": "d",
+          "text": "קיים $\\varepsilon>0$ כך שלכל $m,n$ מתקיים $|a_m-a_n|<\\varepsilon$"
+        }
+      ],
+      "correct": "b",
+      "hint1": "בודקים כל זוג איברים בזנב, לא רק שכנים.",
+      "hint2": "הדיוק שרירותי, והסף צריך להתאים לכל זוג אינדקסים גדולים ממנו.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "תנאי קושי אומר שכל איברי הזנב קרובים זה לזה בכל דיוק נתון. קרבת איברים עוקבים בלבד היא תנאי חלש יותר.",
+      "level": "sanity",
+      "coverage_group": "cauchy",
+      "available_after_page": 41
+    },
+    {
+      "id": "trial26-cauchy-r1",
+      "chapter": 2,
+      "after_section": "2.7.3",
+      "study_section": "2.7.3",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "סדרות קושי",
+      "title": "הפרשים עוקבים אינם מספיקים",
+      "question": "נגדיר $a_n=\\sum_{k=1}^n1/k$. מה נכון?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "הסדרה קושי כי כל הפרש עוקב חיובי"
+        },
+        {
+          "id": "b",
+          "text": "ההפרשים אינם שואפים לאפס"
+        },
+        {
+          "id": "c",
+          "text": "$a_{n+1}-a_n\\to0$, אך הסדרה אינה קושי"
+        },
+        {
+          "id": "d",
+          "text": "ההפרשים שואפים לאפס ולכן הסדרה קושי"
+        }
+      ],
+      "correct": "c",
+      "hint1": "השוו איברים רחוקים, למשל באינדקסים $n$ ו־$2n$.",
+      "hint2": "$a_{2n}-a_n=\\sum_{k=n+1}^{2n}1/k\\ge n/(2n)=1/2$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "ההפרש העוקב הוא $1/(n+1)\\to0$. אבל בכל זנב יש זוג אינדקסים מהצורה $n,2n$ שמרחק איבריהם לפחות $1/2$, בסתירה לתנאי קושי.",
+      "level": "rehearsal",
+      "coverage_group": "cauchy",
+      "available_after_page": 41
+    },
+    {
+      "id": "trial26-cauchy-c1",
+      "chapter": 2,
+      "after_section": "2.7.3",
+      "study_section": "2.7.3",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "סדרות קושי",
+      "title": "בקרה מצטברת",
+      "question": "נתון $|a_{n+1}-a_n|\\le2^{-n}$ לכל $n\\ge1$. מה מתחייב?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "היא מתכנסת בהכרח ל־0"
+        },
+        {
+          "id": "b",
+          "text": "היא מונוטונית"
+        },
+        {
+          "id": "c",
+          "text": "ייתכן שאינה חסומה"
+        },
+        {
+          "id": "d",
+          "text": "הסדרה קושי ולכן מתכנסת ב־$\\mathbb R$"
+        }
+      ],
+      "correct": "d",
+      "hint1": "חסמו הפרש בין שני איברים רחוקים באמצעות סכום הפרשים עוקבים.",
+      "hint2": "ל־$m>n$, מתקיים $|a_m-a_n|\\le\\sum_{k=n}^{m-1}2^{-k}<2^{1-n}$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "החסם אינו תלוי ב־$m$ ושואף לאפס עם $n$, ולכן מתקיים תנאי קושי. שלמות הממשיים נותנת התכנסות. הגבול תלוי בסדרה ובאיבר הראשון, ואין הכרח למונוטוניות.",
+      "level": "challenge",
+      "coverage_group": "cauchy",
+      "available_after_page": 41
+    },
+    {
+      "id": "trial26-logic-s2",
+      "chapter": 1,
+      "after_section": "1.3",
+      "study_section": "1.3",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "לוגיקה וכמתים",
+      "title": "שלילת לכל",
+      "question": "מהי השלילה של הטענה ״לכל $x\\in A$ מתקיים $P(x)$״?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "קיים $x\\in A$ שעבורו $P(x)$ אינה מתקיימת"
+        },
+        {
+          "id": "b",
+          "text": "לכל $x\\in A$ הטענה $P(x)$ אינה מתקיימת"
+        },
+        {
+          "id": "c",
+          "text": "קיים $x\\notin A$ שעבורו $P(x)$ מתקיימת"
+        },
+        {
+          "id": "d",
+          "text": "קיים $x\\in A$ שעבורו $P(x)$ מתקיימת"
+        }
+      ],
+      "correct": "a",
+      "hint1": "דוגמה נגדית אחת מספיקה להפרכת טענה כללית.",
+      "hint2": "שומרים את תחום המשתנה ומשנים גם את הכמת וגם את הטענה שבתוכו.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "השלילה היא $\\exists x\\in A:\\neg P(x)$. לא נדרש שכל האיברים יהיו דוגמאות נגדיות.",
+      "level": "sanity",
+      "coverage_group": "logic",
+      "available_after_page": 4
+    },
+    {
+      "id": "trial26-logic-r2",
+      "chapter": 1,
+      "after_section": "1.3",
+      "study_section": "1.3",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "לוגיקה וכמתים",
+      "title": "איחוד של שתי אפשרויות",
+      "question": "לכל מספר ממשי $x$ מתקיים $P(x)$ או $Q(x)$. האם נובע שלכל $x$ מתקיים $P(x)$, או שלכל $x$ מתקיים $Q(x)$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "לא, ולכן בהכרח יש מספר שלא מקיים אף אחת"
+        },
+        {
+          "id": "b",
+          "text": "לא; אפשר ש־$P$ נכונה בחלק מהמספרים ו־$Q$ באחרים"
+        },
+        {
+          "id": "c",
+          "text": "כן, כמת לכל מתפלג על או"
+        },
+        {
+          "id": "d",
+          "text": "כן, בתנאי שאין מספר שמקיים את שתיהן"
+        }
+      ],
+      "correct": "b",
+      "hint1": "האפשרות הנכונה עשויה להשתנות ממספר למספר.",
+      "hint2": "קחו $P(x)$ להיות $x\\ge0$, ו־$Q(x)$ להיות $x<0$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "בדוגמה כל ממשי מקיים בדיוק אחת מן התכונות, אך אף תכונה אינה נכונה לכל הממשיים. לכן אי אפשר להוציא את ״או״ אל מחוץ לכמת באופן הזה.",
+      "level": "rehearsal",
+      "coverage_group": "logic",
+      "available_after_page": 4
+    },
+    {
+      "id": "trial26-logic-c2",
+      "chapter": 1,
+      "after_section": "1.3",
+      "study_section": "1.3",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "לוגיקה וכמתים",
+      "title": "כמתים מעל תחום ריק",
+      "question": "עבור קבוצות $A,B$, איזו טענה על שתי הנוסחאות נכונה תמיד? $S:\\exists y\\in B\\,\\forall x\\in A\\,P(x,y)$, $T:\\forall x\\in A\\,\\exists y\\in B\\,P(x,y)$.",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$T\\Rightarrow S$ תמיד"
+        },
+        {
+          "id": "b",
+          "text": "כאשר $A=\\varnothing$ שתי הנוסחאות בהכרח שקריות"
+        },
+        {
+          "id": "c",
+          "text": "$S\\Rightarrow T$ תמיד, אך הכיוון ההפוך עלול להיכשל גם כאשר $A=\\varnothing$"
+        },
+        {
+          "id": "d",
+          "text": "$S$ ו־$T$ שקולות תמיד"
+        }
+      ],
+      "correct": "c",
+      "hint1": "עד שמתאים לכולם מתאים גם לכל איבר בנפרד. בדקו בנפרד קבוצות ריקות.",
+      "hint2": "אם $A=B=\\varnothing$, הטענה הכללית $T$ אמת ריקה, אך ב־$S$ אין עד אפשרי ב־$B$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "עד משותף מוכיח תמיד את $T$, ולכן $S\\Rightarrow T$. כאשר שתי הקבוצות ריקות, $T$ אמת ו־$S$ שקר. גם בתחומים לא ריקים הכיוון ההפוך עלול להיכשל אם העד תלוי ב־$x$.",
+      "level": "challenge",
+      "coverage_group": "logic",
+      "available_after_page": 6
+    },
+    {
+      "id": "trial26-sets-s2",
+      "chapter": 1,
+      "after_section": "1.4",
+      "study_section": "1.4",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "קבוצות ופעולות",
+      "title": "הקבוצה הריקה כתת־קבוצה",
+      "question": "איזו טענה נכונה לכל קבוצה $A$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$\\varnothing\\in A$"
+        },
+        {
+          "id": "b",
+          "text": "$A\\subseteq\\varnothing$"
+        },
+        {
+          "id": "c",
+          "text": "$A\\cap\\varnothing=A$"
+        },
+        {
+          "id": "d",
+          "text": "$\\varnothing\\subseteq A$"
+        }
+      ],
+      "correct": "d",
+      "hint1": "הכלה ושייכות הן יחסים שונים.",
+      "hint2": "כדי להפריך $\\varnothing\\subseteq A$ היה צריך למצוא איבר בקבוצה הריקה שאינו ב־$A$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "אין איבר כזה, ולכן הקבוצה הריקה היא תת־קבוצה של כל קבוצה. אין מכך שהיא עצמה איבר בכל קבוצה.",
+      "level": "sanity",
+      "coverage_group": "sets",
+      "available_after_page": 6
+    },
+    {
+      "id": "trial26-sets-r2",
+      "chapter": 1,
+      "after_section": "1.4",
+      "study_section": "1.4",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "קבוצות ופעולות",
+      "title": "חוק דה מורגן",
+      "question": "איזו קבוצה שווה ל־$A\\setminus(B\\cup C)$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$(A\\setminus B)\\cap(A\\setminus C)$"
+        },
+        {
+          "id": "b",
+          "text": "$(A\\setminus B)\\cup(A\\setminus C)$"
+        },
+        {
+          "id": "c",
+          "text": "$(A\\cap B)\\setminus C$"
+        },
+        {
+          "id": "d",
+          "text": "$A\\setminus(B\\cap C)$"
+        }
+      ],
+      "correct": "a",
+      "hint1": "איבר בהפרש צריך להימנע משתי הקבוצות.",
+      "hint2": "$x\\notin B\\cup C$ פירושו $x\\notin B$ וגם $x\\notin C$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "צריך להשתייך ל־$A$ ולהימצא מחוץ ל־$B$ וגם מחוץ ל־$C$. זה בדיוק החיתוך של שני ההפרשים.",
+      "level": "rehearsal",
+      "coverage_group": "sets",
+      "available_after_page": 6
+    },
+    {
+      "id": "trial26-sets-c2",
+      "chapter": 1,
+      "after_section": "1.4",
+      "study_section": "1.4",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "קבוצות ופעולות",
+      "title": "מתי איחוד נבלע בחיתוך?",
+      "question": "נניח $A\\cup B\\subseteq A\\cap C$. איזו מסקנה מתחייבת?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$A\\cap B=\\varnothing$"
+        },
+        {
+          "id": "b",
+          "text": "$B\\subseteq A\\subseteq C$"
+        },
+        {
+          "id": "c",
+          "text": "$A=B=C$"
+        },
+        {
+          "id": "d",
+          "text": "$C\\subseteq A\\subseteq B$"
+        }
+      ],
+      "correct": "b",
+      "hint1": "השתמשו בכך שכל איבר של האיחוד נמצא גם בכל אחד משני חלקי החיתוך.",
+      "hint2": "איברי $B$ חייבים להיות ב־$A$, ואיברי $A$ חייבים להיות ב־$C$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "מן ההכלה נובע $B\\subseteq A$ וגם $A\\subseteq C$. שוויון אינו הכרחי: למשל $B=\\{1\\}$, $A=\\{1,2\\}$ ו־$C=\\{1,2,3\\}$ מקיימות את הנתון.",
+      "level": "challenge",
+      "coverage_group": "sets",
+      "available_after_page": 6
+    },
+    {
+      "id": "trial26-bounds-s2",
+      "chapter": 1,
+      "after_section": "1.6.4",
+      "study_section": "1.6.4",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "חסמים וקיצונים",
+      "title": "מקסימום",
+      "question": "מה מבדיל מקסימום של קבוצה מחסם עליון כללי שלה?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "המקסימום חייב להיות גדול ממש מכל איבר"
+        },
+        {
+          "id": "b",
+          "text": "מקסימום קיים רק לקבוצה סופית"
+        },
+        {
+          "id": "c",
+          "text": "המקסימום חייב להיות איבר של הקבוצה"
+        },
+        {
+          "id": "d",
+          "text": "המקסימום חייב להיות חיובי"
+        }
+      ],
+      "correct": "c",
+      "hint1": "השוו את שתי ההגדרות.",
+      "hint2": "המקסימום הוא חסם עליון שגם שייך לקבוצה.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "אם $M\\in A$ ו־$a\\le M$ לכל $a\\in A$, אז $M=\\max A$. אין דרישה לחיוביות או לסופיות הקבוצה.",
+      "level": "sanity",
+      "coverage_group": "bounds",
+      "available_after_page": 15
+    },
+    {
+      "id": "trial26-bounds-r2",
+      "chapter": 1,
+      "after_section": "1.6.4",
+      "study_section": "1.6.6",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "חסמים וקיצונים",
+      "title": "שינוי סימן של קבוצה",
+      "question": "קבוצה לא ריקה $A\\subseteq\\mathbb R$ חסומה, ונגדיר $-A=\\{-a:a\\in A\\}$. מה נכון?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$\\sup(-A)=-\\sup A$"
+        },
+        {
+          "id": "b",
+          "text": "$\\inf(-A)=\\inf A$"
+        },
+        {
+          "id": "c",
+          "text": "$\\sup(-A)=\\sup A$"
+        },
+        {
+          "id": "d",
+          "text": "$\\sup(-A)=-\\inf A$"
+        }
+      ],
+      "correct": "d",
+      "hint1": "כפל במספר שלילי הופך את סדר האיברים.",
+      "hint2": "אם $m$ חסם תחתון של $A$, אז $-m$ חסם עליון של $-A$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "היפוך הסימן מחליף בין חסמים תחתונים לעליונים. אפיון האינפימום נותן שהחסם העליון הקטן ביותר של $-A$ הוא $-\\inf A$.",
+      "level": "rehearsal",
+      "coverage_group": "bounds",
+      "available_after_page": 17
+    },
+    {
+      "id": "trial26-bounds-c2",
+      "chapter": 1,
+      "after_section": "1.6.4",
+      "study_section": "1.6.6",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "חסמים וקיצונים",
+      "title": "הופכיים וחסם חיובי",
+      "question": "קבוצה לא ריקה $A\\subseteq(0,+\\infty)$ מקיימת $\\inf A=m>0$. נגדיר $B=\\{1/a:a\\in A\\}$. מה נכון?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$\\sup B=1/m$, ול־$B$ יש מקסימום אם ורק אם ל־$A$ יש מינימום"
+        },
+        {
+          "id": "b",
+          "text": "$\\sup B=1/m$ רק כאשר $m\\in A$"
+        },
+        {
+          "id": "c",
+          "text": "$\\sup B=1/\\sup A$"
+        },
+        {
+          "id": "d",
+          "text": "$B$ אינה חסומה אם $A$ אינה חסומה מלעיל"
+        }
+      ],
+      "correct": "a",
+      "hint1": "לקיחת הופכי הופכת את הסדר במספרים חיוביים.",
+      "hint2": "$a\\ge m$ נותן $1/a\\le1/m$. איברים של $A$ קרובים ל־$m$ מלמעלה נותנים הופכיים קרובים ל־$1/m$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "לכל $t<1/m$ חיובי, מתקיים $1/t>m$, ולכן יש $a\\in A$ עם $a<1/t$ ומכאן $1/a>t$. כך $1/m$ הוא הסופרמום. הוא מושג בדיוק כאשר $m\\in A$.",
+      "level": "challenge",
+      "coverage_group": "bounds",
+      "available_after_page": 17
+    },
+    {
+      "id": "trial26-limit-definition-s2",
+      "chapter": 2,
+      "after_section": "2.2.2",
+      "study_section": "2.2.2",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "הגדרת הגבול והוכחות ממנה",
+      "title": "סביבה של גבול",
+      "question": "מה פירוש $|a_n-L|<\\varepsilon$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$a_n=L$"
+        },
+        {
+          "id": "b",
+          "text": "$L-\\varepsilon<a_n<L+\\varepsilon$"
+        },
+        {
+          "id": "c",
+          "text": "$a_n<L-\\varepsilon$ או $a_n>L+\\varepsilon$"
+        },
+        {
+          "id": "d",
+          "text": "$-\\varepsilon<a_n<\\varepsilon$"
+        }
+      ],
+      "correct": "b",
+      "hint1": "המרחק מן המרכז קטן מרדיוס הסביבה.",
+      "hint2": "פתחו את אי־שוויון הערך המוחלט והוסיפו $L$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "האיבר נמצא בתוך הקטע הפתוח שמרכזו $L$ ורדיוסו $\\varepsilon$. אין צורך שיהיה שווה בדיוק לגבול.",
+      "level": "sanity",
+      "coverage_group": "limit-definition",
+      "available_after_page": 7
+    },
+    {
+      "id": "trial26-limit-definition-r2",
+      "chapter": 2,
+      "after_section": "2.2.2",
+      "study_section": "2.2.2",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "הגדרת הגבול והוכחות ממנה",
+      "title": "שינוי ראשית סופית",
+      "question": "נתון $a_n\\to L$. משנים את 100 האיברים הראשונים למספרים ממשיים שרירותיים ומשאירים את השאר. מהו הגבול החדש?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "ייתכן שאין גבול אם אחד הערכים גדול מאוד"
+        },
+        {
+          "id": "b",
+          "text": "הגבול משתנה אלא אם סכום השינויים אפס"
+        },
+        {
+          "id": "c",
+          "text": "$L$"
+        },
+        {
+          "id": "d",
+          "text": "סכום הערכים החדשים חלקי 100"
+        }
+      ],
+      "correct": "c",
+      "hint1": "הגדרת גבול מתייחסת לזנב.",
+      "hint2": "לכל אפסילון אפשר לבחור את $N$ גדול גם מ־100 וגם מהסף המקורי.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "מאותו סף שתי הסדרות זהות, ולכן אותה בדיקת אפסילון תקפה. שינוי מספר סופי של איברים אינו משנה את הגבול.",
+      "level": "rehearsal",
+      "coverage_group": "limit-definition",
+      "available_after_page": 7
+    },
+    {
+      "id": "trial26-limit-definition-c2",
+      "chapter": 2,
+      "after_section": "2.2.2",
+      "study_section": "2.2.2",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "הגדרת הגבול והוכחות ממנה",
+      "title": "קרוב אינסוף פעמים או תמיד לבסוף?",
+      "question": "לכל $\\varepsilon>0$ ולכל $N$ קיים $n\\ge N$ כך ש־$|a_n-L|<\\varepsilon$. מה נכון?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "הנתון הוא בדיוק הגדרת ההתכנסות ל־$L$"
+        },
+        {
+          "id": "b",
+          "text": "הנתון מחייב $a_n=L$ באינסוף אינדקסים"
+        },
+        {
+          "id": "c",
+          "text": "הנתון מחייב שהסדרה חסומה"
+        },
+        {
+          "id": "d",
+          "text": "הנתון חלש מהתכנסות ל־$L$; למשל $a_n=(-1)^n$, $L=1$ מקיימים אותו"
+        }
+      ],
+      "correct": "d",
+      "hint1": "השוו בין ״קיים אינדקס גדול״ לבין ״כל אינדקס גדול״.",
+      "hint2": "בתנודה בין $-1$ ל־1 תמיד אפשר למצוא אינדקס זוגי גדול, אבל הזנב כולו אינו קרוב ל־1.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "הדוגמה שברמז מפריכה התכנסות. גם $a_n=L+1/n$ מקיימת את הנתון בלי שוויון ממש, ואפשר לשלב איברים שווים ל־$L$ עם איברים לא חסומים. לכן רק המסקנה הראשונה נכונה.",
+      "level": "challenge",
+      "coverage_group": "limit-definition",
+      "available_after_page": 7
+    },
+    {
+      "id": "trial26-limit-properties-s2",
+      "chapter": 2,
+      "after_section": "2.3.1",
+      "study_section": "2.3.1",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "תכונות של סדרות מתכנסות",
+      "title": "יחידות הגבול",
+      "question": "סדרה ממשית מקיימת גם $a_n\\to L$ וגם $a_n\\to M$, ושני הגבולות סופיים. מה מתחייב?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$L=M$"
+        },
+        {
+          "id": "b",
+          "text": "$L=-M$"
+        },
+        {
+          "id": "c",
+          "text": "ייתכן $L<M$ אם הסדרה אינה מונוטונית"
+        },
+        {
+          "id": "d",
+          "text": "רק $|L|=|M|$"
+        }
+      ],
+      "correct": "a",
+      "hint1": "גבול של סדרה, אם קיים, הוא יחיד.",
+      "hint2": "אם שני הגבולות שונים, אפשר לבחור סביבם סביבות זרות.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "זנב הסדרה היה צריך להיות בתוך שתי סביבות זרות בו־זמנית. לכן שני גבולות סופיים של אותה סדרה חייבים להיות שווים.",
+      "level": "sanity",
+      "coverage_group": "limit-properties",
+      "available_after_page": 11
+    },
+    {
+      "id": "trial26-limit-properties-r2",
+      "chapter": 2,
+      "after_section": "2.3.1",
+      "study_section": "2.3.1",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "תכונות של סדרות מתכנסות",
+      "title": "גבול חיובי וסימן האיברים",
+      "question": "נתון $a_n\\to L>0$. מה מתחייב?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$a_n$ עולה"
+        },
+        {
+          "id": "b",
+          "text": "$a_n>0$ החל ממקום מסוים"
+        },
+        {
+          "id": "c",
+          "text": "$a_n>0$ לכל $n$"
+        },
+        {
+          "id": "d",
+          "text": "$a_n\\ge L$ החל ממקום מסוים"
+        }
+      ],
+      "correct": "b",
+      "hint1": "בחרו סביבה שאינה מגיעה לאפס.",
+      "hint2": "קחו $\\varepsilon=L/2$. בזנב מתקיים $a_n>L-L/2$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "לבסוף $a_n>L/2>0$. איברים מוקדמים יכולים להיות שליליים, וניתן להתקרב לגבול מלמטה או בתנודות.",
+      "level": "rehearsal",
+      "coverage_group": "limit-properties",
+      "available_after_page": 11
+    },
+    {
+      "id": "trial26-limit-properties-c2",
+      "chapter": 2,
+      "after_section": "2.3.1",
+      "study_section": "2.3.1",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "תכונות של סדרות מתכנסות",
+      "title": "שתי אפשרויות שנותרות",
+      "question": "נתון $(a_n-1)(a_n+1)\\to0$. איזו מסקנה נכונה תמיד?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$a_n\\to0$"
+        },
+        {
+          "id": "b",
+          "text": "לכל $n$ מתקיים $a_n\\in\\{-1,1\\}$"
+        },
+        {
+          "id": "c",
+          "text": "לכל $\\varepsilon>0$, לבסוף כל איבר נמצא במרחק קטן מ־$\\varepsilon$ לפחות מאחת הנקודות $-1,1$"
+        },
+        {
+          "id": "d",
+          "text": "לבסוף כל האיברים קרובים לאותה אחת משתי הנקודות"
+        }
+      ],
+      "correct": "c",
+      "hint1": "אם איבר רחוק משתי הנקודות, מהו חסם תחתון לערך המוחלט של המכפלה?",
+      "hint2": "אם $|a_n-1|\\ge\\varepsilon$ וגם $|a_n+1|\\ge\\varepsilon$, אז $|(a_n-1)(a_n+1)|\\ge\\varepsilon^2$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "המכפלה קטנה לבסוף מ־$\\varepsilon^2$, ולכן לפחות אחד משני המרחקים קטן מ־$\\varepsilon$. הסדרה יכולה להחליף בין שתי הסביבות, למשל $(-1)^n$, ולכן אין הכרח לבחירה קבועה או לגבול יחיד.",
+      "level": "challenge",
+      "coverage_group": "limit-properties",
+      "available_after_page": 11
+    },
+    {
+      "id": "trial26-squeeze-s2",
+      "chapter": 2,
+      "after_section": "2.4.2",
+      "study_section": "2.4.2",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "סנדוויץ׳ והשוואה",
+      "title": "חסם לערך מוחלט",
+      "question": "נתון $|a_n|\\le1/n$ לכל $n\\ge1$. מה מתחייב?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$a_n>0$"
+        },
+        {
+          "id": "b",
+          "text": "$a_n$ יורדת"
+        },
+        {
+          "id": "c",
+          "text": "$a_n=1/n$"
+        },
+        {
+          "id": "d",
+          "text": "$a_n\\to0$"
+        }
+      ],
+      "correct": "d",
+      "hint1": "הסדרה כלואה בין שני חסמים פשוטים.",
+      "hint2": "$-1/n\\le a_n\\le1/n$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "שני החסמים שואפים ל־0, ולכן גם $a_n\\to0$. סימן האיברים ומונוטוניות אינם נקבעים מן הנתון.",
+      "level": "sanity",
+      "coverage_group": "squeeze",
+      "available_after_page": 18
+    },
+    {
+      "id": "trial26-squeeze-r2",
+      "chapter": 2,
+      "after_section": "2.4.2",
+      "study_section": "2.4.2",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "סנדוויץ׳ והשוואה",
+      "title": "סדר נשמר בגבול",
+      "question": "נתון $a_n\\le b_n$ לכל $n$, $a_n\\to a$ ו־$b_n\\to b$. מה מתחייב?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$a\\le b$"
+        },
+        {
+          "id": "b",
+          "text": "$a<b$"
+        },
+        {
+          "id": "c",
+          "text": "$a=b$"
+        },
+        {
+          "id": "d",
+          "text": "$a\\ge b$"
+        }
+      ],
+      "correct": "a",
+      "hint1": "מעבר לגבול שומר על אי־שוויון רחב.",
+      "hint2": "בדקו גם סדרות שונות עם אותו גבול, למשל $0$ ו־$1/n$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "אם היה $a>b$, סביבות קטנות של הגבולות היו גורמות בסוף ל־$a_n>b_n$, בסתירה לנתון. שוויון בגבול אפשרי, ולכן אין הכרח לאי־שוויון ממש.",
+      "level": "rehearsal",
+      "coverage_group": "squeeze",
+      "available_after_page": 18
+    },
+    {
+      "id": "trial26-squeeze-c2",
+      "chapter": 2,
+      "after_section": "2.4.2",
+      "study_section": "2.4.2",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "סנדוויץ׳ והשוואה",
+      "title": "מכפלה עם איבר גדל",
+      "question": "נתון $a_n>0$, $a_n\\to+\\infty$, ו־$b_n\\to0$. מהו הגבול של $b_n\\,a_n/(1+a_n)$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$1$"
+        },
+        {
+          "id": "b",
+          "text": "$0$"
+        },
+        {
+          "id": "c",
+          "text": "$+\\infty$"
+        },
+        {
+          "id": "d",
+          "text": "לא ניתן לקבוע בגלל הצורה $0\\cdot\\infty$"
+        }
+      ],
+      "correct": "b",
+      "hint1": "הגורם המכיל את הסדרה הגדלה הוא בעצמו חסום.",
+      "hint2": "$0<a_n/(1+a_n)<1$, ולכן ערך מוחלט של המכפלה אינו גדול מ־$|b_n|$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "משפט הסנדוויץ׳ נותן גבול 0. למעשה די בחיוביות של $a_n$; הגורם $a_n/(1+a_n)$ חסום גם בלי להניח שאיפה לאינסוף.",
+      "level": "challenge",
+      "coverage_group": "squeeze",
+      "available_after_page": 18
+    },
+    {
+      "id": "trial26-partial-limits-s2",
+      "chapter": 2,
+      "after_section": "2.6.12",
+      "study_section": "2.6.12",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "גבולות חלקיים",
+      "title": "איבר שחוזר ללא סוף",
+      "question": "אם ערך ממשי $c$ מופיע באינסוף אינדקסים של סדרה, מה מתחייב?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "אין גבולות חלקיים אחרים"
+        },
+        {
+          "id": "b",
+          "text": "הסדרה חסומה"
+        },
+        {
+          "id": "c",
+          "text": "$c$ הוא גבול חלקי"
+        },
+        {
+          "id": "d",
+          "text": "הסדרה מתכנסת ל־$c$"
+        }
+      ],
+      "correct": "c",
+      "hint1": "אספו את האינדקסים שבהם מופיע הערך.",
+      "hint2": "אפשר לסדר את האינדקסים בסדר עולה ולקבל תת־סדרה קבועה.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "תת־הסדרה הקבועה שווה ל־$c$ ולכן מתכנסת אליו. האיברים האחרים יכולים להתנהג אחרת, ואף להיות לא חסומים.",
+      "level": "sanity",
+      "coverage_group": "partial-limits",
+      "available_after_page": 37
+    },
+    {
+      "id": "trial26-partial-limits-r2",
+      "chapter": 2,
+      "after_section": "2.6.12",
+      "study_section": "2.6.12",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "גבולות חלקיים",
+      "title": "הזזה של גבולות חלקיים",
+      "question": "קבוצת הגבולות החלקיים הממשיים של $a_n$ היא $\\{-2,3\\}$. מהי קבוצת הגבולות החלקיים של $b_n=2a_n+1$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$\\{-4,6\\}$"
+        },
+        {
+          "id": "b",
+          "text": "$[-3,7]$"
+        },
+        {
+          "id": "c",
+          "text": "$\\{-2,3,1\\}$"
+        },
+        {
+          "id": "d",
+          "text": "$\\{-3,7\\}$"
+        }
+      ],
+      "correct": "d",
+      "hint1": "הפעילו את אותה פעולה על כל גבול חלקי.",
+      "hint2": "אם $b_{n_k}\\to M$, אז $a_{n_k}=(b_{n_k}-1)/2\\to(M-1)/2$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "כל גבול חלקי של $a_n$ יוצר גבול חלקי $2L+1$ של $b_n$. הנוסחה ההפוכה מראה שאין גבולות נוספים, ולכן מתקבלים בדיוק $-3$ ו־7.",
+      "level": "rehearsal",
+      "coverage_group": "partial-limits",
+      "available_after_page": 37
+    },
+    {
+      "id": "trial26-partial-limits-c2",
+      "chapter": 2,
+      "after_section": "2.6.12",
+      "study_section": "2.6.12",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "גבולות חלקיים",
+      "title": "למה צריך חסימות?",
+      "question": "האם קיום גבול חלקי ממשי יחיד מחייב התכנסות, ללא הנחת חסימות?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "לא: $a_{2n}=0$, $a_{2n-1}=n$ נותנת גבול חלקי ממשי יחיד 0 ואינה מתכנסת"
+        },
+        {
+          "id": "b",
+          "text": "כן, תמיד"
+        },
+        {
+          "id": "c",
+          "text": "כן, אם הגבול החלקי היחיד הוא 0"
+        },
+        {
+          "id": "d",
+          "text": "לא: הסדרה הקבועה 0 היא דוגמה נגדית"
+        }
+      ],
+      "correct": "a",
+      "hint1": "אפשר לשלוח חלק מהאיברים לאינסוף בלי ליצור גבול חלקי ממשי חדש.",
+      "hint2": "בדוגמה, תת־סדרה מתכנסת לגבול ממשי יכולה להכיל רק מספר סופי של איברים אי־זוגיים.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "האיברים האי־זוגיים גדלים לאינסוף, ולכן כל תת־סדרה המתכנסת לגבול ממשי חייבת להיות לבסוף אפסים. הגבול החלקי הממשי היחיד הוא 0, אבל הסדרה כולה אינה מתכנסת.",
+      "level": "challenge",
+      "coverage_group": "partial-limits",
+      "available_after_page": 37
+    },
+    {
+      "id": "trial26-cauchy-s2",
+      "chapter": 2,
+      "after_section": "2.7.3",
+      "study_section": "2.7.3",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "סדרות קושי",
+      "title": "קושי בממשיים",
+      "question": "איזו טענה נכונה לגבי סדרות ממשיות?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "סדרת קושי חייבת להיות קבועה לבסוף"
+        },
+        {
+          "id": "b",
+          "text": "סדרה היא קושי אם ורק אם היא מתכנסת לגבול ממשי"
+        },
+        {
+          "id": "c",
+          "text": "כל סדרה חסומה היא קושי"
+        },
+        {
+          "id": "d",
+          "text": "כל סדרה מונוטונית היא קושי"
+        }
+      ],
+      "correct": "b",
+      "hint1": "שלמות הממשיים מחברת בין שני המושגים.",
+      "hint2": "להפרכת שתי הדרישות האמצעיות בדקו $(-1)^n$ ו־$n$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "כל סדרה מתכנסת היא קושי, וב־$\\mathbb R$ גם כל סדרת קושי מתכנסת. חסימות או מונוטוניות לבדן אינן מספיקות.",
+      "level": "sanity",
+      "coverage_group": "cauchy",
+      "available_after_page": 41
+    },
+    {
+      "id": "trial26-cauchy-r2",
+      "chapter": 2,
+      "after_section": "2.7.3",
+      "study_section": "2.7.3",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "סדרות קושי",
+      "title": "הפרש של סדרות קושי",
+      "question": "אם $(a_n)$ ו־$(b_n)$ סדרות קושי ממשיות, מה נכון לגבי $c_n=a_n-b_n$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "היא קושי רק אם אחת הסדרות קבועה"
+        },
+        {
+          "id": "b",
+          "text": "היא אינה בהכרח חסומה"
+        },
+        {
+          "id": "c",
+          "text": "גם $(c_n)$ סדרת קושי"
+        },
+        {
+          "id": "d",
+          "text": "היא קושי רק אם לשתי הסדרות אותו גבול"
+        }
+      ],
+      "correct": "c",
+      "hint1": "פרקו הפרש בין שני איברים של הסדרה החדשה.",
+      "hint2": "$|c_m-c_n|\\le|a_m-a_n|+|b_m-b_n|$; השתמשו ב־$\\varepsilon/2$ לכל סדרה.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "בוחרים סף משותף שבו שני ההפרשים קטנים מ־$\\varepsilon/2$. סכומם קטן מ־$\\varepsilon$, וזהו תנאי קושי עבור ההפרש.",
+      "level": "rehearsal",
+      "coverage_group": "cauchy",
+      "available_after_page": 41
+    },
+    {
+      "id": "trial26-cauchy-c2",
+      "chapter": 2,
+      "after_section": "2.7.3",
+      "study_section": "2.7.3",
+      "status": "approved",
+      "approval_stage": "partial",
+      "type": "multiple_choice",
+      "topic": "סדרות קושי",
+      "title": "תת־סדרה מזהה את הגבול",
+      "question": "סדרת קושי $(a_n)$ מכילה תת־סדרה $a_{n_k}\\to L$. איזה טיעון מוכיח ישירות שכל הסדרה מתכנסת ל־$L$?",
+      "formula": "",
+      "choices": [
+        {
+          "id": "a",
+          "text": "די בקיום תת־סדרה מתכנסת, ללא תנאי קושי"
+        },
+        {
+          "id": "b",
+          "text": "כל איברי הסדרה שייכים בהכרח לתת־הסדרה"
+        },
+        {
+          "id": "c",
+          "text": "כל סדרת קושי מונוטונית, ולכן הגבול מיידי"
+        },
+        {
+          "id": "d",
+          "text": "בוחרים איבר של תת־הסדרה בזנב קושי וקרוב ל־$L$, ואז משתמשים באי־שוויון המשולש"
+        }
+      ],
+      "correct": "d",
+      "hint1": "השוו כל איבר בזנב לאיבר נבחר של תת־הסדרה.",
+      "hint2": "בחרו $N$ לתנאי קושי עם $\\varepsilon/2$ ו־$n_k\\ge N$ עם $|a_{n_k}-L|<\\varepsilon/2$.",
+      "wrong1": "התשובה אינה נכונה. כדאי להיעזר ברמז הראשון.",
+      "wrong2": "עדיין לא. אפשר לפתוח את הרמז הנוסף ולנסות שוב.",
+      "explanation": "לכל $n\\ge N$ מתקיים $|a_n-L|\\le|a_n-a_{n_k}|+|a_{n_k}-L|<\\varepsilon$. הטיעון משתמש בדיוק בקרבת כל איברי הזנב ובקרבת איבר נבחר לגבול.",
+      "level": "challenge",
+      "coverage_group": "cauchy",
+      "available_after_page": 41
     }
   ]
 }
